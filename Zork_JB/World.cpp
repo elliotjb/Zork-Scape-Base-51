@@ -853,7 +853,7 @@ void World::Move_position_East(){
 	}
 }
 
-void World::Look_position(){
+void World::Look_position()const{
 
 	if (player[0].position == 0){
 		printf("%s", (rooms[0].name));
@@ -898,7 +898,7 @@ void World::Look_position(){
 	}
 }
 
-void World::Look_Specify_position_North(){
+void World::Look_Specify_position_North()const{
 
 	if (player[0].position == 0){
 		printf("%s\n", exit[1].description);
@@ -941,7 +941,7 @@ void World::Look_Specify_position_North(){
 	}
 
 }
-void World::Look_Specify_position_West(){
+void World::Look_Specify_position_West()const{
 
 	if (player[0].position == 0){
 		printf("There is a Wall.\n");
@@ -983,7 +983,7 @@ void World::Look_Specify_position_West(){
 		printf("There is a Wall.\n");
 	}
 }
-void World::Look_Specify_position_South(){
+void World::Look_Specify_position_South()const{
 
 	if (player[0].position == 0){
 		printf("There is a Wall.\n");
@@ -1025,7 +1025,7 @@ void World::Look_Specify_position_South(){
 		printf("There is a Wall.\n");
 	}
 }
-void World::Look_Specify_position_East(){
+void World::Look_Specify_position_East()const{
 
 	if (player[0].position == 0){
 		printf("There is a Wall.\n");

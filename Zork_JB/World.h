@@ -24,7 +24,7 @@ public:
 	void Create_World();
 	void Set_Command();
 	void Move_position_North();
-	void Look_position();
+	void Look_position() const;
 	void Open_Door_North();
 	void Open_Door_West();
 	void Open_Door_South();
@@ -37,10 +37,10 @@ public:
 	void Move_position_West();
 	void Move_position_South();
 	void Move_position_East();
-	void Look_Specify_position_North();
-	void Look_Specify_position_West();
-	void Look_Specify_position_South();
-	void Look_Specify_position_East();
+	void Look_Specify_position_North() const;
+	void Look_Specify_position_West() const;
+	void Look_Specify_position_South()const;
+	void Look_Specify_position_East()const;
 	bool Exit_zork();
 
 };
