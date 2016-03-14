@@ -71,19 +71,19 @@ void World::Create_World(){
 	
 
 	//Create Exits
-	strcpy_s(exit[0].description, "Around Here is the Main Room.\n");
-	strcpy_s(exit[1].description, "Around Here is the Aisle.\n");
-	strcpy_s(exit[2].description, "Around Here is the Dressing Room.\n");
-	strcpy_s(exit[3].description, "Around Here is the Office Room.\n");
-	strcpy_s(exit[4].description, "Around Here is the Alien Spawn.\n");
-	strcpy_s(exit[5].description, "Around Here is the Warehouse.\n");
-	strcpy_s(exit[6].description, "Around Here is the Warehouse.\n");
-	strcpy_s(exit[7].description, "Around Here is the Gunsmith.\n");
-	strcpy_s(exit[8].description, "Around Here is the Ailse.\n");
-	strcpy_s(exit[9].description, "Around Here is the Hall.\n");
-	strcpy_s(exit[10].description, "Around Here is the Exit.\n");
-	strcpy_s(exit[11].description, "Around Here is the Ailse.\n");
-	strcpy_s(exit[12].description, "Around Here is the Laboratory.\n");
+	strcpy_s(exit[0].description, "Behind the door is the Main Room.\n");
+	strcpy_s(exit[1].description, "Behind the door is the Aisle.\n");
+	strcpy_s(exit[2].description, "Behind the door is the Dressing Room.\n");
+	strcpy_s(exit[3].description, "Behind the door is the Office Room.\n");
+	strcpy_s(exit[4].description, "Behind the door is the Alien Spawn.\n");
+	strcpy_s(exit[5].description, "Behind the door is the Warehouse.\n");
+	strcpy_s(exit[6].description, "Behind the door is the Warehouse.\n");
+	strcpy_s(exit[7].description, "Behind the door is the Gunsmith.\n");
+	strcpy_s(exit[8].description, "Behind the door is the Ailse.\n");
+	strcpy_s(exit[9].description, "Behind the door is the Hall.\n");
+	strcpy_s(exit[10].description, "Behind the door is the Exit.\n");
+	strcpy_s(exit[11].description, "Behind the door is the Ailse.\n");
+	strcpy_s(exit[12].description, "Behind the door is the Laboratory.\n");
 
 	//Create Exits dst.
 	exit[0].dst_N = 1;

@@ -10,6 +10,10 @@ public:
 	void Move_position_West();
 	void Move_position_South();
 	void Move_position_East();
+	void Look_Specify_position_North();
+	void Look_Specify_position_West();
+	void Look_Specify_position_South();
+	void Look_Specify_position_East();
 };
 
 
