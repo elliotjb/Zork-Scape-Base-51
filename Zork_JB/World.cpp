@@ -41,37 +41,37 @@ void World::Create_World(){
 	strcpy_s(rooms[1].description, "This Aisle is small and it's a dimly lit.\n");
 
 	strcpy_s(rooms[2].name, "You are stay in the Dressing Room.\n");
-	strcpy_s(rooms[2].description, "es 2");
+	strcpy_s(rooms[2].description, "You can see many lockers, and some are open.|nThere is also a window but it is locked with bars.\n");
 
 	strcpy_s(rooms[3].name, "You are stay in the Office Room.\n");
-	strcpy_s(rooms[3].description, "es 3");
+	strcpy_s(rooms[3].description, "It is a large room, you see that this separated workspaces with computers at home space.\n");
 
 	strcpy_s(rooms[4].name, "You are stay in the Mysteri Room.\n");
-	strcpy_s(rooms[4].description, "es 4");
+	strcpy_s(rooms[4].description, "This room is has a gigantic cube in the middle of the room has a door and it seems that this open.\n");
 
 	strcpy_s(rooms[5].name, "You are stay in the Warehouse.\n");
-	strcpy_s(rooms[5].description, "es 5");
+	strcpy_s(rooms[5].description, "There are many shelves.\n");
 
 	strcpy_s(rooms[6].name, "You are stay in the Warehouse II.\n");
-	strcpy_s(rooms[6].description, "es 6");
+	strcpy_s(rooms[6].description, "There are many shelves.\n");
 
 	strcpy_s(rooms[7].name, "You are stay in the Gunsmith.\n");
-	strcpy_s(rooms[7].description, "es 7");
+	strcpy_s(rooms[7].description, "Here are many weapons and lots of ammunition, it could be useful.\n");
 
 	strcpy_s(rooms[8].name, "You are stay in the Aisle.\n");
-	strcpy_s(rooms[8].description, "es 8");
+	strcpy_s(rooms[8].description, "This Aisle is big room.\n");
 
 	strcpy_s(rooms[9].name, "You are stay in the Hall.\n");
-	strcpy_s(rooms[9].description, "es 9");
+	strcpy_s(rooms[9].description, "It is a very large room with plenty of lighting.\n");
 
 	strcpy_s(rooms[10].name, "You are stay in the Exit.\n");
-	strcpy_s(rooms[10].description, "es 10");
+	strcpy_s(rooms[10].description, "This is Exit.\n");
 
 	strcpy_s(rooms[11].name, "You are stay in the Aisle.\n");
-	strcpy_s(rooms[11].description, "es 11");
+	strcpy_s(rooms[11].description, "This Aisle is long.\n");
 
 	strcpy_s(rooms[12].name, "You are stay in the Laboratory.\n");
-	strcpy_s(rooms[12].description, "es 12");
+	strcpy_s(rooms[12].description, "There are many very strange instruments.\n");
 
 	
 
@@ -1073,5 +1073,4 @@ bool World::Exit_zork(){
 		return false;
 	else
 		return true;
-
 }

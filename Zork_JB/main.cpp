@@ -12,6 +12,7 @@ int main(){
 	w.Create_World();
 
 	printf("Hello to my Zork!\n\n");
+	printf("You'll have to get reach the exit without dying.\nFor this you will have to open and close doors and be careful not to get caught.\n\n");
 
 	printf("%s", w.rooms[0].name);
 	printf("%s", w.rooms[0].description);
