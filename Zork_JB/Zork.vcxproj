@@ -64,16 +64,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="fun.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Move.cpp" />
     <ClCompile Include="player.h" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Door.h" />
     <ClInclude Include="Exits.h" />
-    <ClInclude Include="Move.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="Room.h" />
   </ItemGroup>
