@@ -6,6 +6,9 @@
 #include <string.h>
 
 #define _CRT_SECURE_NO_WARNINGS
+class Exits;
+class Room;
+class Player;
 
 class World{
 public:
@@ -16,7 +19,6 @@ public:
 	World();
 	~World();
 	void Create_World();
-	int num_room;
 };
 
 

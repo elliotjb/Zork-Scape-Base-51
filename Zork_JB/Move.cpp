@@ -3,12 +3,11 @@
 #include "Room.h"
 #include "Exits.h"
 #include "World.h"
+using namespace std;
 
 World w;
 Room r;
 Exits e;
-
-
 
 void Move::Move_position_North(){
 
@@ -549,4 +548,8 @@ void Move::Look_Specify_position_East(){
 	if (w.player[0].position == 12){
 		printf("%s\n", w.exit[11].description);
 	}
+}
+
+void Move::Exit_zork(){
+	w.player[0].position = 10;
 }

@@ -3,7 +3,7 @@
 #include "player.h"
 #include "Exits.h"
 #include <string.h>
-
+using namespace std;
 #define _CRT_SECURE_NO_WARNINGS
 
 
@@ -84,45 +84,6 @@ void World::Create_World(){
 	strcpy_s(exit[10].description, "Behind the door is the Exit.\n");
 	strcpy_s(exit[11].description, "Behind the door is the Ailse.\n");
 	strcpy_s(exit[12].description, "Behind the door is the Laboratory.\n");
-
-	//Create Exits dst.
-	exit[0].dst_N = 1;
-
-	exit[1].dst_N = 2;
-	exit[1].dst_E = 8;
-	exit[1].dst_S = 0;
-	exit[1].dst_W = 3;
-
-	exit[2].dst_S = 1;
-
-	exit[3].dst_W = 4;
-	exit[3].dst_S = 6;
-	exit[3].dst_E = 1;
-
-	exit[4].dst_N = 5;
-	exit[4].dst_E = 3;
-
-	exit[5].dst_S = 4;
-
-	exit[6].dst_N = 3;
-	exit[6].dst_W = 7;
-
-	exit[7].dst_E = 6;
-
-	exit[8].dst_N = 11;
-	exit[8].dst_W = 1;
-	exit[8].dst_S = 9;
-
-	exit[9].dst_N = 8;
-	exit[9].dst_E = 10;
-
-	exit[10].dst_W = 9;
-
-	exit[11].dst_N = 8;
-	exit[11].dst_W = 12;
-
-	exit[12].dst_E = 11;
-
 
 }
 

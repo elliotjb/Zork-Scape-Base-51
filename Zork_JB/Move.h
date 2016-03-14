@@ -14,6 +14,7 @@ public:
 	void Look_Specify_position_West();
 	void Look_Specify_position_South();
 	void Look_Specify_position_East();
+	void Exit_zork();
 };
 
 

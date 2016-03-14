@@ -6,8 +6,10 @@
 #include "Move.h"
 #include <string.h>
 
+using namespace std;
+
 void Move::Set_Command(){
-	char comand[10];
+	char comand[20];
 	printf("> ");
 	gets_s(comand);
 
@@ -20,6 +22,10 @@ void Move::Set_Command(){
 		printf("-[quit]\n-[help]\n");
 	}
 
+	//Commands - Go
+	if (strcmp("go", comand) == 0){
+		printf("Where you want to go? [go north, go west, go south, go east]\n");
+	}
 	if (strcmp("go north", comand) == 0){
 		Move_position_North();
 	}
@@ -44,10 +50,9 @@ void Move::Set_Command(){
 	if (strcmp("go e", comand) == 0){
 		Move_position_East();
 	}
+	
 
-	if (strcmp("go", comand) == 0){
-		printf("Where you want to go? [go north, go west, go south, go east]\n");
-	}
+	//Commands - Look
 	if (strcmp("look", comand) == 0){
 		Look_position();
 		printf("If you want to specify where to look like this-> [ look north/n, look west/w, look south/s, look east/e ]\n");
@@ -75,6 +80,10 @@ void Move::Set_Command(){
 	}
 	if (strcmp("look e", comand) == 0){
 		Look_Specify_position_East();
+	}
+
+	if (strcmp("quit", comand) == 0){
+		Exit_zork();
 	}
 
 

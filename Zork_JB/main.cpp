@@ -15,18 +15,16 @@ int main(){
 	int exit = 0;
 	char *dir;
 	char *oc_door;
+	printf("%s", w.rooms[0].name);
+	printf("%s", w.rooms[0].description);
 
 	while (exit==0)
 	{
-		printf("%s", w.rooms[0].name);
-		printf("%s", w.rooms[0].description);
-
-		m.Move_position();
-		m.Look_position(); system("pause");
+		m.Set_Command();
+		if (w.player[0].position == 10){
+			exit = 1;
+		}
 	}
-
-
-
 
 	system("pause");
 	return 0;
