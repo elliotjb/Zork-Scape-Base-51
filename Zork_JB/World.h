@@ -11,6 +11,8 @@ class World{
 public:
 	Room* rooms = nullptr;
 	Player* player = nullptr;
+	Exits* exit = nullptr;
+
 	World();
 	~World();
 	void Create_World();

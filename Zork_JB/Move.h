@@ -4,11 +4,12 @@
 class Move{
 
 public:
-	char moviment[4];
-
-
+	void Set_Command();
 	void Look_position();
-	void Move_position();
+	void Move_position_North();
+	void Move_position_West();
+	void Move_position_South();
+	void Move_position_East();
 };
 
 

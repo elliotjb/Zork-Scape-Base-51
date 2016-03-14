@@ -3,13 +3,13 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
-
+/*
 void Room::Select_Direction(){
 	direction[0] = "n";
 	direction[1] = "w";
 	direction[2] = "s";
 	direction[3] = "e";
-}
+}*/
 
 /*void Room::Select_Direction2(){
 	strcpy(direction2 + 0, "north");

@@ -3,7 +3,9 @@
 
 class Player{
 public:
-	char name;
+	char name[10];
+	char descrption[50];
+	int position;
 };
 
 #endif
