@@ -9,8 +9,8 @@ Github Zork: https://github.com/elliotjb/Zork-Scape-Base-51/
 
 * [go north] or [go n]
 * [go west] or [go w]
--[go south] or [go s]
--[go east] or [go e]
+- [go south] or [go s]
+- [go east] or [go e]
 -[look (the same way as above)]
 -[open door]\n-[close door]
 -[quit]\n-[help]
