@@ -7,6 +7,7 @@
 class Exits{
 public:
 	char description[150];
+	int discover;
 
 };
 

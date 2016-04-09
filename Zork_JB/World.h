@@ -23,30 +23,30 @@ public:
 
 	World();
 	~World();
+
 	int quit = 0, cont = 0;
+
 	void Create_World();
+
+	//fucntions to put comands
 	void Set_Command();
 
 	//Funciton to go n, go w, go s and go e
 	void Move();
 
-	void Look_position() const;
+	//Function to open
+	void Open();
 
-	void Open_Door_North();
-	void Open_Door_West();
-	void Open_Door_South();
-	void Open_Door_East();
+	//Function to close
+	void Close();
 
-	void Close_Door_North();
-	void Close_Door_West();
-	void Close_Door_South();
-	void Close_Door_East();
+	//Function to Look Room
+	void Look() const;
 
-	void Look_Specify_position_North() const;
-	void Look_Specify_position_West() const;
-	void Look_Specify_position_South()const;
-	void Look_Specify_position_East()const;
+	//Function to Look specify position (North, West, South and East)
+	void Look_Specify_Position() const;
 
+	//Function to exit the game
 	bool Exit_zork();
 
 };
