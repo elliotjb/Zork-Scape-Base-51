@@ -35,12 +35,14 @@ World::~World(){
 void World::Create_World(){
 
 	//Create Player
+	//player[0].name = "player";
 	strcpy_s(player[0].name, "Player");
-	strcpy_s(player[0].descrption, "You have 20 years.");
+	strcpy_s(player[0].description, "You have 20 years.");
 	player[0].position = 0; //Position start-> Main Room.
 
 
 	//Create Rooms
+	rooms[0].name = "hola";
 	strcpy_s(rooms[0].name, "You are stay in the Main Room.\n");
 	strcpy_s(rooms[0].description, "This room is very dark but there is a light above is enough to see everything. \nThere is only one door and the north.\n");
 

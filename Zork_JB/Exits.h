@@ -1,12 +1,14 @@
-#ifndef __Exits__
-#define __Exits__
+#ifndef __Exits_H_
+#define __Exits_H_
 #include <string.h>
+#include "Entity.h"
 
 #define _CRT_SECURE_NO_WARNINGS
 
-class Exits{
+class Exits : public Entity
+{
 public:
-	char description[150];
+	//char description[150];
 	int discover;
 
 };

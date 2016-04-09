@@ -2,22 +2,12 @@
 #define __ENTITY_H__
 #include "String_Class.h"
 
-class World;
-class Exits;
-class Player;
-class Room;
-class Door;
-
 class Entity
 {
 public:
 
-	World* world;
-	Exits* exits;
-	Player* player;
-	Room* room;
-	Door* door;
-	ClString comands;
+	ClString name[25];
+	ClString description[250];
 
 public:
 
@@ -26,7 +16,6 @@ public:
 
 };
 
-// Global var made extern for Application ---
-extern Entity* App;
 
-#endif // __APPLICATION_H__
+
+#endif 
