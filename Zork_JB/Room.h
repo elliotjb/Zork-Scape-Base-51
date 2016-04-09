@@ -1,8 +1,13 @@
 #ifndef _Room_
 #define _Room_
+
 #include <string>
+
 #define _CRT_SECURE_NO_WARNINGS
+
 using namespace std;
+
+
 class Room{
 public:
 	char name[50];

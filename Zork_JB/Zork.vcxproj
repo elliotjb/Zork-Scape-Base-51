@@ -70,7 +70,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Door.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Exits.h" />
+    <ClInclude Include="String_Class.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="Room.h" />
   </ItemGroup>

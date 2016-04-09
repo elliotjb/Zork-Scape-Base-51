@@ -1,13 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "World.h"
 #include "Room.h"
 #include "player.h"
 #include "Door.h"
 #include "Exits.h"
+#include "Entity.h"
+#include "String_Class.h"
 #include <string.h>
 
 using namespace std;
 
-#define _CRT_SECURE_NO_WARNINGS
+//#define _CRT_SECURE_NO_WARNINGS
 
 
 World::World(){
@@ -15,6 +19,7 @@ World::World(){
 	player = new Player[1];
 	exit = new Exits[13];
 	door = new Door[5];
+	comand = new char[];
 
 }
 
@@ -22,6 +27,8 @@ World::~World(){
 	delete[]rooms;
 	delete[]player;
 	delete[]exit;
+	delete[]door;
+	delete[]comand;
 }
 
 
@@ -99,10 +106,15 @@ void World::Create_World(){
 }
 
 void World::Set_Command(){
-	char comand[20];
-	printf("> ");
-	gets_s(comand);
 
+	printf("> ");
+	gets_s(comand, 20);
+
+	//App->comands = comand;
+
+	/*if (App->comands == "go n"){
+		printf("HOLAAAAAAAAAA\n");
+	}*/
 	//Command - Help
 	if (strcmp("help", comand) == 0){
 		printf("Your commands:\n");
@@ -111,33 +123,16 @@ void World::Set_Command(){
 		printf("-[open door]\n-[close door]\n");
 		printf("-[quit]\n-[help]\n");
 	}
+	if (strcmp("go n", comand) == 0 || strcmp("go w", comand) == 0 || strcmp("go s", comand) == 0 || strcmp("go e", comand) == 0){
+		Move();
+	}
+	if (strcmp("go north", comand) == 0 || strcmp("go west", comand) == 0 || strcmp("go south", comand) == 0 || strcmp("go east", comand) == 0){
+		Move();
+	}
+
 	//Commands - Go
 	if (strcmp("go", comand) == 0){
 		printf("Where you want to go? [go north, go west, go south, go east]\n");
-	}
-	if (strcmp("go north", comand) == 0){
-		Move_position_North();
-	}
-	if (strcmp("go west", comand) == 0){
-		Move_position_West();
-	}
-	if (strcmp("go south", comand) == 0){
-		Move_position_South();
-	}
-	if (strcmp("go east", comand) == 0){
-		Move_position_East();
-	}
-	if (strcmp("go n", comand) == 0){
-		Move_position_North();
-	}
-	if (strcmp("go w", comand) == 0){
-		Move_position_West();
-	}
-	if (strcmp("go s", comand) == 0){
-		Move_position_South();
-	}
-	if (strcmp("go e", comand) == 0){
-		Move_position_East();
 	}
 
 	if (strcmp("open", comand) == 0){
@@ -176,8 +171,8 @@ void World::Set_Command(){
 	if (strcmp("look", comand) == 0){
 		Look_position();
 		if (cont < 1){
-		printf("If you want to specify where to look like this-> [ look north/n, look west/w, look south/s, look east/e ]\n");
-		cont++;
+			printf("If you want to specify where to look like this-> [ look north/n, look west/w, look south/s, look east/e ]\n");
+			cont++;
 		}
 	}
 	if (strcmp("look north", comand) == 0){
@@ -209,8 +204,433 @@ void World::Set_Command(){
 		quit = 1;
 		Exit_zork();
 	}
-
 }
+
+void World::Move()
+{
+	//Main Room
+	if (player[0].position == 0)
+	{
+		if (strcmp("go n", comand) == 0)
+		{
+		printf("\n%s\n", (rooms[1].name));
+		printf("%s\n", (rooms[1].description));
+		player[0].position = 1;
+		return;
+		}
+		else if (strcmp("go w", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go s", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go e", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+	}
+	//Ailse 1
+	if (player[0].position == 1)
+	{
+		if (strcmp("go n", comand) == 0)
+		{
+			if (door[0].Num_doors == 1)
+			{
+				player[0].position = 2;
+				printf("\n%s\n", (rooms[2].name));
+				printf("%s\n", (rooms[2].description));
+				return;
+			}
+			else{
+				printf("You can't move, there is a front door and closed.\n");
+			}
+		}
+		else if (strcmp("go w", comand) == 0)
+		{
+			player[0].position = 3;
+			printf("\n%s\n", (rooms[3].name));
+			printf("%s\n", (rooms[3].description));
+			return;
+		}
+		else if (strcmp("go s", comand) == 0)
+		{
+			player[0].position = 0;
+			printf("\n%s\n", (rooms[0].name));
+			printf("%s\n", (rooms[0].description));
+			return;
+		}
+		else if (strcmp("go e", comand) == 0)
+		{
+			player[0].position = 8;
+			printf("\n%s\n", (rooms[8].name));
+			printf("%s\n", (rooms[8].description));
+			return;
+		}
+	}
+	//Dressing Room
+	if (player[0].position == 2)
+	{
+		if (strcmp("go n", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go w", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go s", comand) == 0)
+		{
+			if (door[0].Num_doors == 1){
+				player[0].position = 1;
+				printf("\n%s\n", (rooms[1].name));
+				printf("%s\n", (rooms[1].description));
+				return;
+			}
+			else{
+				printf("You can't move, there is a front door and closed.\n");
+			}
+		}
+		else if (strcmp("go e", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+	}
+
+	//Office Room
+	if (player[0].position == 3)
+	{
+		if (strcmp("go n", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go w", comand) == 0)
+		{
+			player[0].position = 4;
+			printf("\n%s\n", (rooms[4].name));
+			printf("%s\n", (rooms[4].description));
+			return;
+		}
+		else if (strcmp("go s", comand) == 0)
+		{
+			player[0].position = 6;
+			printf("\n%s\n", (rooms[6].name));
+			printf("%s\n", (rooms[6].description));
+			return;
+		}
+		else if (strcmp("go e", comand) == 0)
+		{
+			player[0].position = 1;
+			printf("\n%s\n", (rooms[1].name));
+			printf("%s\n", (rooms[1].description));
+			return;
+		}
+	}
+
+	//Alien Spawn
+	if (player[0].position == 4)
+	{
+		if (strcmp("go n", comand) == 0)
+		{
+			if (door[1].Num_doors == 1){
+				player[0].position = 5;
+				printf("\n%s\n", (rooms[5].name));
+				printf("%s\n", (rooms[5].description));
+				return;
+			}
+			else{
+				printf("You can't move, there is a front door and closed.\n");
+			}
+		}
+		else if (strcmp("go w", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go s", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go e", comand) == 0)
+		{
+			player[0].position = 3;
+			printf("\n%s\n", (rooms[3].name));
+			printf("%s\n", (rooms[3].description));
+			return;
+		}
+	}
+
+	//Warehouse
+	if (player[0].position == 5)
+	{
+		if (strcmp("go n", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go w", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go s", comand) == 0)
+		{
+			if (door[1].Num_doors == 1){
+				player[0].position = 4;
+				printf("\n%s\n", (rooms[4].name));
+				printf("%s\n", (rooms[4].description));
+				return;
+			}
+			else{
+				printf("You can't move, there is a front door and closed.\n");
+			}
+		}
+		else if (strcmp("go e", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+	}
+
+	//Warehouse 2
+	if (player[0].position == 6)
+	{
+		if (strcmp("go n", comand) == 0)
+		{
+			player[0].position = 3;
+			printf("\n%s\n", (rooms[3].name));
+			printf("%s\n", (rooms[3].description));
+			return;
+		}
+		else if (strcmp("go w", comand) == 0)
+		{
+			if (door[2].Num_doors == 1){
+				player[0].position = 7;
+				printf("\n%s\n", (rooms[7].name));
+				printf("%s\n", (rooms[7].description));
+				return;
+			}
+			else{
+				printf("You can't move, there is a front door and closed.\n");
+			}
+		}
+		else if (strcmp("go s", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go e", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+	}
+
+	//Gunsmith
+	if (player[0].position == 7)
+	{
+		if (strcmp("go n", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go w", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go s", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go e", comand) == 0)
+		{
+			if (door[2].Num_doors == 1){
+				player[0].position = 6;
+				printf("\n%s\n", (rooms[6].name));
+				printf("%s\n", (rooms[6].description));
+				return;
+			}
+			else{
+				printf("You can't move, there is a front door and closed.\n");
+			}
+		}
+	}
+
+	//Aisle 2
+	if (player[0].position == 8)
+	{
+		if (strcmp("go n", comand) == 0)
+		{
+			player[0].position = 11;
+			printf("\n%s\n", (rooms[11].name));
+			printf("%s\n", (rooms[11].description));
+			return;
+		}
+		else if (strcmp("go w", comand) == 0)
+		{
+			player[0].position = 1;
+			printf("\n%s\n", (rooms[1].name));
+			printf("%s\n", (rooms[1].description));
+			return;
+		}
+		else if (strcmp("go s", comand) == 0)
+		{
+			player[0].position = 9;
+			printf("\n%s\n", (rooms[9].name));
+			printf("%s\n", (rooms[9].description));
+			return;
+		}
+		else if (strcmp("go e", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+	}
+
+	//Hall
+	if (player[0].position == 9)
+	{
+		if (strcmp("go n", comand) == 0)
+		{
+			player[0].position = 8;
+			printf("\n%s\n", (rooms[8].name));
+			printf("%s\n", (rooms[8].description));
+			return;
+		}
+		else if (strcmp("go w", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go s", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go e", comand) == 0)
+		{
+			if (door[3].Num_doors == 1){
+				player[0].position = 10;
+				printf("\n%s\n", (rooms[10].name));
+				printf("%s\n", (rooms[10].description));
+				return;
+			}
+			else{
+				printf("You can't move, there is a front door and closed.\n");
+			}
+		}
+	}
+
+	//Exit
+	if (player[0].position == 10)
+	{
+		if (strcmp("go n", comand) == 0)
+		{
+			printf("This is Exit!\n");
+			return;
+		}
+		else if (strcmp("go w", comand) == 0)
+		{
+			if (door[3].Num_doors == 1){
+				player[0].position = 9;
+				printf("\n%s\n", (rooms[9].name));
+				printf("%s\n", (rooms[9].description));
+				return;
+			}
+			else{
+				printf("You can't move, there is a front door and closed.\n");
+			}
+		}
+		else if (strcmp("go s", comand) == 0)
+		{
+			printf("This is Exit!\n");
+			return;
+		}
+		else if (strcmp("go e", comand) == 0)
+		{
+			printf("This is Exit!\n");
+			return;
+		}
+	}
+
+	//Aisle 3
+	if (player[0].position == 11)
+	{
+		if (strcmp("go n", comand) == 0)
+		{
+			player[0].position = 8;
+			printf("\n%s\n", (rooms[8].name));
+			printf("%s\n", (rooms[8].description));
+			return;
+		}
+		else if (strcmp("go w", comand) == 0)
+		{
+			if (door[4].Num_doors == 1){
+				player[0].position = 12;
+				printf("\n%s\n", (rooms[12].name));
+				printf("%s\n", (rooms[12].description));
+				return;
+			}
+			else{
+				printf("You can't move, there is a front door and closed.\n");
+			}
+		}
+		else if (strcmp("go s", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go e", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+	}
+
+	//Laboratory
+	if (player[0].position == 12)
+	{
+		if (strcmp("go n", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go w", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go s", comand) == 0)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if (strcmp("go e", comand) == 0)
+		{
+			if (door[4].Num_doors == 1){
+				player[0].position = 11;
+				printf("\n%s\n", (rooms[11].name));
+				printf("%s\n", (rooms[11].description));
+				return;
+			}
+			else{
+				printf("You can't move, there is a front door and closed.\n");
+			}
+		}
+	}
+}
+
 void World::Open_Door_North()
 {
 	if (player[0].position == 1)
@@ -238,6 +658,7 @@ void World::Open_Door_North()
 		printf("In this direction there isn't door.\n");
 	}
 }
+
 void World::Open_Door_West()
 {
 	if (player[0].position == 6)
@@ -464,392 +885,6 @@ void World::Close_Door_East()
 	}
 	else{
 		printf("In this direction there isn't door.\n");
-	}
-}
-
-void World::Move_position_North()
-{
-
-	if (player[0].position == 0)
-	{
-		printf("\n%s\n", (rooms[1].name));
-		printf("%s\n", (rooms[1].description));
-		player[0].position = 1;
-		return;
-	}
-	if (player[0].position == 1)
-	{
-		if (door[0].Num_doors == 1){
-			player[0].position = 2;
-			printf("\n%s\n", (rooms[2].name));
-			printf("%s\n", (rooms[2].description));
-			return;
-		}
-		else{
-			printf("You can't move, there is a front door and closed.\n");
-		}
-
-	}
-	if (player[0].position == 2)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 3)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 4)
-	{
-		if (door[1].Num_doors == 1){
-			player[0].position = 5;
-			printf("\n%s\n", (rooms[5].name));
-			printf("%s\n", (rooms[5].description));
-			return;
-		}
-		else{
-			printf("You can't move, there is a front door and closed.\n");
-		}
-
-	}
-	if (player[0].position == 5)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 6)
-	{
-		player[0].position = 3;
-		printf("\n%s\n", (rooms[3].name));
-		printf("%s\n", (rooms[3].description));
-		return;
-	}
-	if (player[0].position == 7)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 8)
-	{
-		player[0].position = 11;
-		printf("\n%s\n", (rooms[11].name));
-		printf("%s\n", (rooms[11].description));
-		return;
-	}
-	if (player[0].position == 9)
-	{
-		player[0].position = 8;
-		printf("\n%s\n", (rooms[8].name));
-		printf("%s\n", (rooms[8].description));
-		return;
-	}
-	if (player[0].position == 10)
-	{
-		printf("This is Exit!\n");
-		return;
-	}
-	if (player[0].position == 11)
-	{
-		player[0].position = 8;
-		printf("\n%s\n", (rooms[8].name));
-		printf("%s\n", (rooms[8].description));
-		return;
-	}
-	if (player[0].position == 12)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-}
-
-void World::Move_position_West(){
-
-	if (player[0].position == 0)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 1)
-	{
-		player[0].position = 3;
-		printf("\n%s\n", (rooms[3].name));
-		printf("%s\n", (rooms[3].description));
-		return;
-	}
-	if (player[0].position == 2)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 3)
-	{
-		player[0].position = 4;
-		printf("\n%s\n", (rooms[4].name));
-		printf("%s\n", (rooms[4].description));
-		return;
-	}
-	if (player[0].position == 4)
-	{
-		printf("There is a wall.\n");
-		return;
-	}
-	if (player[0].position == 5)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 6)
-	{
-		if (door[2].Num_doors == 1){
-		player[0].position = 7;
-		printf("\n%s\n", (rooms[7].name));
-		printf("%s\n", (rooms[7].description));
-		return;
-		}
-		else{
-			printf("You can't move, there is a front door and closed.\n");
-		}
-
-	}
-	if (player[0].position == 7)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 8)
-	{
-		player[0].position = 1;
-		printf("\n%s\n", (rooms[1].name));
-		printf("%s\n", (rooms[1].description));
-		return;
-	}
-	if (player[0].position == 9)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 10)
-	{
-		if (door[3].Num_doors == 1){
-		player[0].position = 9;
-		printf("\n%s\n", (rooms[9].name));
-		printf("%s\n", (rooms[9].description));
-		return;
-		}
-		else{
-			printf("You can't move, there is a front door and closed.\n");
-		}
-
-	}
-	if (player[0].position == 11)
-	{
-		if (door[4].Num_doors == 1){
-		player[0].position = 12;
-		printf("\n%s\n", (rooms[12].name));
-		printf("%s\n", (rooms[12].description));
-		return;
-		}
-		else{
-			printf("You can't move, there is a front door and closed.\n");
-		}
-
-	}
-	if (player[0].position == 12)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-}
-
-void World::Move_position_South(){
-
-	if (player[0].position == 0)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 1)
-	{
-		player[0].position = 0;
-		printf("\n%s\n", (rooms[0].name));
-		printf("%s\n", (rooms[0].description));
-		return;
-	}
-	if (player[0].position == 2)
-	{
-		if (door[0].Num_doors == 1){
-		player[0].position = 1;
-		printf("\n%s\n", (rooms[1].name));
-		printf("%s\n", (rooms[1].description));
-		return;
-		}
-		else{
-			printf("You can't move, there is a front door and closed.\n");
-		}
-
-	}
-	if (player[0].position == 3)
-	{
-		player[0].position = 6;
-		printf("\n%s\n", (rooms[6].name));
-		printf("%s\n", (rooms[6].description));
-		return;
-	}
-	if (player[0].position == 4)
-	{
-		printf("There is a wall.\n");
-		return;
-	}
-	if (player[0].position == 5)
-	{
-		if (door[1].Num_doors == 1){
-		player[0].position = 4;
-		printf("\n%s\n", (rooms[4].name));
-		printf("%s\n", (rooms[4].description));
-		return;
-		}
-		else{
-			printf("You can't move, there is a front door and closed.\n");
-		}
-
-	}
-	if (player[0].position == 6)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 7)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 8)
-	{
-		player[0].position = 9;
-		printf("\n%s\n", (rooms[9].name));
-		printf("%s\n", (rooms[9].description));
-		return;
-	}
-	if (player[0].position == 9)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 10)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 11)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 12)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-}
-
-void World::Move_position_East(){
-
-	if (player[0].position == 0)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 1)
-	{
-		player[0].position = 8;
-		printf("\n%s\n", (rooms[8].name));
-		printf("%s\n", (rooms[8].description));
-		return;
-	}
-	if (player[0].position == 2)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 3)
-	{
-		player[0].position = 1;
-		printf("\n%s\n", (rooms[1].name));
-		printf("%s\n", (rooms[1].description));
-		return;
-	}
-	if (player[0].position == 4)
-	{
-		player[0].position = 3;
-		printf("\n%s\n", (rooms[3].name));
-		printf("%s\n", (rooms[3].description));
-		return;
-	}
-	if (player[0].position == 5)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 6)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 7)
-	{
-		if (door[2].Num_doors == 1){
-		player[0].position = 6;
-		printf("\n%s\n", (rooms[6].name));
-		printf("%s\n", (rooms[6].description));
-		return;
-		}
-		else{
-			printf("You can't move, there is a front door and closed.\n");
-		}
-
-	}
-	if (player[0].position == 8)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-	if (player[0].position == 9)
-	{
-		if (door[3].Num_doors == 1){
-		player[0].position = 10;
-		printf("\n%s\n", (rooms[10].name));
-		printf("%s\n", (rooms[10].description));
-		return;
-		}
-		else{
-			printf("You can't move, there is a front door and closed.\n");
-		}
-	}
-
-	if (player[0].position == 10)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-
-	if (player[0].position == 11)
-	{
-		printf("There is a wall!.\n");
-		return;
-	}
-
-	if (player[0].position == 12)
-	{
-		if (door[4].Num_doors == 1){
-		player[0].position = 11;
-		printf("\n%s\n", (rooms[11].name));
-		printf("%s\n", (rooms[11].description));
-		return;
-		}
-		else{
-			printf("You can't move, there is a front door and closed.\n");
-		}
 	}
 }
 

@@ -22,21 +22,27 @@
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
     <ClCompile Include="player.h">
-      <Filter>Archivos de código fuente</Filter>
+      <Filter>Archivos de encabezado</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Room.h">
-      <Filter>Archivos de código fuente</Filter>
-    </ClInclude>
-    <ClInclude Include="World.h">
-      <Filter>Archivos de código fuente</Filter>
+    <ClInclude Include="Door.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Exits.h">
-      <Filter>Archivos de código fuente</Filter>
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Door.h">
-      <Filter>Archivos de código fuente</Filter>
+    <ClInclude Include="Room.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="String_Class.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

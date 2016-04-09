@@ -4,6 +4,8 @@
 #include "player.h"
 #include "Room.h"
 #include "World.h"
+#include "Entity.h"
+#include "String_Class.h"
 
 #include <string.h>
 
