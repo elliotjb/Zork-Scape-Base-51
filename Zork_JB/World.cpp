@@ -19,8 +19,8 @@ World::World(){
 	player = new Player[1];
 	exit = new Exits[13];
 	door = new Door[5];
+	//comand = new ClString;
 	comand = new char[];
-
 }
 
 World::~World(){
@@ -29,75 +29,75 @@ World::~World(){
 	delete[]exit;
 	delete[]door;
 	delete[]comand;
+
 }
 
 
 void World::Create_World(){
 
 	//Create Player
-	//player[0].name = "player";
-	strcpy_s(player[0].name, "Player");
-	strcpy_s(player[0].description, "You have 20 years.");
+	player[0].name = "player";
+	player[0].description = "You have 20 years.";
 	player[0].position = 0; //Position start-> Main Room.
 
 
 	//Create Rooms
 	rooms[0].name = "hola";
-	strcpy_s(rooms[0].name, "You are stay in the Main Room.\n");
-	strcpy_s(rooms[0].description, "This room is very dark but there is a light above is enough to see everything. \nThere is only one door and the north.\n");
+	rooms[0].name = "You are stay in the Main Room.\n";
+	rooms[0].description, "This room is very dark but there is a light above is enough to see everything. \nThere is only one door and the north.\n";
 
-	strcpy_s(rooms[1].name, "You are stay in the Aisle.\n");
-	strcpy_s(rooms[1].description, "This Aisle is small and it's a dimly lit.\n");
+	rooms[1].name = "You are stay in the Aisle.\n";
+	rooms[1].description = "This Aisle is small and it's a dimly lit.\n";
 
-	strcpy_s(rooms[2].name, "You are stay in the Dressing Room.\n");
-	strcpy_s(rooms[2].description, "You can see many lockers, and some are open.|nThere is also a window but it is locked with bars.\n");
+	rooms[2].name = "You are stay in the Dressing Room.\n";
+	rooms[2].description = "You can see many lockers, and some are open.|nThere is also a window but it is locked with bars.\n";
 
-	strcpy_s(rooms[3].name, "You are stay in the Office Room.\n");
-	strcpy_s(rooms[3].description, "It is a large room, you see that this separated workspaces with computers at home space.\n");
+	rooms[3].name = "You are stay in the Office Room.\n";
+	rooms[3].description = "It is a large room, you see that this separated workspaces with computers at home space.\n";
 
-	strcpy_s(rooms[4].name, "You are stay in the Mystery Room.\n");
-	strcpy_s(rooms[4].description, "This room is has a gigantic cube in the middle of the room has a door and it seems that this open.\n");
+	rooms[4].name = "You are stay in the Mystery Room.\n";
+	rooms[4].description = "This room is has a gigantic cube in the middle of the room has a door and it seems that this open.\n";
 
-	strcpy_s(rooms[5].name, "You are stay in the Warehouse.\n");
-	strcpy_s(rooms[5].description, "There are many shelves.\n");
+	rooms[5].name = "You are stay in the Warehouse.\n";
+	rooms[5].description = "There are many shelves.\n";
 
-	strcpy_s(rooms[6].name, "You are stay in the Warehouse II.\n");
-	strcpy_s(rooms[6].description, "There are many shelves.\n");
+	rooms[6].name = "You are stay in the Warehouse II.\n";
+	rooms[6].description = "There are many shelves.\n";
 
-	strcpy_s(rooms[7].name, "You are stay in the Gunsmith.\n");
-	strcpy_s(rooms[7].description, "Here are many weapons and lots of ammunition, it could be useful.\n");
+	rooms[7].name = "You are stay in the Gunsmith.\n";
+	rooms[7].description = "Here are many weapons and lots of ammunition, it could be useful.\n";
 
-	strcpy_s(rooms[8].name, "You are stay in the Aisle.\n");
-	strcpy_s(rooms[8].description, "This Aisle is big room.\n");
+	rooms[8].name = "You are stay in the Aisle.\n";
+	rooms[8].description = "This Aisle is big room.\n";
 
-	strcpy_s(rooms[9].name, "You are stay in the Hall.\n");
-	strcpy_s(rooms[9].description, "It is a very large room with plenty of lighting.\n");
+	rooms[9].name = "You are stay in the Hall.\n";
+	rooms[9].description = "It is a very large room with plenty of lighting.\n";
 
-	strcpy_s(rooms[10].name, "You are stay in the Exit.\n");
-	strcpy_s(rooms[10].description, "This is Exit.\n");
+	rooms[10].name = "You are stay in the Exit.\n";
+	rooms[10].description = "This is Exit.\n";
 
-	strcpy_s(rooms[11].name, "You are stay in the Aisle.\n");
-	strcpy_s(rooms[11].description, "This Aisle is long.\n");
+	rooms[11].name = "You are stay in the Aisle.\n";
+	rooms[11].description = "This Aisle is long.\n";
 
-	strcpy_s(rooms[12].name, "You are stay in the Laboratory.\n");
-	strcpy_s(rooms[12].description, "There are many very strange instruments.\n");
+	rooms[12].name = "You are stay in the Laboratory.\n";
+	rooms[12].description = "There are many very strange instruments.\n";
 
 	
 
 	//Create Exits
-	strcpy_s(exit[0].description, "There is a door.\nBehind the door is the Main Room.\n");
-	strcpy_s(exit[1].description, "There is a door.\nBehind the door is the Aisle.\n");
-	strcpy_s(exit[2].description, "There is a door.\nBehind the door is the Dressing Room.\n");
-	strcpy_s(exit[3].description, "There is a door.\nBehind the door is the Office Room.\n");
-	strcpy_s(exit[4].description, "There is a door.\nBehind the door is the Mystery Spawn.\n");
-	strcpy_s(exit[5].description, "There is a door.\nBehind the door is the Warehouse.\n");
-	strcpy_s(exit[6].description, "There is a door.\nBehind the door is the Warehouse.\n");
-	strcpy_s(exit[7].description, "There is a door.\nBehind the door is the Gunsmith.\n");
-	strcpy_s(exit[8].description, "There is a door.\nBehind the door is the Ailse.\n");
-	strcpy_s(exit[9].description, "There is a door.\nBehind the door is the Hall.\n");
-	strcpy_s(exit[10].description, "There is a door.\nBehind the door is the Exit.\n");
-	strcpy_s(exit[11].description, "There is a door.\nBehind the door is the Ailse.\n");
-	strcpy_s(exit[12].description, "There is a door.\nBehind the door is the Laboratory.\n");
+	exit[0].description = "There is a door.\nBehind the door is the Main Room.\n";
+	exit[1].description = "There is a door.\nBehind the door is the Aisle.\n";
+	exit[2].description = "There is a door.\nBehind the door is the Dressing Room.\n";
+	exit[3].description = "There is a door.\nBehind the door is the Office Room.\n";
+	exit[4].description = "There is a door.\nBehind the door is the Mystery Spawn.\n";
+	exit[5].description = "There is a door.\nBehind the door is the Warehouse.\n";
+	exit[6].description = "There is a door.\nBehind the door is the Warehouse.\n";
+	exit[7].description = "There is a door.\nBehind the door is the Gunsmith.\n";
+	exit[8].description = "There is a door.\nBehind the door is the Ailse.\n";
+	exit[9].description = "There is a door.\nBehind the door is the Hall.\n";
+	exit[10].description = "There is a door.\nBehind the door is the Exit.\n";
+	exit[11].description = "There is a door.\nBehind the door is the Ailse.\n";
+	exit[12].description = "There is a door.\nBehind the door is the Laboratory.\n";
 
 
 
@@ -128,13 +128,10 @@ void World::Create_World(){
 void World::Set_Command(){
 
 	printf("> ");
+
 	gets_s(comand, 20);
+	//comand->set();
 
-	//App->comands = comand;
-
-	/*if (App->comands == "go n"){
-		printf("HOLAAAAAAAAAA\n");
-	}*/
 	//Command - Help
 	if (strcmp("help", comand) == 0){
 		printf("Your commands:\n");

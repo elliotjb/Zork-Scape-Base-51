@@ -3,89 +3,122 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
+
+typedef unsigned int uint;
 
 class ClString{
 
 private:
 	char* buffer = nullptr;
-	unsigned int memory;
+	uint memory;
 
 public:
+	ClString()
+	{
+		memory = 1;
+		buffer = new char[memory];
+		strcpy_s(buffer, memory, "");
+	}
 	ClString(const char* str){
 		//Constructor que copiara al iniciar - "ClString hello("h"); ->(%s, hello) = h;"
-		memory = strlen(str);
-		buffer = new char[memory + 1];
+		uint len = strlen(str);
+		buffer = new char[len + 1];
+		memory = len + 1;
 		strcpy_s(buffer, memory, str);
 	}
 	//Contructor de copia
 	ClString(const ClString& copy){
 		memory = strlen(copy.buffer);
-		buffer = new char[memory + 1];
+		buffer = new char[memory];
 		strcpy_s(buffer, memory, copy.buffer);
 	}
 	//Destructor
 	~ClString(){
 		delete[]buffer;
 	}
+	//Function to set 
+	void set()
+	{
+		char str[20];
+		gets_s(str, 20);
+		int lent = strlen(str) + 1;
+		if (memory < lent){
+			delete[]buffer;
+			memory = lent;
+			buffer = new char[memory];
+		}
+		strcpy_s(buffer, memory, str);
+	}
 	//Funcion para devolver longitud
-	unsigned int lenght()const{
+	uint length()const{
 		return strlen(buffer);
 	}
+	void clear()
+	{
+		strcpy_s(buffer, memory, "");
+	}
 	//Funcion para imprimir string
-	const char* getstr()const{
+	const char* getstr()const
+	{
 		return buffer;
 	}
+	//Devuelve la capacidad!
+	uint capacity() const
+	{
+		return memory;
+	}
 	//Funcion para saber si hay algo en la cadena
-	bool empty()const{
-		return strlen(buffer) == 0;
+	bool empty() const
+	{
+		return buffer[0] == 0;
 	}
 	//Funcion para comparar 2 clases si son iguales
-	bool operator ==(const ClString& str)const{
+	bool operator ==(const ClString& str) const
+	{
 		return strcmp(buffer, str.buffer) == 0;
 	}
+	//Function to compare 2 char
+	bool operator ==(const char* str) const
+	{
+		return strcmp(buffer, str) == 0;
+	}
+
 	//Funcion para sumar 2 clases
-	bool operator +=(const ClString& str)const{
+	bool operator +=(const ClString& str) const
+	{
 		//deures!
 	}
 	//
-	void operator =(const ClString& str){
-
-		if (SameLenght(str)){
-			strcpy_s(buffer, memory, str.buffer);
-		}
-
-		else if (IsSmaller(str)){
-			int len = str.memory;
-			strcpy_s(buffer, len, str.buffer);
-			buffer[len] = 0;
-		}
-
-		if (str.lenght() + 1 > memory){
-			memory = str.lenght() + 1;
-			delete[]buffer;
+	void operator =(const ClString& str)
+	{
+		if (memory < str.length() + 1)
+		{
+			delete[] buffer;
+			memory = str.length() + 1;
 			buffer = new char[memory];
 		}
 		strcpy_s(buffer, memory, str.buffer);
-		//deures!
 	}
 
 	//+=
-	void operator +=(const ClString& str){
-		//if ()
+	void operator +=(const ClString& str)
+	{
+		char *temp = nullptr;
 
-	}
-	//COmprueba que tengan la misma capacidad
-	bool SameLenght(const ClString& str){
-		return memory == str.memory;
-	}
-	//Comprueba que sea mas pequeño que la capacidad que hay
-	bool IsSmaller(const ClString& str){
-		return memory > str.memory;
-	}
-
-	//Devuelve la capacidad!
-	int GetCapacity(){
-		return memory;
+		if (memory < str.length() + length() + 1)
+		{
+			memory = str.length() + length() + 1;
+			temp = new char[memory];
+			strcpy_s(temp, memory, buffer);
+			delete[]buffer;
+			strcat_s(temp, memory, str.buffer);
+			buffer = temp;
+		}
+		else
+		{
+			strcat_s(buffer, memory, str.buffer);
+		}
 	}
 	/*
 	//

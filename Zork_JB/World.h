@@ -5,7 +5,7 @@
 #include "player.h"
 #include <string.h>
 
-#define _CRT_SECURE_NO_WARNINGS
+
 class Exits;
 class Room;
 class Player;
@@ -17,9 +17,8 @@ public:
 	Player* player = nullptr;
 	Exits* exit = nullptr;
 	Door* door = nullptr;
-
-	char* comand = nullptr;
 	//ClString* comand = nullptr;
+	char* comand = nullptr;
 
 	World();
 	~World();
