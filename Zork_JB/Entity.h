@@ -9,6 +9,7 @@ public:
 
 	ClString name;
 	ClString description;
+	//virtual void look()const;
 
 public:
 

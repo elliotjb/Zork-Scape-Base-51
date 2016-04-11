@@ -6,7 +6,8 @@
 #include "Door.h"
 #include "Exits.h"
 #include "Entity.h"
-#include "String_Class.h"
+#include "Item.h"
+//#include "String_Class.h"
 #include <string.h>
 
 using namespace std;
@@ -19,6 +20,7 @@ World::World(){
 	player = new Player[1];
 	exit = new Exits[13];
 	door = new Door[5];
+	item = new Item[10];
 	//comand = new ClString;
 	comand = new char[];
 }
@@ -29,6 +31,7 @@ World::~World(){
 	delete[]exit;
 	delete[]door;
 	delete[]comand;
+	delete[]item;
 
 }
 
@@ -67,7 +70,7 @@ void World::Create_World(){
 	rooms[7].name = "You are stay in the Gunsmith.\n";
 	rooms[7].description = "Here are many weapons and lots of ammunition, it could be useful.\n";
 
-	rooms[8].name = "You are stay in the Aisle.\n";
+	rooms[8].name = "You are stay in the Aisle 2.\n";
 	rooms[8].description = "This Aisle is big room.\n";
 
 	rooms[9].name = "You are stay in the Hall.\n";
@@ -76,7 +79,7 @@ void World::Create_World(){
 	rooms[10].name = "You are stay in the Exit.\n";
 	rooms[10].description = "This is Exit.\n";
 
-	rooms[11].name = "You are stay in the Aisle.\n";
+	rooms[11].name = "You are stay in the Aisle 3.\n";
 	rooms[11].description = "This Aisle is long.\n";
 
 	rooms[12].name = "You are stay in the Laboratory.\n";
@@ -93,10 +96,10 @@ void World::Create_World(){
 	exit[5].description = "There is a door.\nBehind the door is the Warehouse.\n";
 	exit[6].description = "There is a door.\nBehind the door is the Warehouse.\n";
 	exit[7].description = "There is a door.\nBehind the door is the Gunsmith.\n";
-	exit[8].description = "There is a door.\nBehind the door is the Ailse.\n";
+	exit[8].description = "There is a door.\nBehind the door is the Ailse 2.\n";
 	exit[9].description = "There is a door.\nBehind the door is the Hall.\n";
 	exit[10].description = "There is a door.\nBehind the door is the Exit.\n";
-	exit[11].description = "There is a door.\nBehind the door is the Ailse.\n";
+	exit[11].description = "There is a door.\nBehind the door is the Ailse 3.\n";
 	exit[12].description = "There is a door.\nBehind the door is the Laboratory.\n";
 
 
@@ -136,6 +139,7 @@ void World::Set_Command(){
 	if (strcmp("help", comand) == 0){
 		printf("Your commands:\n");
 		printf("-[go north] or [go n]\n-[go west] or [go w]\n-[go south] or [go s]\n-[go east] or [go e]\n");
+		printf("-[go up] or [go u]\n-[go down] or [go d]\n");
 		printf("-[look (the same way as above)]\n");
 		printf("-[open door]\n-[close door]\n");
 		printf("-[quit]\n-[help]\n");
@@ -146,10 +150,10 @@ void World::Set_Command(){
 	if (strcmp("go", comand) == 0){
 		printf("Where you want to go? [go north, go west, go south, go east]\n");
 	}
-	if (strcmp("go n", comand) == 0 || strcmp("go w", comand) == 0 || strcmp("go s", comand) == 0 || strcmp("go e", comand) == 0){
+	if (strcmp("go n", comand) == 0 || strcmp("go w", comand) == 0 || strcmp("go s", comand) == 0 || strcmp("go e", comand) == 0 || strcmp("go u", comand) == 0 || strcmp("go d", comand) == 0){
 		Move();
 	}
-	if (strcmp("go north", comand) == 0 || strcmp("go west", comand) == 0 || strcmp("go south", comand) == 0 || strcmp("go east", comand) == 0){
+	if (strcmp("go north", comand) == 0 || strcmp("go west", comand) == 0 || strcmp("go south", comand) == 0 || strcmp("go east", comand) == 0 || strcmp("go up", comand) == 0 || strcmp("go down", comand) == 0){
 		Move();
 	}
 
@@ -479,12 +483,18 @@ void World::Move()
 	{
 		if ((strcmp("go n", comand) == 0) || (strcmp("go north", comand) == 0))
 		{
+			printf("There are stairs that go up.\n");
+			return;
+		}
+		if ((strcmp("go u", comand) == 0) || (strcmp("go up", comand) == 0))
+		{		
 			exit[11].discover = 1;
 			player[0].position = 11;
 			printf("\n%s\n", (rooms[11].name));
 			printf("%s\n", (rooms[11].description));
 			return;
 		}
+
 		else if ((strcmp("go w", comand) == 0) || (strcmp("go west", comand) == 0))
 		{
 			player[0].position = 1;
@@ -579,6 +589,11 @@ void World::Move()
 	if (player[0].position == 11)
 	{
 		if ((strcmp("go n", comand) == 0) || (strcmp("go north", comand) == 0))
+		{
+			printf("There are stairs that go down.\n");
+			return;
+		}
+		if ((strcmp("go d", comand) == 0) || (strcmp("go down", comand) == 0))
 		{
 			player[0].position = 8;
 			printf("\n%s\n", (rooms[8].name));
@@ -1250,7 +1265,7 @@ void World::Look_Specify_Position() const
 			}
 			else
 			{
-				printf("There is a door and that room has not been discovered yet.\n");
+				printf("There are stairs that go up and that room has not been discovered yet.\n");
 			}
 		}
 		else if ((strcmp("look w", comand) == 0) || (strcmp("look west", comand) == 0))
@@ -1355,7 +1370,7 @@ void World::Look_Specify_Position() const
 			}
 			else
 			{
-				printf("There is a door and that room has not been discovered yet.\n");
+				printf("There are stairs that go up and that room has not been discovered yet.\n");
 			}
 		}
 		else if ((strcmp("look w", comand) == 0) || (strcmp("look west", comand) == 0))

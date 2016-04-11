@@ -10,6 +10,7 @@ class Exits;
 class Room;
 class Player;
 class Door;
+class Item;
 
 class World{
 public:
@@ -17,6 +18,7 @@ public:
 	Player* player = nullptr;
 	Exits* exit = nullptr;
 	Door* door = nullptr;
+	Item* item = nullptr;
 	//ClString* comand = nullptr;
 	char* comand = nullptr;
 
