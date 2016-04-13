@@ -7,7 +7,8 @@ using namespace std;
 class Door{
 
 public:
-
+	Door(int Num_doors);
+	virtual ~Door();
 	int Num_doors;
 };
 

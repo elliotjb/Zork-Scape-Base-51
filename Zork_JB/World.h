@@ -2,7 +2,8 @@
 #define __World__
 
 #include "Room.h"
-#include "player.h"
+#include "Player.h"
+#include "Vector.h"
 #include <string.h>
 
 
@@ -13,14 +14,21 @@ class Door;
 class Item;
 
 class World{
+
 public:
-	Room* rooms = nullptr;
-	Player* player = nullptr;
-	Exits* exit = nullptr;
-	Door* door = nullptr;
-	Item* item = nullptr;
+
+	Vector <Room*> rooms;
+	Vector <Player*> player;
+	Vector <Exits*> exit;
+	Vector <Door*> door;
+	Vector <Item*> item;
+
+	Vector <Entity*> my_entities;
+
 	//ClString* comand = nullptr;
 	char* comand = nullptr;
+
+public:
 
 	World();
 	~World();
@@ -36,19 +44,20 @@ public:
 	void Move();
 
 	//Function to open
-	void Open();
+	/*void Open();
 
 	//Function to close
 	void Close();
-
+	*/
 	//Function to Look Room
 	void Look() const;
-
+	/*
 	//Function to Look specify position (North, West, South and East)
 	void Look_Specify_Position() const;
-
+	*/
 	//Function to exit the game
 	bool Exit_zork();
+
 
 };
 

@@ -3,11 +3,13 @@
 #include <string.h>
 #include "Entity.h"
 
-
+using namespace std;
 
 class Exits : public Entity
 {
 public:
+	Exits(const char* str1, const char* str2, int discover);
+	virtual ~Exits();
 	//char description[150];
 	int discover;
 

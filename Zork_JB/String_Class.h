@@ -29,7 +29,7 @@ public:
 	}
 	//Contructor de copia
 	ClString(const ClString& copy){
-		memory = strlen(copy.buffer);
+		memory = copy.memory;
 		buffer = new char[memory];
 		strcpy_s(buffer, memory, copy.buffer);
 	}
