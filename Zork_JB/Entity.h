@@ -18,7 +18,7 @@ enum Type
 
 class Entity
 {
-public:
+private:
 
 	ClString name_string;
 	ClString description_string;
@@ -26,6 +26,7 @@ public:
 public:
 
 	Entity(const char* str1, const char* str2);
+	Entity();
 	virtual ~Entity();
 
 	ClString name()const;

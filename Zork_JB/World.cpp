@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "World.h"
 #include "Room.h"
-#include "Player.h"
+#include "player.h"
 #include "Door.h"
 #include "Exits.h"
 #include "Entity.h"
@@ -16,10 +16,11 @@ using namespace std;
 //#define _CRT_SECURE_NO_WARNINGS
 
 
-World::World(){
+World::World()
+{
 	comand = new char[];
+	//comand = new char[];
 }
-
 World::~World()
 {
 
@@ -28,13 +29,11 @@ World::~World()
 
 void World::Create_World(){
 
-	Player* gamer;
 	//Create Player
-	player.push_back(gamer = new Player("Player", "You have 20 years."));
 
 
 	//Create Rooms
-	Room* MainRoom;//0
+	//Room* MainRoom;//0
 	Room* Ailse;//1...
 	Room* DressingRoom;
 	Room* OfficeRoom;
@@ -49,7 +48,7 @@ void World::Create_World(){
 	Room* Laboratory;
 
 
-	rooms.push_back(MainRoom = new Room("You are stay in the Main Room.\n", "ha"));
+	rooms.push_back(new Room("You are stay in the Main Room.\n", "ha"));
 	rooms.push_back(Ailse = new Room("You are stay in the Aisle.\n", "ha"));
 	rooms.push_back(DressingRoom = new Room("Room 2", "ha"));
 	rooms.push_back(OfficeRoom = new Room("Room 3", "ha"));
@@ -63,7 +62,7 @@ void World::Create_World(){
 	rooms.push_back(Ailse3 = new Room("Room 11", "ha"));
 	rooms.push_back(Laboratory = new Room("Room 12", "ha"));
 
-	my_entities.push_back(MainRoom);
+	/*my_entities.push_back(MainRoom);
 	my_entities.push_back(Ailse);
 	my_entities.push_back(DressingRoom);
 	my_entities.push_back(OfficeRoom);
@@ -75,7 +74,7 @@ void World::Create_World(){
 	my_entities.push_back(Hall);
 	my_entities.push_back(ExitRoom);
 	my_entities.push_back(Ailse3);
-	my_entities.push_back(Laboratory);
+	my_entities.push_back(Laboratory);*/
 	//rooms[0]->name();
 
 	/*rooms[0].name = "hola";
@@ -118,7 +117,8 @@ void World::Create_World(){
 	rooms[12].name = "You are stay in the Laboratory.\n";
 	rooms[12].description = "There are many very strange instruments.\n";*/
 
-	
+	//player.push_back(new Player(rooms[0]));
+
 
 	//Create Exits
 
@@ -135,6 +135,8 @@ void World::Create_World(){
 	exit.push_back(new Exits("Exit to Exit.\n", "There is a door.\nBehind the door is the Exit.\n", 0));
 	exit.push_back(new Exits("Exit to Ailse 3.\n", "There is a door.\nBehind the door is the Ailse 3.\n", 0));
 	exit.push_back(new Exits("Exit to Laboratory.\n", "There is a door.\nBehind the door is the Laboratory.\n", 0));
+	
+	
 
 
 	//Create Doors
@@ -144,7 +146,11 @@ void World::Create_World(){
 	door.push_back(new Door(0));
 	door.push_back(new Door(0));
 
-	Item* Latern;
+	//PLAYER
+	player->position = rooms[0];
+
+	//ITEMS
+	/*Item* Latern;
 	Item* TargetLaboratory;
 	Item* KeyDressing;
 	Item* KeyGunsmith;
@@ -160,8 +166,8 @@ void World::Create_World(){
 	Item* CardReaderExit;
 	Item* BackPack;
 
-	item.push_back(Latern = new Item("Latern", "iluminate\n"));
-	item.push_back(TargetLaboratory = new Item("Tarjet Laboratory", "Target\n"));
+	item.push_back(Latern = new Item("Latern", "iluminate\n", rooms[0], false));
+	item.push_back(TargetLaboratory = new Item("Tarjet Laboratory", "Target\n", rooms[1], false));
 	item.push_back(KeyDressing = new Item("Key of Dressing Room", "key\n"));
 	item.push_back(KeyGunsmith = new Item("Key of Gunsmith", "key\n"));
 	item.push_back(TargetMaster = new Item("Target Master", "iluminate\n"));
@@ -190,9 +196,7 @@ void World::Create_World(){
 	my_entities.push_back(ASafe);
 	my_entities.push_back(CardReaderLabo);
 	my_entities.push_back(CardReaderExit);
-	my_entities.push_back(BackPack);
-
-
+	my_entities.push_back(BackPack);*/
 }
 
 
@@ -280,15 +284,16 @@ void World::Set_Command(){
 
 void World::Move()
 {
+
 	//Main Room
-	if (player[0]->position == 0)
+	if (player->position == rooms[0])
 	{
 		if ((strcmp("go n", comand) == 0) || (strcmp("go north", comand) == 0))
 		{
 			exit[1]->discover = 1;
 			printf("%s\n", rooms[1]->name());
 			printf("%s\n", rooms[1]->description());
-			player[0]->position = 1;
+			player->position = rooms[1];
 			return;
 		}
 		else if ((strcmp("go w", comand) == 0) || (strcmp("go west", comand) == 0))
@@ -308,14 +313,14 @@ void World::Move()
 		}
 	}
 	//Ailse 1
-	if (player[0]->position == 1)
+	if (player->position == rooms[1])
 	{
 		if ((strcmp("go n", comand) == 0) || (strcmp("go north", comand) == 0))
 		{
 			if (door[0]->Num_doors == 1)
 			{
 				exit[2]->discover = 1;
-				player[0]->position = 2;
+				player->position = rooms[2];
 				printf("\n%s\n", (rooms[2]->name()));
 				printf("%s\n", (rooms[2]->description()));
 				return;
@@ -327,14 +332,14 @@ void World::Move()
 		else if ((strcmp("go w", comand) == 0) || (strcmp("go west", comand) == 0))
 		{
 			exit[3]->discover = 1;
-			player[0]->position = 3;
+			player->position = rooms[3];
 			printf("\n%s\n", (rooms[3]->name()));
 			printf("%s\n", (rooms[3]->description()));
 			return;
 		}
 		else if ((strcmp("go s", comand) == 0) || (strcmp("go south", comand) == 0))
 		{
-			player[0]->position = 0;
+			player->position = rooms[0];
 			printf("\n%s\n", (rooms[0]->name()));
 			printf("%s\n", (rooms[0]->description()));
 			return;
@@ -342,7 +347,7 @@ void World::Move()
 		else if ((strcmp("go e", comand) == 0) || (strcmp("go east", comand) == 0))
 		{
 			exit[8]->discover = 1;
-			player[0]->position = 8;
+			player->position = rooms[8];
 			printf("\n%s\n", (rooms[8]->name()));
 			printf("%s\n", (rooms[8]->description()));
 			return;

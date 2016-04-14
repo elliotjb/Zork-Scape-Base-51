@@ -1,32 +1,44 @@
 #ifndef __World__
 #define __World__
 
+#include <stdio.h>
+#include <stdlib.h>
 #include "Room.h"
-#include "Player.h"
+#include "player.h"
+#include "Door.h"
+#include "Exits.h"
+#include "Entity.h"
 #include "Vector.h"
+#include "Item.h"
+#include "String_Class.h"
 #include <string.h>
 
-
+class Entity;
 class Exits;
 class Room;
-class Player;
 class Door;
 class Item;
 
-class World{
+class World:public Entity
+{
 
 public:
 
 	Vector <Room*> rooms;
-	Vector <Player*> player;
+	//Vector <Player*> player;
+
 	Vector <Exits*> exit;
 	Vector <Door*> door;
 	Vector <Item*> item;
 
 	Vector <Entity*> my_entities;
 
+	Item* inventory = nullptr;
 	//ClString* comand = nullptr;
 	char* comand = nullptr;
+	Player* player = nullptr;
+	int position_player;
+
 
 public:
 
@@ -58,6 +70,11 @@ public:
 	//Function to exit the game
 	bool Exit_zork();
 
+	//Function to pick a item
+	//void Pick_item(const ClString&);
+
+	//Function to drop a item
+	//void Drop_item(const ClString&);
 
 };
 

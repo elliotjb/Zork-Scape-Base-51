@@ -4,7 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Item::Item(const char* str1, const char* str2) :Entity(str1, str2)
+Item::Item(const char* str1, const char* str2, Room* link, bool istatus) :
+Entity(str1, str2), link(link), istatus(istatus)
 {
 	type = ITEM;
 }

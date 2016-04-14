@@ -24,6 +24,7 @@ int main(){
 	{
 		world.Set_Command();
 	}
+
 	printf("\nThanks for Playing!!! :D\n\n");
 
 	system("pause");

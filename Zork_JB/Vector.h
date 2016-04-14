@@ -45,7 +45,7 @@ public:
 
 	TYPE& operator[](unsigned int num)
 	{
-		assert(num < elements);
+		assert(num >= 0 && num < elements);
 		return buffer[num];
 	}
 

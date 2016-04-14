@@ -101,6 +101,17 @@ public:
 		strcpy_s(buffer, memory, str.buffer);
 	}
 
+	void operator =(const char *str)
+	{
+		unsigned int len = strlen(str);
+		if (memory < len + 1);
+		{
+			delete[] buffer;
+			memory = len + 1;
+			buffer = new char[memory];
+		}
+		strcpy_s(buffer, memory, str);
+	}
 	//+=
 	void operator +=(const ClString& str)
 	{
