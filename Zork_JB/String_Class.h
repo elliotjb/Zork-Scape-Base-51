@@ -38,17 +38,15 @@ public:
 		delete[]buffer;
 	}
 	//Function to set 
-	void set()
+	void set(char* command)
 	{
-		char str[20];
-		gets_s(str, 20);
-		int lent = strlen(str) + 1;
-		if (memory < lent){
-			delete[]buffer;
-			memory = lent;
+		if (memory < strlen(command) + 1)
+		{
+			delete[] buffer;
+			memory = strlen(command) + 1;
 			buffer = new char[memory];
 		}
-		strcpy_s(buffer, memory, str);
+		strcpy_s(buffer, memory, command);
 	}
 	//Funcion para devolver longitud
 	uint length()const{

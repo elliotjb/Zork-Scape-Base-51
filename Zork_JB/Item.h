@@ -12,10 +12,7 @@ public:
 
 	Room* link;
 	bool istatus;
-	int position_item;
 
-	//Item_Status: 0->room  1->into inventory  2-> equiped  
-	int item_status[15];
 
 
 };

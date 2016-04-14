@@ -16,8 +16,8 @@ int main(){
 	printf("Hello to my Zork!\n\n");
 	printf("You'll have to get reach the exit without dying.\nFor this you will have to open and close doors and be careful not to get caught.\n\n");
 
-	printf("%s", world.rooms[0]->name());
-	printf("%s", world.rooms[0]->description());
+	printf("%s", world.rooms[0]->name.getstr());
+	printf("%s", world.rooms[0]->description.getstr());
 	system("pause");
 
 	while (world.Exit_zork())

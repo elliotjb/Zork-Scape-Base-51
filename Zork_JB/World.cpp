@@ -9,7 +9,7 @@
 #include "Vector.h"
 #include "Item.h"
 #include "String_Class.h"
-#include <string.h>
+//#include <string.h>
 
 using namespace std;
 
@@ -18,8 +18,9 @@ using namespace std;
 
 World::World()
 {
-	comand = new char[];
 	//comand = new char[];
+	//comand = new char[];
+	player = new Player;
 }
 World::~World()
 {
@@ -33,7 +34,7 @@ void World::Create_World(){
 
 
 	//Create Rooms
-	//Room* MainRoom;//0
+	Room* MainRoom;//0
 	Room* Ailse;//1...
 	Room* DressingRoom;
 	Room* OfficeRoom;
@@ -48,7 +49,7 @@ void World::Create_World(){
 	Room* Laboratory;
 
 
-	rooms.push_back(new Room("You are stay in the Main Room.\n", "ha"));
+	rooms.push_back(MainRoom = new Room("You are stay in the Main Room.\n", "ha"));
 	rooms.push_back(Ailse = new Room("You are stay in the Aisle.\n", "ha"));
 	rooms.push_back(DressingRoom = new Room("Room 2", "ha"));
 	rooms.push_back(OfficeRoom = new Room("Room 3", "ha"));
@@ -62,7 +63,7 @@ void World::Create_World(){
 	rooms.push_back(Ailse3 = new Room("Room 11", "ha"));
 	rooms.push_back(Laboratory = new Room("Room 12", "ha"));
 
-	/*my_entities.push_back(MainRoom);
+	my_entities.push_back(MainRoom);
 	my_entities.push_back(Ailse);
 	my_entities.push_back(DressingRoom);
 	my_entities.push_back(OfficeRoom);
@@ -74,7 +75,7 @@ void World::Create_World(){
 	my_entities.push_back(Hall);
 	my_entities.push_back(ExitRoom);
 	my_entities.push_back(Ailse3);
-	my_entities.push_back(Laboratory);*/
+	my_entities.push_back(Laboratory);
 	//rooms[0]->name();
 
 	/*rooms[0].name = "hola";
@@ -150,7 +151,7 @@ void World::Create_World(){
 	player->position = rooms[0];
 
 	//ITEMS
-	/*Item* Latern;
+	Item* Lantern;
 	Item* TargetLaboratory;
 	Item* KeyDressing;
 	Item* KeyGunsmith;
@@ -165,24 +166,24 @@ void World::Create_World(){
 	Item* CardReaderLabo;
 	Item* CardReaderExit;
 	Item* BackPack;
-
-	item.push_back(Latern = new Item("Latern", "iluminate\n", rooms[0], false));
+	
+	item.push_back(Lantern = new Item("Lantern", "iluminate\n", rooms[0], false));
 	item.push_back(TargetLaboratory = new Item("Tarjet Laboratory", "Target\n", rooms[1], false));
-	item.push_back(KeyDressing = new Item("Key of Dressing Room", "key\n"));
-	item.push_back(KeyGunsmith = new Item("Key of Gunsmith", "key\n"));
-	item.push_back(TargetMaster = new Item("Target Master", "iluminate\n"));
-	item.push_back(LockDressing = new Item("Lock of Dressing Room", "iluminate\n"));
-	item.push_back(LockGunsmith = new Item("Lock of Gunsmith", "iluminate\n"));
-	item.push_back(Locker = new Item("Locker", "Locker in Dressing Room\n"));
-	item.push_back(Gun = new Item("Gun", "This gun is a M4A1-S.\n"));
-	item.push_back(Ammo = new Item("Ammo", "1 cargador"));
-	item.push_back(Camera = new Item("Camera", "iluminate"));
-	item.push_back(ASafe = new Item("A Safe", "A Safe in Warehouse.\n"));
-	item.push_back(CardReaderLabo = new Item("Card Reader of Laboratory", "iluminate"));
-	item.push_back(CardReaderExit = new Item("Card Reader of Exit", "iluminate"));
-	item.push_back(BackPack = new Item("Back Pack", "iluminate"));
+	item.push_back(KeyDressing = new Item("Key of Dressing Room", "key\n", rooms[3], false));
+	item.push_back(KeyGunsmith = new Item("Key of Gunsmith", "key\n", rooms[2], false));
+	item.push_back(TargetMaster = new Item("Target Master", "iluminate\n", rooms[12], false));
+	item.push_back(LockDressing = new Item("Lock of Dressing Room", "iluminate\n", rooms[0], false));//EDIT This not a item...
+	item.push_back(LockGunsmith = new Item("Lock of Gunsmith", "iluminate\n", rooms[0], false));//EDIT This not a item...
+	item.push_back(Locker = new Item("Locker", "Locker in Dressing Room\n", rooms[0], false));//EDIT This not a item...
+	item.push_back(Gun = new Item("Gun", "This gun is a M4A1-S.\n", rooms[7], false));
+	item.push_back(Ammo = new Item("Ammo", "1 cargador", rooms[7], false));
+	item.push_back(Camera = new Item("Camera", "iluminate", rooms[5], false));
+	item.push_back(ASafe = new Item("A Safe", "A Safe in Warehouse.\n", rooms[0], false));//EDIT This not a item...
+	item.push_back(CardReaderLabo = new Item("Card Reader of Laboratory", "iluminate", rooms[0], false));//EDIT This not a item...
+	item.push_back(CardReaderExit = new Item("Card Reader of Exit", "iluminate", rooms[0], false));//EDIT This not a item...
+	item.push_back(BackPack = new Item("Back Pack", "iluminate", rooms[0], false));
 
-	my_entities.push_back(Latern);
+	my_entities.push_back(Lantern);
 	my_entities.push_back(TargetLaboratory);
 	my_entities.push_back(KeyDressing);
 	my_entities.push_back(KeyGunsmith);
@@ -196,7 +197,7 @@ void World::Create_World(){
 	my_entities.push_back(ASafe);
 	my_entities.push_back(CardReaderLabo);
 	my_entities.push_back(CardReaderExit);
-	my_entities.push_back(BackPack);*/
+	my_entities.push_back(BackPack);
 }
 
 
@@ -204,21 +205,38 @@ void World::Set_Command(){
 
 	printf("> ");
 
-	gets_s(comand, 20);
-	//comand->set();
+	//gets_s(comands, 40);
+	gets_s(comands, 40);
+	comand->set(comands);
 
-	if (strcmp("look inventory", comand) == 0 || strcmp("look i", comand) == 0){
+
+	/*if (strcmp("look inventory", comand) == 0 || strcmp("look i", comand) == 0){
 		//Look();
-	}
-
+	}*/
 	//Command - Help
-	if (strcmp("help", comand) == 0){
+	if (comands == "help"){
 		printf("Your commands:\n");
 		printf("-[go north] or [go n]\n-[go west] or [go w]\n-[go south] or [go s]\n-[go east] or [go e]\n");
 		printf("-[go up] or [go u]\n-[go down] or [go d]\n");
 		printf("-[look (the same way as above)]\n");
 		printf("-[open door]\n-[close door]\n");
 		printf("-[quit]\n-[help]\n");
+	}
+
+	if ("go n" == comands || "go w" == comands || "go s" == comands || "go e" == comands){
+		Move();
+	}
+	//Command - Help
+	/*if (strcmp("help", comand) == 0){
+		printf("Your commands:\n");
+		printf("-[go north] or [go n]\n-[go west] or [go w]\n-[go south] or [go s]\n-[go east] or [go e]\n");
+		printf("-[go up] or [go u]\n-[go down] or [go d]\n");
+		printf("-[look (the same way as above)]\n");
+		printf("-[open door]\n-[close door]\n");
+		printf("-[quit]\n-[help]\n");
+	}
+	if (strcmp("pick lantern", comand) == 0 || strcmp("p", comand) == 0){
+		Pick_item(item_p);
 	}
 
 
@@ -231,7 +249,7 @@ void World::Set_Command(){
 	}
 	if (strcmp("go north", comand) == 0 || strcmp("go west", comand) == 0 || strcmp("go south", comand) == 0 || strcmp("go east", comand) == 0 || strcmp("go up", comand) == 0 || strcmp("go down", comand) == 0){
 		Move();
-	}
+	}*/
 
 	//Comands - Open and Close
 	/*if (strcmp("open", comand) == 0){
@@ -276,10 +294,14 @@ void World::Set_Command(){
 	}
 	*/
 	//Comand - Exit
-	if (strcmp("quit", comand) == 0){
+	if ("quit" == comands){
 		quit = 1;
 		Exit_zork();
 	}
+	/*if (strcmp("quit", comand) == 0){
+		quit = 1;
+		Exit_zork();
+	}*/
 }
 
 void World::Move()
@@ -288,11 +310,36 @@ void World::Move()
 	//Main Room
 	if (player->position == rooms[0])
 	{
+		if ("go n" == comands || "go north" == comands)
+		{
+			exit[1]->discover = 1;
+			printf("%s\n", rooms[1]->name.getstr());
+			printf("%s\n", rooms[1]->description.getstr());
+			player->position = rooms[1];
+			return;
+		}
+		else if ("go w" == comands || "go west" == comands)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if ("go s" == comands || "go south" == comands)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+		else if ("go e" == comands || "go east" == comands)
+		{
+			printf("There is a wall!.\n");
+			return;
+		}
+	/*if (player->position == rooms[0])
+	{
 		if ((strcmp("go n", comand) == 0) || (strcmp("go north", comand) == 0))
 		{
 			exit[1]->discover = 1;
-			printf("%s\n", rooms[1]->name());
-			printf("%s\n", rooms[1]->description());
+			printf("%s\n", rooms[1]->name.getstr());
+			printf("%s\n", rooms[1]->description.getstr());
 			player->position = rooms[1];
 			return;
 		}
@@ -310,10 +357,10 @@ void World::Move()
 		{
 			printf("There is a wall!.\n");
 			return;
-		}
+		}*/
 	}
 	//Ailse 1
-	if (player->position == rooms[1])
+	/*if (player->position == rooms[1])
 	{
 		if ((strcmp("go n", comand) == 0) || (strcmp("go north", comand) == 0))
 		{
@@ -321,8 +368,8 @@ void World::Move()
 			{
 				exit[2]->discover = 1;
 				player->position = rooms[2];
-				printf("\n%s\n", (rooms[2]->name()));
-				printf("%s\n", (rooms[2]->description()));
+				printf("\n%s\n", (rooms[2]->name.getstr()));
+				printf("%s\n", (rooms[2]->description.getstr()));
 				return;
 			}
 			else{
@@ -333,26 +380,26 @@ void World::Move()
 		{
 			exit[3]->discover = 1;
 			player->position = rooms[3];
-			printf("\n%s\n", (rooms[3]->name()));
-			printf("%s\n", (rooms[3]->description()));
+			printf("\n%s\n", (rooms[3]->name.getstr()));
+			printf("%s\n", (rooms[3]->description.getstr()));
 			return;
 		}
 		else if ((strcmp("go s", comand) == 0) || (strcmp("go south", comand) == 0))
 		{
 			player->position = rooms[0];
-			printf("\n%s\n", (rooms[0]->name()));
-			printf("%s\n", (rooms[0]->description()));
+			printf("\n%s\n", (rooms[0]->name.getstr()));
+			printf("%s\n", (rooms[0]->description.getstr()));
 			return;
 		}
 		else if ((strcmp("go e", comand) == 0) || (strcmp("go east", comand) == 0))
 		{
 			exit[8]->discover = 1;
 			player->position = rooms[8];
-			printf("\n%s\n", (rooms[8]->name()));
-			printf("%s\n", (rooms[8]->description()));
+			printf("\n%s\n", (rooms[8]->name.getstr()));
+			printf("%s\n", (rooms[8]->description.getstr()));
 			return;
 		}
-	}
+	}*/
 	/*//Dressing Room
 	if (player[0].position == 2)
 	{
@@ -1526,3 +1573,19 @@ bool World::Exit_zork(){
 	else
 		return true;
 }
+
+/*void World::Pick_item(const ClString &item_p)
+{
+	for (int i = 0; i < NUM_ITEMS; i++)
+	{
+		if (rooms[i]->name == item_p && item[i]->istatus == false)
+		{
+			item[i]->istatus = true;
+			//player->num_items++;
+			printf("You picked %s", item[i]->name.getstr());
+			return;
+		}
+	}
+	printf("There's any object with that name here.\n");
+}*/
+

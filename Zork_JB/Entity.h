@@ -3,7 +3,7 @@
 
 #include "Vector.h"
 #include "String_Class.h"
-
+#define NUM_ITEMS 15
 
 using namespace std;
 
@@ -18,10 +18,10 @@ enum Type
 
 class Entity
 {
-private:
+public:
 
-	ClString name_string;
-	ClString description_string;
+	ClString name;
+	ClString description;
 
 public:
 
@@ -29,8 +29,8 @@ public:
 	Entity();
 	virtual ~Entity();
 
-	ClString name()const;
-	ClString description()const;
+	/*ClString name()const;
+	ClString description()const;*/
 	Type type;
 	Vector <Entity*> my_entities;
 	void Get_description()const; 

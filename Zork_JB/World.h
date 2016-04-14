@@ -31,13 +31,14 @@ public:
 	Vector <Door*> door;
 	Vector <Item*> item;
 
+	//Vector<ClString> option; //for items?
+
 	Vector <Entity*> my_entities;
 
 	Item* inventory = nullptr;
-	//ClString* comand = nullptr;
-	char* comand = nullptr;
+	ClString* comand;
+	char comands[40];
 	Player* player = nullptr;
-	int position_player;
 
 
 public:

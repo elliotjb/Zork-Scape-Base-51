@@ -16,6 +16,7 @@ public:
 	Room(const char* names_string, const char* description_string);
 	virtual ~Room();
 
+	void Look()const;
 	//char name[50];
 	//char description[250];
 
