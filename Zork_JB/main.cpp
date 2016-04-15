@@ -3,6 +3,7 @@
 #include "Exits.h"
 #include "player.h"
 #include "Room.h"
+#include "Vector.h"
 #include "World.h"
 #include "Entity.h"
 #include "String_Class.h"

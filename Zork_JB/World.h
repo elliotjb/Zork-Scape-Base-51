@@ -36,8 +36,8 @@ public:
 	Vector <Entity*> my_entities;
 
 	Item* inventory = nullptr;
-	ClString* comand;
-	char comands[40];
+	ClString comand;
+	char* option = nullptr;
 	Player* player = nullptr;
 
 
@@ -53,26 +53,28 @@ public:
 	//fucntions to put comands
 	void Set_Command();
 
+	void Input();
 	//Funciton to go n, go w, go s and go e
-	void Move();
+	void Move(Vector<ClString>&);
+
 
 	//Function to open
-	/*void Open();
+	void Open();
 
 	//Function to close
 	void Close();
-	*/
+	
 	//Function to Look Room
 	void Look() const;
-	/*
+	
 	//Function to Look specify position (North, West, South and East)
-	void Look_Specify_Position() const;
-	*/
+	//void Look_Specify_Position() const;
+	
 	//Function to exit the game
 	bool Exit_zork();
 
 	//Function to pick a item
-	//void Pick_item(const ClString&);
+	void Pick_item(Vector<ClString> &comand);
 
 	//Function to drop a item
 	//void Drop_item(const ClString&);

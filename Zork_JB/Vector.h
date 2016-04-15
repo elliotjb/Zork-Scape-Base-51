@@ -4,8 +4,8 @@
 #include<stdio.h>
 #include<assert.h>
 #include<vector>
-#include "String_Class.h"
 
+typedef unsigned int uint;
 
 template<class TYPE>
 class Vector
@@ -13,13 +13,12 @@ class Vector
 
 private:
 	TYPE* buffer;
-	unsigned int capacity= 13;
+	unsigned int capacity = 13;
 	unsigned int elements = 0;
 
 public:
 	//Constructor
 	Vector(){
-		printf("Me cre!\n");
 		buffer = new TYPE[capacity];
 	}
 	//Construcor copy
@@ -33,9 +32,7 @@ public:
 	}
 	//Destructor
 	~Vector(){ 
-		printf("Me destruyo!\n");
 		delete[]buffer;
-		getchar();
 	}
 
 	uint num_ele()const
@@ -45,7 +42,12 @@ public:
 
 	TYPE& operator[](unsigned int num)
 	{
-		assert(num >= 0 && num < elements);
+		assert(num < elements);
+		return buffer[num];
+	}
+	TYPE& operator[](unsigned int num)const
+	{
+		assert(num < elements);
 		return buffer[num];
 	}
 

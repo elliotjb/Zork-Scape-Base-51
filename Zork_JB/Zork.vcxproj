@@ -72,6 +72,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="player.h" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="String_class.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>

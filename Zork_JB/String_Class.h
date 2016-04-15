@@ -4,167 +4,61 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "Vector.h"
+
 
 typedef unsigned int uint;
+
 
 class ClString{
 
 private:
+
 	char* buffer = nullptr;
 	uint memory;
 
 public:
-	ClString()
-	{
-		memory = 1;
-		buffer = new char[memory];
-		strcpy_s(buffer, memory, "");
-	}
-	ClString(const char* str){
-		//Constructor que copiara al iniciar - "ClString hello("h"); ->(%s, hello) = h;"
-		uint len = strlen(str);
-		buffer = new char[len + 1];
-		memory = len + 1;
-		strcpy_s(buffer, memory, str);
-	}
+	ClString();
+	ClString(const char* str);
 	//Contructor de copia
-	ClString(const ClString& copy){
-		memory = copy.memory;
-		buffer = new char[memory];
-		strcpy_s(buffer, memory, copy.buffer);
-	}
-	//Destructor
-	~ClString(){
-		delete[]buffer;
-	}
+	ClString(const ClString& copy);
+	~ClString();
+
 	//Function to set 
-	void set(char* command)
-	{
-		if (memory < strlen(command) + 1)
-		{
-			delete[] buffer;
-			memory = strlen(command) + 1;
-			buffer = new char[memory];
-		}
-		strcpy_s(buffer, memory, command);
-	}
+	void set(char* command);
+
 	//Funcion para devolver longitud
-	uint length()const{
-		return strlen(buffer);
-	}
-	void clear()
-	{
-		strcpy_s(buffer, memory, "");
-	}
+	uint length()const;
+
+	void clear();
+
 	//Funcion para imprimir string
-	const char* getstr()const
-	{
-		return buffer;
-	}
+	const char* getstr()const;
+
 	//Devuelve la capacidad!
-	uint capacity() const
-	{
-		return memory;
-	}
+	uint capacity() const;
+
 	//Funcion para saber si hay algo en la cadena
-	bool empty() const
-	{
-		return buffer[0] == 0;
-	}
+	bool empty() const;
+
 	//Funcion para comparar 2 clases si son iguales
-	bool operator ==(const ClString& str) const
-	{
-		return strcmp(buffer, str.buffer) == 0;
-	}
+	bool operator ==(const ClString& str) const;
+
 	//Function to compare 2 char
-	bool operator ==(const char* str) const
-	{
-		return strcmp(buffer, str) == 0;
-	}
+	bool operator ==(const char* str) const;
 
 	//Funcion para sumar 2 clases
-	bool operator +=(const ClString& str) const
-	{
-		//deures!
-	}
-	//
-	void operator =(const ClString& str)
-	{
-		if (memory < str.length() + 1)
-		{
-			delete[] buffer;
-			memory = str.length() + 1;
-			buffer = new char[memory];
-		}
-		strcpy_s(buffer, memory, str.buffer);
-	}
+	bool operator +=(const ClString& str) const;
 
-	void operator =(const char *str)
-	{
-		unsigned int len = strlen(str);
-		if (memory < len + 1);
-		{
-			delete[] buffer;
-			memory = len + 1;
-			buffer = new char[memory];
-		}
-		strcpy_s(buffer, memory, str);
-	}
+	void operator =(const ClString& str);
+
+	void operator =(const char *str);
 	//+=
-	void operator +=(const ClString& str)
-	{
-		char *temp = nullptr;
+	void operator +=(const ClString& str);
 
-		if (memory < str.length() + length() + 1)
-		{
-			memory = str.length() + length() + 1;
-			temp = new char[memory];
-			strcpy_s(temp, memory, buffer);
-			delete[]buffer;
-			strcat_s(temp, memory, str.buffer);
-			buffer = temp;
-		}
-		else
-		{
-			strcat_s(buffer, memory, str.buffer);
-		}
-	}
-	/*
-	//
-	bool operator +(const ClString& str)const{
-		//deures!
-	}
-	//
-	char* operator *=(const ClString& str)const{
-		//deures!
-	}
-	//
-	char* operator -(const ClString& str)const{
-		//deures!
-	}
-	//
-	char* operator -=(const ClString& str)const{
-		//deures!
-	}*/
-
+	Vector<ClString> tokenize(const char*);
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #endif

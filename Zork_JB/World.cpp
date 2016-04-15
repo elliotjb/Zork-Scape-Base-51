@@ -18,8 +18,6 @@ using namespace std;
 
 World::World()
 {
-	//comand = new char[];
-	//comand = new char[];
 	player = new Player;
 }
 World::~World()
@@ -167,7 +165,7 @@ void World::Create_World(){
 	Item* CardReaderExit;
 	Item* BackPack;
 	
-	item.push_back(Lantern = new Item("Lantern", "iluminate\n", rooms[0], false));
+	item.push_back(Lantern = new Item("lantern", "iluminate\n", rooms[0], false));
 	item.push_back(TargetLaboratory = new Item("Tarjet Laboratory", "Target\n", rooms[1], false));
 	item.push_back(KeyDressing = new Item("Key of Dressing Room", "key\n", rooms[3], false));
 	item.push_back(KeyGunsmith = new Item("Key of Gunsmith", "key\n", rooms[2], false));
@@ -200,21 +198,25 @@ void World::Create_World(){
 	my_entities.push_back(BackPack);
 }
 
+void World::Input()
+{
+	option = new char[20];
+	gets_s(option, 20);
+}
 
 void World::Set_Command(){
 
 	printf("> ");
-
-	//gets_s(comands, 40);
-	gets_s(comands, 40);
-	comand->set(comands);
-
+	Input();
+	Vector<ClString> comand_tok = comand.tokenize(option);
+	comand = option;
 
 	/*if (strcmp("look inventory", comand) == 0 || strcmp("look i", comand) == 0){
 		//Look();
 	}*/
+
 	//Command - Help
-	if (comands == "help"){
+	if (comand == "help"){
 		printf("Your commands:\n");
 		printf("-[go north] or [go n]\n-[go west] or [go w]\n-[go south] or [go s]\n-[go east] or [go e]\n");
 		printf("-[go up] or [go u]\n-[go down] or [go d]\n");
@@ -223,61 +225,53 @@ void World::Set_Command(){
 		printf("-[quit]\n-[help]\n");
 	}
 
-	if ("go n" == comands || "go w" == comands || "go s" == comands || "go e" == comands){
-		Move();
-	}
-	//Command - Help
-	/*if (strcmp("help", comand) == 0){
-		printf("Your commands:\n");
-		printf("-[go north] or [go n]\n-[go west] or [go w]\n-[go south] or [go s]\n-[go east] or [go e]\n");
-		printf("-[go up] or [go u]\n-[go down] or [go d]\n");
-		printf("-[look (the same way as above)]\n");
-		printf("-[open door]\n-[close door]\n");
-		printf("-[quit]\n-[help]\n");
-	}
-	if (strcmp("pick lantern", comand) == 0 || strcmp("p", comand) == 0){
-		Pick_item(item_p);
+
+
+	if (comand == "pick lantern"){
+		Pick_item(comand_tok);
 	}
 
 
 	//Commands - Go
-	if (strcmp("go", comand) == 0){
+	if (comand == "go"){
 		printf("Where you want to go? [go north, go west, go south, go east]\n");
 	}
-	if (strcmp("go n", comand) == 0 || strcmp("go w", comand) == 0 || strcmp("go s", comand) == 0 || strcmp("go e", comand) == 0 || strcmp("go u", comand) == 0 || strcmp("go d", comand) == 0){
-		Move();
+
+	if (comand == "go n" || comand == "go w" || comand == "go s" || comand == "go e" || comand == "go u" || comand == "go d"){
+		Move(comand_tok);
 	}
-	if (strcmp("go north", comand) == 0 || strcmp("go west", comand) == 0 || strcmp("go south", comand) == 0 || strcmp("go east", comand) == 0 || strcmp("go up", comand) == 0 || strcmp("go down", comand) == 0){
-		Move();
-	}*/
+	if (comand == "go north" || comand == "go westw" || comand == "go south" || comand == "go east" || comand == "go up" || comand == "go down"){
+		Move(comand_tok);
+	}
 
 	//Comands - Open and Close
-	/*if (strcmp("open", comand) == 0){
+	if (comand == "open"){
 		printf("The command to open is [open door (direction) -> example: open door north].\n");
 	}
-	if (strcmp("close", comand) == 0){
+	if (comand == "close"){
 		printf("The command to close is [close door (direction) -> example: close door north].\n");
 	}
 
 	//Open
-	if (strcmp("open door n", comand) == 0 || strcmp("open door w", comand) == 0 || strcmp("open door s", comand) == 0 || strcmp("open door e", comand) == 0){
+	if (comand == "open door n" || comand == "open door w" || comand == "open door s" || comand == "open door e"){
 		Open();
 	}
-	if (strcmp("open door north", comand) == 0 || strcmp("open door west", comand) == 0 || strcmp("open door south", comand) == 0 || strcmp("open door east", comand) == 0){
+	if (comand == "open door north" || comand == "open door west" || comand == "open door south" || comand == "open door east"){
 		Open();
 	}
 
 	//Close
-	if (strcmp("close door n", comand) == 0 || strcmp("close door w", comand) == 0 || strcmp("close door s", comand) == 0 || strcmp("close door e", comand) == 0){
+	if (comand == "close door n" || comand == "close door w" || comand == "close door s" || comand == "close door e"){
 		Close();
 	}
-	if (strcmp("close door north", comand) == 0 || strcmp("close door west", comand) == 0 || strcmp("close door south", comand) == 0 || strcmp("close door east", comand) == 0){
+	if (comand == "close door north" || comand == "close door west" || comand == "close door south" || comand == "close door east"){
 		Close();
 	}
+
 
 
 	//Command - Look
-	if (strcmp("look", comand) == 0){
+	if (comand == "look"){
 		Look();
 		if (cont < 2){
 			printf("If you want to specify where to look like this-> [ look north/n, look west/w, look south/s, look east/e ]\n");
@@ -286,31 +280,27 @@ void World::Set_Command(){
 	}
 
 	//Commands - Look Specify position
-	if (strcmp("look n", comand) == 0 || strcmp("look w", comand) == 0 || strcmp("look s", comand) == 0 || strcmp("look e", comand) == 0){
+	/*if (comand == "look n" || comand == "look w" || comand == "look s" || comand == "look e"){
 		Look_Specify_Position();
 	}
-	if (strcmp("look north", comand) == 0 || strcmp("look west", comand) == 0 || strcmp("look south", comand) == 0 || strcmp("look east", comand) == 0){
+	if (comand == "look north" || comand == "look west" || comand == "look south" || comand == "look east"){
 		Look_Specify_Position();
-	}
-	*/
-	//Comand - Exit
-	if ("quit" == comands){
-		quit = 1;
-		Exit_zork();
-	}
-	/*if (strcmp("quit", comand) == 0){
-		quit = 1;
-		Exit_zork();
 	}*/
+	
+	//Comand - Exit
+	if (comand == "quit"){
+		quit = 1;
+		Exit_zork();
+	}
 }
 
-void World::Move()
+void World::Move(Vector<ClString> &comand)
 {
 
 	//Main Room
 	if (player->position == rooms[0])
 	{
-		if ("go n" == comands || "go north" == comands)
+		if (comand[0] == "go" || comand[1] == "n")
 		{
 			exit[1]->discover = 1;
 			printf("%s\n", rooms[1]->name.getstr());
@@ -318,51 +308,26 @@ void World::Move()
 			player->position = rooms[1];
 			return;
 		}
-		else if ("go w" == comands || "go west" == comands)
+		/*else if (comand[0] == "go w" || comand[0] == "go west")
 		{
 			printf("There is a wall!.\n");
 			return;
 		}
-		else if ("go s" == comands || "go south" == comands)
+		else if (comand[0] == "go s" || comand[0] == "go south")
 		{
 			printf("There is a wall!.\n");
 			return;
 		}
-		else if ("go e" == comands || "go east" == comands)
-		{
-			printf("There is a wall!.\n");
-			return;
-		}
-	/*if (player->position == rooms[0])
-	{
-		if ((strcmp("go n", comand) == 0) || (strcmp("go north", comand) == 0))
-		{
-			exit[1]->discover = 1;
-			printf("%s\n", rooms[1]->name.getstr());
-			printf("%s\n", rooms[1]->description.getstr());
-			player->position = rooms[1];
-			return;
-		}
-		else if ((strcmp("go w", comand) == 0) || (strcmp("go west", comand) == 0))
-		{
-			printf("There is a wall!.\n");
-			return;
-		}
-		else if ((strcmp("go s", comand) == 0) || (strcmp("go south", comand) == 0))
-		{
-			printf("There is a wall!.\n");
-			return;
-		}
-		else if ((strcmp("go e", comand) == 0) || (strcmp("go east", comand) == 0))
+		else if (comand[0] == "go e" || comand[0] == "go east")
 		{
 			printf("There is a wall!.\n");
 			return;
 		}*/
 	}
 	//Ailse 1
-	/*if (player->position == rooms[1])
+	if (player->position == rooms[1])
 	{
-		if ((strcmp("go n", comand) == 0) || (strcmp("go north", comand) == 0))
+		/*if (comand == "go n" || comand == "go north")
 		{
 			if (door[0]->Num_doors == 1)
 			{
@@ -376,30 +341,30 @@ void World::Move()
 				printf("You can't move, there is a front door and closed.\n");
 			}
 		}
-		else if ((strcmp("go w", comand) == 0) || (strcmp("go west", comand) == 0))
+		else if (comand == "go w" || comand == "go west")
 		{
 			exit[3]->discover = 1;
 			player->position = rooms[3];
 			printf("\n%s\n", (rooms[3]->name.getstr()));
 			printf("%s\n", (rooms[3]->description.getstr()));
 			return;
-		}
-		else if ((strcmp("go s", comand) == 0) || (strcmp("go south", comand) == 0))
+		}*/
+		if (comand[0] == "go" || comand[1] == "s")
 		{
 			player->position = rooms[0];
 			printf("\n%s\n", (rooms[0]->name.getstr()));
 			printf("%s\n", (rooms[0]->description.getstr()));
 			return;
 		}
-		else if ((strcmp("go e", comand) == 0) || (strcmp("go east", comand) == 0))
+	/*	else if (comand == "go e" || comand == "go east")
 		{
 			exit[8]->discover = 1;
 			player->position = rooms[8];
 			printf("\n%s\n", (rooms[8]->name.getstr()));
 			printf("%s\n", (rooms[8]->description.getstr()));
 			return;
-		}
-	}*/
+		}*/
+	}
 	/*//Dressing Room
 	if (player[0].position == 2)
 	{
@@ -783,29 +748,29 @@ void World::Move()
 	}*/
 }
 
-/*
+
 void World::Open()
 {
-	if ((strcmp(comand, "open door north") == 0) || (strcmp(comand, "open door n") == 0))
+	if (comand == "open door n" || comand == "open door north")
 	{
-		if (player[0].position == 1)
+		if (player->position == rooms[1])
 		{
-			if (door[0].Num_doors == 1){
+			if (door[0]->Num_doors == 1){
 				printf("The door was already open.\n");
 			}
 			else{
-				door[0].Num_doors = 1;
+				door[0]->Num_doors = 1;
 				printf("The door is already open.\n");
 			}
 
 		}
-		else if (player[0].position == 4)
+		else if (player->position == rooms[4])
 		{
-			if (door[1].Num_doors == 1){
+			if (door[1]->Num_doors == 1){
 				printf("The door was already open.\n");
 			}
 			else{
-				door[1].Num_doors = 1;
+				door[1]->Num_doors = 1;
 				printf("The door is already open.\n");
 			}
 		}
@@ -813,35 +778,35 @@ void World::Open()
 			printf("In this direction there isn't door.\n");
 		}
 	}
-	if ((strcmp(comand, "open door west") == 0) || (strcmp(comand, "open door w") == 0))
+	if (comand == "open door west" || comand == "open door w")
 	{
-		if (player[0].position == 6)
+		if (player->position == rooms[6])
 		{
-			if (door[2].Num_doors == 1){
+			if (door[2]->Num_doors == 1){
 				printf("The door was already open.\n");
 			}
 			else{
-				door[2].Num_doors = 1;
+				door[2]->Num_doors = 1;
 				printf("The door is already open.\n");
 			}
 		}
-		else if (player[0].position == 11)
+		else if (player->position == rooms[11])
 		{
-			if (door[4].Num_doors == 1){
+			if (door[4]->Num_doors == 1){
 				printf("The door was already open.\n");
 			}
 			else{
-				door[4].Num_doors = 1;
+				door[4]->Num_doors = 1;
 				printf("The door is already open.\n");
 			}
 		}
-		else if (player[0].position == 10)
+		else if (player->position == rooms[10])
 		{
-			if (door[3].Num_doors == 1){
+			if (door[3]->Num_doors == 1){
 				printf("The door was already open.\n");
 			}
 			else{
-				door[3].Num_doors = 1;
+				door[3]->Num_doors = 1;
 				printf("The door is already open.\n");
 			}
 		}
@@ -849,25 +814,25 @@ void World::Open()
 			printf("In this direction there isn't door.\n");
 		}
 	}
-	if ((strcmp(comand, "open door south") == 0) || (strcmp(comand, "open door s") == 0))
+	if (comand == "open door south" || comand == "open door s" )
 	{
-		if (player[0].position == 2)
+		if (player->position == rooms[2])
 		{
-			if (door[0].Num_doors == 1){
+			if (door[0]->Num_doors == 1){
 				printf("The door was already open.\n");
 			}
 			else{
-				door[0].Num_doors = 1;
+				door[0]->Num_doors = 1;
 				printf("The door is already open.\n");
 			}
 		}
-		else if (player[0].position == 5)
+		else if (player->position == rooms[5])
 		{
-			if (door[1].Num_doors == 1){
+			if (door[1]->Num_doors == 1){
 				printf("The door was already open.\n");
 			}
 			else{
-				door[1].Num_doors = 1;
+				door[1]->Num_doors = 1;
 				printf("The door is already open.\n");
 			}
 		}
@@ -875,35 +840,35 @@ void World::Open()
 			printf("In this direction there isn't door.\n");
 		}
 	}
-	if ((strcmp(comand, "open door south") == 0) || (strcmp(comand, "open door s") == 0))
+	if (comand == "open door south" || comand == "open door s")
 	{
-		if (player[0].position == 7)
+		if (player->position == rooms[7])
 		{
-			if (door[2].Num_doors == 1){
+			if (door[2]->Num_doors == 1){
 				printf("The door was already open.\n");
 			}
 			else{
-				door[2].Num_doors = 1;
+				door[2]->Num_doors = 1;
 				printf("The door is already open.\n");
 			}
 		}
-		else if (player[0].position == 9)
+		else if (player->position == rooms[9])
 		{
-			if (door[3].Num_doors == 1){
+			if (door[3]->Num_doors == 1){
 				printf("The door was already open.\n");
 			}
 			else{
-				door[3].Num_doors = 1;
+				door[3]->Num_doors = 1;
 				printf("The door is already open.\n");
 			}
 		}
-		else if (player[0].position == 12)
+		else if (player->position == rooms[12])
 		{
-			if (door[4].Num_doors == 1){
+			if (door[4]->Num_doors == 1){
 				printf("The door was already open.\n");
 			}
 			else{
-				door[4].Num_doors = 1;
+				door[4]->Num_doors = 1;
 				printf("The door is already open.\n");
 			}
 		}
@@ -915,26 +880,26 @@ void World::Open()
 
 void World::Close()
 {
-	if ((strcmp(comand, "close door north") == 0) || (strcmp(comand, "close door n") == 0))
+	if (comand =="close door north" || comand == "close door n")
 	{
-		if (player[0].position == 1)
+		if (player->position == rooms[1])
 		{
-			if (door[0].Num_doors == 0){
+			if (door[0]->Num_doors == 0){
 				printf("The door was already closed.\n");
 			}
 			else{
-				door[0].Num_doors = 0;
+				door[0]->Num_doors = 0;
 				printf("The door is already close.\n");
 			}
 
 		}
-		else if (player[0].position == 4)
+		else if (player->position == rooms[4])
 		{
-			if (door[1].Num_doors == 0){
+			if (door[1]->Num_doors == 0){
 				printf("The door was already closed.\n");
 			}
 			else{
-				door[1].Num_doors = 0;
+				door[1]->Num_doors = 0;
 				printf("The door is already close.\n");
 			}
 		}
@@ -942,36 +907,36 @@ void World::Close()
 			printf("In this direction there isn't door.\n");
 		}
 	}
-	if ((strcmp(comand, "close door west") == 0) || (strcmp(comand, "close door w") == 0))
+	if (comand == "close door west" || comand == "close door w")
 	{
-		if (player[0].position == 10)
+		if (player->position == rooms[10])
 		{
-			if (door[3].Num_doors == 0){
+			if (door[3]->Num_doors == 0){
 				printf("The door was already closed.\n");
 			}
 			else{
-				door[3].Num_doors = 0;
+				door[3]->Num_doors = 0;
 				printf("The door is already close.\n");
 			}
 
 		}
-		else if (player[0].position == 6)
+		else if (player->position == rooms[6])
 		{
-			if (door[2].Num_doors == 0){
+			if (door[2]->Num_doors == 0){
 				printf("The door was already closed.\n");
 			}
 			else{
-				door[2].Num_doors = 0;
+				door[2]->Num_doors = 0;
 				printf("The door is already close.\n");
 			}
 		}
-		else if (player[0].position == 11)
+		else if (player->position == rooms[11])
 		{
-			if (door[4].Num_doors == 0){
+			if (door[4]->Num_doors == 0){
 				printf("The door was already closed.\n");
 			}
 			else{
-				door[4].Num_doors = 0;
+				door[4]->Num_doors = 0;
 				printf("The door is already close.\n");
 			}
 		}
@@ -979,26 +944,26 @@ void World::Close()
 			printf("In this direction there isn't door.\n");
 		}
 	}
-	if ((strcmp(comand, "close door south") == 0) || (strcmp(comand, "close door s") == 0))
+	if (comand == "close door south"|| comand == "close door s")
 	{
-		if (player[0].position == 2)
+		if (player->position == rooms[2])
 		{
-			if (door[0].Num_doors == 0){
+			if (door[0]->Num_doors == 0){
 				printf("The door was already closed.\n");
 			}
 			else{
-				door[0].Num_doors = 0;
+				door[0]->Num_doors = 0;
 				printf("The door is already close.\n");
 			}
 
 		}
-		else if (player[0].position == 5)
+		else if (player->position == rooms[5])
 		{
-			if (door[1].Num_doors == 0){
+			if (door[1]->Num_doors == 0){
 				printf("The door was already closed.\n");
 			}
 			else{
-				door[1].Num_doors = 0;
+				door[1]->Num_doors = 0;
 				printf("The door is already close.\n");
 			}
 		}
@@ -1006,36 +971,36 @@ void World::Close()
 			printf("In this direction there isn't door.\n");
 		}
 	}
-	if ((strcmp(comand, "close door south") == 0) || (strcmp(comand, "close door s") == 0))
+	if (comand == "close door south" || comand == "close door s")
 	{
-		if (player[0].position == 7)
+		if (player->position == rooms[7])
 		{
-			if (door[2].Num_doors == 0){
+			if (door[2]->Num_doors == 0){
 				printf("The door was already closed.\n");
 			}
 			else{
-				door[2].Num_doors = 0;
+				door[2]->Num_doors = 0;
 				printf("The door is already close.\n");
 			}
 
 		}
-		else if (player[0].position == 12)
+		else if (player->position == rooms[12])
 		{
-			if (door[4].Num_doors == 0){
+			if (door[4]->Num_doors == 0){
 				printf("The door was already closed.\n");
 			}
 			else{
-				door[4].Num_doors = 0;
+				door[4]->Num_doors = 0;
 				printf("The door is already close.\n");
 			}
 		}
-		else if (player[0].position == 9)
+		else if (player->position == rooms[9])
 		{
-			if (door[3].Num_doors == 0){
+			if (door[3]->Num_doors == 0){
 				printf("The door was already closed.\n");
 			}
 			else{
-				door[3].Num_doors = 0;
+				door[3]->Num_doors = 0;
 				printf("The door is already close.\n");
 			}
 		}
@@ -1045,29 +1010,29 @@ void World::Close()
 	}
 }
 
-void World::Look()const{
+/*void World::Look()const{
 
-	if (player[0].position == 0){
+	if (player->position == rooms[0]){
 		rooms[0]->name();
 		printf("%s", (rooms[0].description));
 	}
-	if (player[0].position == 1){
+	if (player->position == rooms[1]){
 		printf("%s", (rooms[1].name));
 		printf("%s", (rooms[1].description));
 	}
-	if (player[0].position == 2){
+	if (player->position == rooms[2]){
 		printf("%s", (rooms[2].name));
 		printf("%s", (rooms[2].description));
 	}
-	if (player[0].position == 3){
+	if (player->position == rooms[3]){
 		printf("%s", (rooms[3].name));
 		printf("%s", (rooms[3].description));
 	}
-	if (player[0].position == 4){
+	if (player->position == 4){
 		printf("%s", (rooms[4].name));
 		printf("%s", (rooms[4].description));
 	}
-	if (player[0].position == 5){
+	if (player->position == 5){
 		printf("%s", (rooms[5].name));
 		printf("%s", (rooms[5].description));
 	}
@@ -1560,8 +1525,8 @@ void World::Look_Specify_Position() const
 			}
 		}
 	}
-}
-*/
+}*/
+
 
 void World::Look()const
 {
@@ -1574,18 +1539,17 @@ bool World::Exit_zork(){
 		return true;
 }
 
-/*void World::Pick_item(const ClString &item_p)
+void World::Pick_item(Vector<ClString> &comand)
 {
 	for (int i = 0; i < NUM_ITEMS; i++)
 	{
-		if (rooms[i]->name == item_p && item[i]->istatus == false)
+		if (player->position == item[i]->link && item[i]->istatus == false && item[i]->name == comand[1])
 		{
 			item[i]->istatus = true;
-			//player->num_items++;
-			printf("You picked %s", item[i]->name.getstr());
+			printf("You've got-> %s\n", item[i]->name.getstr());
 			return;
 		}
 	}
 	printf("There's any object with that name here.\n");
-}*/
+}
 
