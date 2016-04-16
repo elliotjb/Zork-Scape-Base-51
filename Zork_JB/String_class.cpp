@@ -81,6 +81,7 @@ bool ClString::operator ==(const char* str) const
 	return strcmp(buffer, str) == 0;
 }
 
+
 void ClString::operator =(const ClString& str)
 {
 	if (memory < str.length() + 1)

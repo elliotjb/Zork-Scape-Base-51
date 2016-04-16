@@ -10,6 +10,8 @@ public:
 
 	Room* position;
 
+	int hp = 0;
+	int attack = 0;
 
 };
 

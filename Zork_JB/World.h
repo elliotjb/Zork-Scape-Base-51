@@ -54,9 +54,10 @@ public:
 	void Set_Command();
 
 	void Input();
-	//Funciton to go n, go w, go s and go e
-	void Move(Vector<ClString>&);
 
+	//Funciton to go n, go w, go s and go e
+	void Move();
+	//void Move(Vector<ClString>&);
 
 	//Function to open
 	void Open();
@@ -66,19 +67,33 @@ public:
 	
 	//Function to Look Room
 	void Look() const;
-	
+
+	//function to look inventory
+	void Look_inventory() const;
+
+	//function to look item
+	void Look_item(Vector<ClString> &) const;
+
 	//Function to Look specify position (North, West, South and East)
-	//void Look_Specify_Position() const;
+	void Look_Specify_Position() const;
 	
 	//Function to exit the game
 	bool Exit_zork();
 
 	//Function to pick a item
-	void Pick_item(Vector<ClString> &comand);
+	void Pick_item(Vector<ClString> &);
 
 	//Function to drop a item
-	//void Drop_item(const ClString&);
+	void Drop_item(Vector<ClString> &);
 
+	//Function to equip a item
+	void Equip(Vector<ClString> &);
+
+	//Function to unequip a item
+	void UnEquip(Vector<ClString> &);
+
+	//function to look your stats
+	void Stats()const;
 };
 
 
