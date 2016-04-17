@@ -14,7 +14,7 @@ class Room : public Entity
 public:
 
 	Room(const char* names_string, const char* description_string);
-	virtual ~Room();
+	~Room();
 
 	void Look()const;
 	//char name[50];

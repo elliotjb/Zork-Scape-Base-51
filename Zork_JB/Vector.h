@@ -1,6 +1,6 @@
 #ifndef _ARRAY_H_
 #define _ARRAY_H_
-//#include <vector>
+
 #include<stdio.h>
 #include<assert.h>
 #include<vector>
@@ -12,8 +12,8 @@ class Vector
 {
 
 private:
-	TYPE* buffer;
-	unsigned int capacity = 13;
+	TYPE* buffer = nullptr;
+	unsigned int capacity = 18;
 	unsigned int elements = 0;
 
 public:
@@ -23,16 +23,21 @@ public:
 	}
 	//Construcor copy
 	Vector(const Vector& copy){
-		capacity = copy.capacity;
-		elements = copy.elements; 
+		capacity = copy.elements;
 		buffer = new TYPE[capacity];
-		for (unsigned int i = 0; i < elements; i++){
-			buffer[i] = copy.buffer[i];
+		if (copy.elements > 0)
+		{
+			elements = copy.elements;
+			for (int i = 0; i < elements; i++)
+			{
+				buffer[i] = copy.buffer[i];
+			}
 		}
 	}
+
 	//Destructor
 	~Vector(){ 
-		delete[]buffer;
+		delete[] buffer;
 	}
 
 	uint num_ele()const
@@ -56,7 +61,7 @@ public:
 	
 		if (this->elements >= capacity)
 		{
-			TYPE* temp;
+			TYPE* temp = nullptr;
 			capacity *= 2;
 			temp = new TYPE[capacity];
 

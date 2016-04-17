@@ -14,7 +14,7 @@ class ClString{
 
 private:
 
-	char* buffer = nullptr;
+	char *buffer = nullptr;
 	uint memory;
 
 public:

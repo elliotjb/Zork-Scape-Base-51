@@ -8,7 +8,7 @@ class Door{
 
 public:
 	Door(int Num_doors);
-	virtual ~Door();
+	~Door();
 	int Num_doors;
 };
 

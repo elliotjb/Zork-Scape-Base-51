@@ -4,7 +4,7 @@
 #include "Vector.h"
 #include "String_Class.h"
 
-#define NUM_ITEMS 17
+#define NUM_ITEMS 18
 #define NUM_ROOMS 13
 
 using namespace std;
@@ -21,7 +21,7 @@ public:
 
 	Entity(const char* str1, const char* str2);
 	Entity();
-	virtual ~Entity();
+	~Entity();
 
 };
 
