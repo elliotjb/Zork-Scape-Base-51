@@ -37,7 +37,7 @@ public:
 
 	Item* inventory = nullptr;
 	ClString comand;
-	char* option = nullptr;
+	char option[40];
 	Player* player = nullptr;
 
 
@@ -94,6 +94,13 @@ public:
 
 	//function to look your stats
 	void Stats()const;
+
+	//Function
+	void Put_into(Vector<ClString> &);
+
+	//Function
+	void Get_from(Vector<ClString> &);
+	
 };
 
 

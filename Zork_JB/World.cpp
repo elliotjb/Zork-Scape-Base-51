@@ -133,196 +133,211 @@ void World::Create_World(){
 	player->position = rooms[0];
 
 	//ITEMS
-	item.push_back(new Item("bag", "It is a military backpack brown and is quite large.\n", rooms[0], false, false, false, 0, 0, 100));//item[0], 
+	item.push_back(new Item("bag", "It is a military backpack brown and is quite large.\n", rooms[0], false, false, false, false, 0, 0, 100));//item[0], 
 
-	item.push_back(new Item("lantern", "It is a lantern of those that are small but more light than the sun.\n", rooms[0], false, false, false, 0, 0, 10));//item[1], 
+	item.push_back(new Item("lantern", "It is a lantern of those that are small but more light than the sun.\n", rooms[0], false, false, false, false, 0, 0, 10));//item[1], 
 
-	item.push_back(new Item("card", "It looks like a card to pass a security check, it may be useful!\n", rooms[5], false, false, false, 0, 0, 50));//item[2], 
+	item.push_back(new Item("card", "It looks like a card to pass a security check, it may be useful!\n", rooms[5], false, false, false, false, 0, 0, 50));//item[2], 
 
-	item.push_back(new Item("picklock", "It can be useful to open doors, thank god know how to use it.\n", rooms[3], false, false, false, 0, 0, 1));//item[3], 
+	item.push_back(new Item("picklock", "It can be useful to open doors, thank god know how to use it.\n", rooms[3], false, false, false, false, 0, 0, 1));//item[3], 
 
-	item.push_back(new Item("key", "It is a normal key, with a label that puts armory.\n", rooms[2], false, false, false, 0, 0, 10));//item[4], 
+	item.push_back(new Item("key", "It is a normal key, with a label that puts armory.\n", rooms[2], false, false, false, false, 0, 0, 10));//item[4], 
 
-	item.push_back(new Item("paper", "It is a small role. It has written a command: 'SZKMS'.\n", rooms[12], false, false, false, 0, 0, 100));//item[5], 
+	item.push_back(new Item("paper", "It is a small role. It has written a command: 'SZKMS'.\n", rooms[12], false, false, false, false, 0, 0, 100));//item[5], 
 
-	item.push_back(new Item("gun", "It is a M4A1-S, it is one of my favorite weapons.\n", rooms[7], false, false, false, 0, 5, 100));//item[6], 
+	item.push_back(new Item("gun", "It is a M4A1-S, it is one of my favorite weapons.\n", rooms[7], false, false, false, false, 0, 5, 100));//item[6], 
 
-	item.push_back(new Item("ammo", "It is a ammo pack, but only has 10 bullets.\n", rooms[7], false, false, false, 0, 45, 10));//item[7], 
+	item.push_back(new Item("ammo", "It is a ammo pack, but only has 10 bullets.\n", rooms[7], false, false, false, false, 0, 45, 10));//item[7], 
 
-	item.push_back(new Item("camera", "camera\n", rooms[5], false, false, false, 0, 0, 100));//item[8], 
+	item.push_back(new Item("camera", "camera\n", rooms[5], false, false, false, false, 0, 0, 100));//item[8], 
 
-	item.push_back(new Item("vest", "bulletproof vest!\n", rooms[0], false, false, false, 100, 0, 10));//item[9], 
+	item.push_back(new Item("vest", "bulletproof vest!\n", rooms[0], false, false, false, false, 100, 0, 10));//item[9], 
 
-	item.push_back(new Item("safe", "A Safe in Warehouse.\n", rooms[5], false, true, false, 0, 0, 0));//item[10], 
+	item.push_back(new Item("safe", "A Safe in Warehouse.\n", rooms[5], false, true, false, false, 0, 0, 0));//item[10], 
 
-	item.push_back(new Item("reader", "Number Reader of Exit\n", rooms[9], false, true, false, 0, 0, 0));//item[11], 
+	item.push_back(new Item("reader", "Number Reader of Exit\n", rooms[9], false, true, false, false, 0, 0, 0));//item[11], 
 
-	item.push_back(new Item("scanner", "Card Scanner of Laboratory\n", rooms[11], false, true, false, 0, 0, 0));//item[12], to open door of laboratory
+	item.push_back(new Item("scanner", "Card Scanner of Laboratory\n", rooms[11], false, true, false, false, 0, 0, 0));//item[12], to open door of laboratory
 
-	item.push_back(new Item("lock", "Lock of Dressing Room\n", rooms[1], false, true, false, 0, 0, 0));//item[13], 
+	item.push_back(new Item("lock", "Lock of Dressing Room\n", rooms[1], false, true, false, false, 0, 0, 0));//item[13], 
 
-	item.push_back(new Item("padlock", "Padlock of door in Mystery room!\n", rooms[4], false, true, false, 0, 0, 0));//item[14], Candado
+	item.push_back(new Item("padlock", "Padlock of door in Mystery room!\n", rooms[4], false, true, false, false, 0, 0, 0));//item[14], Candado
 
-	item.push_back(new Item("lock", "Lock of Gunsmith\n", rooms[6], false, true, false, 0, 0, 0));//item[15], 
+	item.push_back(new Item("lock", "Lock of Gunsmith\n", rooms[6], false, true, false, false, 0, 0, 0));//item[15], 
 
-	item.push_back(new Item("armory", "armory of Gunsmith", rooms[7], false, true, false, 0, 0, 0));//item[16], 
+	item.push_back(new Item("armory", "armory of Gunsmith", rooms[7], false, true, false, false, 0, 0, 0));//item[16], 
 
-	item.push_back(new Item("locker", "Locker into Dressing Room\n", rooms[2], false, true, false, 0, 0, 0));//item[17], 
+	item.push_back(new Item("locker", "You can store things inside.\n", rooms[0], false, true, false, false, 0, 0, 0));//item[17], 
 
 }
 
 void World::Input()
 {
-	option = new char[20];
-	gets_s(option, 20);
+	do
+	{
+		printf("> ");
+		gets_s(option, 40);
+	} while (option == NULL);
+
 }
 
-void World::Set_Command(){
 
-	printf("> ");
+void World::Set_Command()
+{
 	Input();
-	Vector<ClString> comand_tok = comand.tokenize(option);
 	comand = option;
+	printf("\n");
 
-	/*if (strcmp("look inventory", comand) == 0 || strcmp("look i", comand) == 0){
-		//Look();
-	}*/
-
-	//Command - Help
-	if (comand == "help"){
-		printf("Your commands:\n");
-		printf("-[go north] or [go n]\n-[go west] or [go w]\n-[go south] or [go s]\n-[go east] or [go e]\n");
-		printf("-[go up] or [go u]\n-[go down] or [go d]\n");
-		printf("-[look (the same way as above)]\n");
-		printf("-[open door]\n-[close door]\n");
-		printf("-[quit]\n-[help]\n");
-	}
-
-	if (comand == "pick" || comand == "p")
+	if (option[0] != NULL && option[0] != ' ')
 	{
-		printf("Please, put pick [item]\n");
-	}
+		Vector<ClString> comand_tok = comand.tokenize(option);
 
-	if (comand == "pick lantern" || comand == "pick card" || comand == "pick picklock" || comand == "pick key"
-		|| comand == "pick paper" || comand == "pick gun" || comand == "pick ammo" || comand == "pick camera" 
-		|| comand == "pick bag" || comand == "pick vest" || comand == "p lantern" || comand == "p card" 
-		|| comand == "p picklock" || comand == "p key" || comand == "p paper" || comand == "p gun" 
-		|| comand == "p ammo" || comand == "p camera" || comand == "p bag" || comand == "p vest" ){
-		Pick_item(comand_tok);
-	}
+		//Command - Help
+		if (comand_tok[0] == "help"){
+			printf("Your commands:\n");
+			printf("-[go north] or [go n]\n-[go west] or [go w]\n-[go south] or [go s]\n-[go east] or [go e]\n");
+			printf("-[go up] or [go u]\n-[go down] or [go d]\n");
+			printf("-[look (the same way as above)]\n");
+			printf("-[open door]\n-[close door]\n");
+			printf("-[quit]\n-[help]\n");
+		}
 
-	if (comand == "drop" || comand == "d")
-	{
-		printf("Please, put drop [item]\n");
-	}
-	
-	if (comand == "drop lantern" || comand == "drop card" || comand == "drop picklock" || comand == "drop key"
-		|| comand == "drop paper" || comand == "drop gun" || comand == "drop ammo" || comand == "drop camera"
-		|| comand == "drop bag" || comand == "drop vest" || comand == "d lantern" || comand == "d card" 
-		|| comand == "d picklock" || comand == "d key" || comand == "d paper" || comand == "d gun" 
-		|| comand == "d ammo" || comand == "d camera" || comand == "d bag" || comand == "d vest"){
-		Drop_item(comand_tok);
-	}
+		if (comand == "pick" || comand == "p")
+		{
+			printf("Please, put pick [item]\n");
+		}
 
-	//Commands - Go
-	if (comand == "go"){
-		printf("Where you want to go? [go north, go west, go south, go east]\n");
-	}
+		if (comand_tok[0] == "pick" && option[4] == ' ' || comand_tok[0] == "p" && option[1] == ' '){
+			Pick_item(comand_tok);
+		}
 
-	if (comand == "go n" || comand == "go w" || comand == "go s" || comand == "go e" || comand == "go u" || comand == "go d"){
-		Move();
-	}
-	if (comand == "go north" || comand == "go westw" || comand == "go south" || comand == "go east" || comand == "go up" || comand == "go down"){
-		Move();
-	}
+		if (comand == "drop" || comand == "d")
+		{
+			printf("Please, put drop [item]\n");
+		}
+		if (comand_tok[0] == "drop" && option[4] == ' ' || comand_tok[0] == "d" && option[1] == ' '){
+			Drop_item(comand_tok);
+		}
 
-	//Comands - Open and Close
-	if (comand == "open"){
-		printf("The command to open is [open door (direction) -> example: open door north].\n");
-	}
-	if (comand == "close"){
-		printf("The command to close is [close door (direction) -> example: close door north].\n");
-	}
+		//Commands - Go
+		if (comand == "go"){
+			printf("Where you want to go? [go north, go west, go south, go east]\n");
+		}
 
-	//Open
-	if (comand == "open door n" || comand == "open door w" || comand == "open door s" || comand == "open door e"){
-		Open();
-	}
-	if (comand == "open door north" || comand == "open door west" || comand == "open door south" || comand == "open door east"){
-		Open();
-	}
+		if (comand == "go n" || comand == "go w" || comand == "go s" || comand == "go e" || comand == "go u" || comand == "go d"){
+			Move();
+		}
+		if (comand == "go north" || comand == "go westw" || comand == "go south" || comand == "go east" || comand == "go up" || comand == "go down"){
+			Move();
+		}
 
-	//Close
-	if (comand == "close door n" || comand == "close door w" || comand == "close door s" || comand == "close door e"){
-		Close();
-	}
-	if (comand == "close door north" || comand == "close door west" || comand == "close door south" || comand == "close door east"){
-		Close();
-	}
+		//Comands - Open and Close
+		if (comand == "open"){
+			printf("The command to open is [open door (direction) -> example: open door north].\n");
+		}
+		if (comand == "close"){
+			printf("The command to close is [close door (direction) -> example: close door north].\n");
+		}
 
-	//Command - Look
-	if (comand == "look"){
-		Look();
-		if (cont < 2){
-			printf("If you want to specify where to look like this-> [ look north/n, look west/w, look south/s, look east/e ]\n");
-			cont++;
+		//Open
+		if (comand == "open door n" || comand == "open door w" || comand == "open door s" || comand == "open door e"){
+			Open();
+		}
+		if (comand == "open door north" || comand == "open door west" || comand == "open door south" || comand == "open door east"){
+			Open();
+		}
+
+		//Close
+		if (comand == "close door n" || comand == "close door w" || comand == "close door s" || comand == "close door e"){
+			Close();
+		}
+		if (comand == "close door north" || comand == "close door west" || comand == "close door south" || comand == "close door east"){
+			Close();
+		}
+
+		//Command - Look
+		if (comand == "look"){
+			Look();
+			if (cont < 2){
+				printf("\nIf you want to specify where to look like this-> [ look north/n, look west/w, look south/s, look east/e ]\n");
+				cont++;
+			}
+		}
+
+		//Comand - look inventory
+		if (comand == "look inventory" || comand == "look inv" || comand == "look i"
+			|| comand == "inventory" || comand == "inv" || comand == "i"){
+			Look_inventory();
+		}
+
+		if (comand_tok[0] == "look" && option[4] == ' ')
+		{
+			Look_item(comand_tok);
+		}
+
+		//Commands - Look Specify position
+		if (comand == "look n" || comand == "look w" || comand == "look s" || comand == "look e"){
+			Look_Specify_Position();
+		}
+		if (comand == "look north" || comand == "look west" || comand == "look south" || comand == "look east"){
+			Look_Specify_Position();
+		}
+
+		//comands - equip
+		if (comand == "equip" || comand == "e")
+		{
+			printf("Please, put equip [item]!\n");
+		}
+
+		if (comand_tok[0] == "equip" && option[5] == ' ' || comand_tok[0] == "e" && option[1] == ' '){
+			Equip(comand_tok);
+		}
+
+		//comands - uneequip
+		if (comand == "unequip" || comand == "ue")
+		{
+			printf("Please, put drop [item]\n\n");
+		}
+
+		if (comand_tok[0] == "unequip" && option[7] == ' ' || comand_tok[0] == "ue" && option[2] == ' '){
+			UnEquip(comand_tok);
+		}
+
+		//Comand - put
+		if (comand == "put" || comand == "put")
+		{
+			printf("Please, write put [item] into [item]\n\n");
+		}
+
+		if (comand_tok[0] == "put" && comand_tok[2] == "into")
+		{
+			Put_into(comand_tok);
+		}
+
+		//Comand - get
+		if (comand == "g" || comand == "get")
+		{
+			printf("Please, write get [item] from [item]\n\n");
+		}
+
+		if (comand_tok[0] == "get" && comand_tok[2] == "from")
+		{
+			Get_from(comand_tok);
+		}
+		//Comand - stats
+
+		if (comand == "stats" || comand == "st")
+		{
+			Stats();
+		}
+
+		//Comand - Exit
+		if (comand == "quit"){
+			quit = 1;
+			Exit_zork();
 		}
 	}
 
-	//Comand - look inventory
-	if (comand == "look inventory" || comand == "look inv" || comand == "look i" 
-		|| comand == "inventory" || comand == "inv" || comand == "i"){
-		Look_inventory();
-	}
-
-	//Commands - Look Specify position
-	if (comand == "look n" || comand == "look w" || comand == "look s" || comand == "look e"){
-		Look_Specify_Position();
-	}
-	if (comand == "look north" || comand == "look west" || comand == "look south" || comand == "look east"){
-		Look_Specify_Position();
-	}
-
-	//comands - equip
-	if (comand == "equip" || comand == "e")
-	{
-		printf("Please, put equip [item]!\n");
-	}
-
-	if (comand == "equip lantern" || comand == "equip card" || comand == "equip picklock" || comand == "equip key"
-		|| comand == "equip paper" || comand == "equip gun" || comand == "equip ammo" || comand == "equip camera"
-		|| comand == "equip bag" || comand == "equip vest" || comand == "e lantern" || comand == "e card"
-		|| comand == "e picklock" || comand == "e key" || comand == "e paper" || comand == "e gun"
-		|| comand == "e ammo" || comand == "e camera" || comand == "e bag" || comand == "e vest"){
-		Equip(comand_tok);
-	}
-
-	//comands - uneequip
-	if (comand == "unequip" || comand == "ue")
-	{
-		printf("Please, put drop [item]\n");
-	}
-
-	if (comand == "unequip lantern" || comand == "unequip card" || comand == "unequip picklock" || comand == "unequip key"
-		|| comand == "unequip paper" || comand == "unequip gun" || comand == "unequip ammo" || comand == "unequip camera"
-		|| comand == "unequip bag" || comand == "unequip vest" || comand == "ue lantern" || comand == "ue card"
-		|| comand == "ue picklock" || comand == "ue key" || comand == "ue paper" || comand == "ue gun"
-		|| comand == "ue ammo" || comand == "ue camera" || comand == "ue bag" || comand == "ue vest"){
-		UnEquip(comand_tok);
-	}
-
-	//Comand - stats
-	if (comand == "stats" || comand == "st")
-	{
-		Stats();
-	}
-
-
-	//Comand - Exit
-	if (comand == "quit"){
-		quit = 1;
-		Exit_zork();
-	}
 }
 
 void World::Move()
@@ -785,63 +800,97 @@ void World::Open()
 	{
 		if (player->position == rooms[1])
 		{
-			if (door[0]->Num_doors == 1){
-				printf("The door was already open.\n");
+			if (item[3]->link == item[13]->link)
+			{
+				if (door[0]->Num_doors == 1){
+					printf("The door was already open.\n\n");
+				}
+				else{
+					door[0]->Num_doors = 1;
+					printf("The door is already open.\n\n");
+				}
 			}
-			else{
-				door[0]->Num_doors = 1;
-				printf("The door is already open.\n");
+			else
+			{
+				printf("First you need to unlock! Uses a key or something.\n\n");
 			}
-
 		}
 		else if (player->position == rooms[4])
 		{
-			if (door[1]->Num_doors == 1){
-				printf("The door was already open.\n");
+			if (item[6]->link == item[14]->link)
+			{
+				if (door[1]->Num_doors == 1){
+					printf("The door was already open.\n\n");
+				}
+				else{
+					door[1]->Num_doors = 1;
+					printf("The door is already open.\n\n");
+				}
 			}
-			else{
-				door[1]->Num_doors = 1;
-				printf("The door is already open.\n");
+			else
+			{
+				printf("First you need to unlock! Uses a key or something.\n\n");
 			}
 		}
 		else{
-			printf("In this direction there isn't door.\n");
+			printf("In this direction there isn't door.\n\n");
 		}
 	}
 	if (comand == "open door west" || comand == "open door w")
 	{
 		if (player->position == rooms[6])
 		{
-			if (door[2]->Num_doors == 1){
-				printf("The door was already open.\n");
+			if (item[4]->link == item[15]->link)
+			{
+				if (door[2]->Num_doors == 1){
+					printf("The door was already open.\n\n");
+				}
+				else{
+					door[2]->Num_doors = 1;
+					printf("The door is already open.\n\n");
+				}
 			}
-			else{
-				door[2]->Num_doors = 1;
-				printf("The door is already open.\n");
+			else
+			{
+				printf("First you need to unlock! Uses a key or something.\n\n");
 			}
 		}
 		else if (player->position == rooms[11])
 		{
-			if (door[4]->Num_doors == 1){
-				printf("The door was already open.\n");
+			if (item[2]->link == item[12]->link)
+			{
+				if (door[4]->Num_doors == 1){
+					printf("The door was already open.\n\n");
+				}
+				else{
+					door[4]->Num_doors = 1;
+					printf("The door is already open.\n\n");
+				}
 			}
-			else{
-				door[4]->Num_doors = 1;
-				printf("The door is already open.\n");
+			else
+			{
+				printf("First you need to unlock! Uses a key or something.\n\n");
 			}
 		}
 		else if (player->position == rooms[10])
 		{
-			if (door[3]->Num_doors == 1){
-				printf("The door was already open.\n");
+			if (item[6]->link == item[13]->link)
+			{
+				if (door[3]->Num_doors == 1){
+					printf("The door was already open.\n\n");
+				}
+				else{
+					door[3]->Num_doors = 1;
+					printf("The door is already open.\n\n");
+				}
 			}
-			else{
-				door[3]->Num_doors = 1;
-				printf("The door is already open.\n");
+			else
+			{
+				printf("First you need to unlock! Uses a key or something.\n\n");
 			}
 		}
 		else{
-			printf("In this direction there isn't door.\n");
+			printf("In this direction there isn't door.\n\n");
 		}
 	}
 	if (comand == "open door south" || comand == "open door s" )
@@ -849,7 +898,7 @@ void World::Open()
 		if (player->position == rooms[2])
 		{
 			if (door[0]->Num_doors == 1){
-				printf("The door was already open.\n");
+				printf("The door was already open.\n\n");
 			}
 			else{
 				door[0]->Num_doors = 1;
@@ -1065,7 +1114,7 @@ void World::Look()const{
 
 			for (int j = 0; j < NUM_ITEMS; j++)
 			{
-				if (item[j]->link == rooms[i] && item[j]->istatus == false && item[j]->object == false)
+				if (item[j]->link == rooms[i] && item[j]->istatus == false && item[j]->object == false && item[j]->isinside == false)
 				{
 					printf("- %s\n", item[j]->name.getstr());
 				}
@@ -1100,9 +1149,15 @@ void World::Look_inventory() const
 		printf("You have these items:\n");
 		for (int i = 0; i < NUM_ITEMS; i++)
 		{
-			if (item[i+1]->istatus == true && item[i+1]->equiped == false)
+			if (item[i+1]->istatus == true && item[i+1]->equiped == false && item[i+1]->object == false)
 			{
 				printf("- %s\n", item[i+1]->name.getstr());
+				return;
+			}
+			else
+			{
+				printf("\n");
+				return;
 			}
 		}
 	}
@@ -1110,19 +1165,35 @@ void World::Look_inventory() const
 	{
 		printf("Sorry you don't have inventory!\n");
 		printf("First you need a bag to look inventory!!!\n");
+		return;
 	}
 }
 
 void World::Look_item(Vector<ClString> &comand)const
 {
+	int cont = 0;
 	for (int i = 0; i < NUM_ITEMS; i++)
 	{
-		if (item[i]->link == player->position && item[i]->istatus == true)
+		if (item[i]->name == comand[1] && item[i]->link == player->position)
 		{
-			if (item[i]->name == comand[1])
+			if (item[i]->istatus == true && item[i]->isinside == false || item[i]->istatus == false && item[i]->isinside == false
+				|| item[i]->equiped == true)
 			{
 				printf("- %s\n", item[i]->name.getstr());
 				printf("%s\n", item[i]->description.getstr());
+			}
+			if (item[i]->object == true )
+			{
+				printf("Inside there: \n");
+				for (int i = 0; i < NUM_ITEMS; i++)
+				{
+					if (item[i]->link == player->position && item[i]->isinside == true)
+					{
+						printf("%s\n", item[i]->name.getstr());
+					}
+				}
+				printf("\n");
+				return;
 			}
 		}
 	}
@@ -1586,23 +1657,23 @@ void World::Pick_item(Vector<ClString> &comand)
 {
 	for (int i = 0; i < NUM_ITEMS; i++)
 	{
-		if (player->position == item[i]->link && item[i]->istatus == false && item[i]->name == comand[1] && item[i]->object == false)
+		if (player->position == item[i]->link && item[i]->istatus == false && item[i]->name == comand[1] && item[i]->object == false && item[i]->isinside == false)
 		{
 			item[i]->istatus = true;
 			if (item[0]->istatus == true)
 			{
-				printf("You picked-> %s\n", item[i]->name.getstr());
+				printf("You picked-> %s\n\n", item[i]->name.getstr());
 				return;
 			}
 			else if (item[0]->istatus == false)
 			{
-				printf("First you need a bag to pick items!!!\n");
+				printf("First you need a bag to pick items!!!\n\n");
 				item[i]->istatus = false;
 				return;
 			}
 		}
 	}
-	printf("In this room, there are no items with that name.\n");
+	printf("In this room, there are no items with that name.\n\n");
 	return;
 }
 
@@ -1614,16 +1685,16 @@ void World::Drop_item(Vector<ClString> &comand)
 		{
 			item[i]->istatus = false;
 			item[i]->link = player->position;
-			printf("You dropped-> %s\n", item[i]->name.getstr());
+			printf("You dropped-> %s\n\n", item[i]->name.getstr());
 			return;
 		}
 		else if (item[i]->equiped == true)
 		{
-			printf("You can't drop an equiped item!\n");
+			printf("You can't drop an equiped item!\n\n");
 			return;
 		}
 	}
-	printf("You dont have any object with this name!\n");
+	printf("You dont have any object with this name!\n\n");
 	return;
 }
 
@@ -1679,14 +1750,14 @@ void World::UnEquip(Vector<ClString> &comand)
 		if (item[i]->istatus == true && item[i]->name == comand[1] && item[i]->object == false && item[i]->equiped == true)
 		{
 			item[i]->equiped = false;
-			if (item[6]->equiped == false)
+			if (item[6]->name == comand[1])
 			{
 				player->hp -= item[6]->hp;
 				player->attack -= item[6]->attack;
 				printf("You unequiped-> %s\n", item[6]->name.getstr());
 				return;
 			}
-			else if (item[9]->equiped == false)
+			else if (item[9]->name == comand[1])
 			{
 				player->hp -= item[9]->hp;
 				player->attack -= item[9]->attack;
@@ -1712,3 +1783,70 @@ void World::Stats()const
 	printf("ATTACK: %i\n", player->attack);
 	printf("----------\n");
 }
+
+void World::Put_into(Vector<ClString> &comand_tok)
+{
+	for (int i = 0; i < NUM_ITEMS; i++)//put [item]
+	{
+		if (item[i]->istatus == true && item[i]->equiped == false && item[i]->name == comand_tok[1])
+		{
+			for (int j = 0; j < NUM_ITEMS; j++)//into [item]
+			{
+				if (player->position == item[j]->link && item[j]->object == true && item[j]->name == comand_tok[3])
+				{
+					item[i]->isinside = true;
+					item[i]->link = item[j]->link;
+					item[i]->istatus = false;
+					printf("You put %s into %s!\n\n", item[i]->name.getstr(), item[j]->name.getstr());
+					return;
+				}
+				else if (item[j]->link != player->position && comand_tok[3] == item[j]->name)
+				{
+					printf("There is no item here by that name!\n\n");
+					return;
+				}
+			}
+		}
+		else if (item[i]->equiped == true && comand_tok[1] == item[i]->name)
+		{
+			printf("You can not put this item, first unequip item!\n\n");
+			return;
+		}
+	}
+}
+
+void World::Get_from(Vector<ClString> &comand_tok)
+{
+	for (int i = 0; i < NUM_ITEMS; i++)//put [item]
+	{
+		if (item[i]->istatus == false && item[i]->name == comand_tok[1] && item[i]->isinside == true)
+		{
+			for (int j = 0; j < NUM_ITEMS; j++)//into [item]
+			{
+				if (player->position == item[j]->link && item[j]->object == true && item[j]->name == comand_tok[3] && item[i]->link == item[j]->link)
+				{
+					item[i]->isinside = false;
+					item[i]->istatus = true;
+					printf("You get %s from %s!\n\n", item[i]->name.getstr(), item[j]->name.getstr());
+					return;
+				}
+				else if (item[j]->link != player->position && comand_tok[3] == item[j]->name)
+				{
+					printf("There is no item here by that name!\n\n");
+					return;
+				}
+			}
+		}
+		else if (item[i]->equiped == true && comand_tok[1] == item[i]->name)
+		{
+			printf("You can not get this item, first unequip item!\n\n");
+			return;
+		}
+		else if (item[0]->istatus == false && comand_tok[1] == item[i+1]->name)
+		{
+			printf("You can not get this item because you do not have a bag!\n\n");
+			return;
+		}
+	}
+}
+
