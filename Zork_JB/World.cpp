@@ -108,7 +108,7 @@ void World::Create_World(){
 
 	//Create Exits
 
-	exit.push_back(new Exits("Exit to Main Room.\n", "There is a door.\nBehind the door is the Main Room.\n", 1));
+	exit.push_back(new Exits("Exit to Main Room.\n", "There is a door.\nBehind the door is the Main Room.\n", 0));
 	exit.push_back(new Exits("Exit to Ailse 1.\n", "There is a door.\nBehind the door is the Aisle.\n", 0));
 	exit.push_back(new Exits("Exit to Dressing Room.\n", "There is a door.\nBehind the door is the Dressing Room.\n", 0));
 	exit.push_back(new Exits("Exit to Office Room.\n", "There is a door.\nBehind the door is the Office Room.\n", 0));
@@ -167,7 +167,7 @@ void World::Create_World(){
 
 	item.push_back(new Item("armory", "armory of Gunsmith", rooms[7], false, true, false, false, 0, 0, 0));//item[16], 
 
-	item.push_back(new Item("locker", "You can store things inside.\n", rooms[0], false, true, false, false, 0, 0, 0));//item[17], 
+	item.push_back(new Item("locker", "You can store things inside.\n", rooms[2], false, true, false, false, 0, 0, 0));//item[17], 
 
 }
 
@@ -346,6 +346,7 @@ void World::Move()
 	//Main Room
 	if (player->position == rooms[0])
 	{
+		exit[0]->discover = 1;
 		if (comand == "go n" || comand == "go north")
 		{
 			exit[1]->discover = 1;
@@ -1216,15 +1217,15 @@ void World::Look_Specify_Position() const
 			}
 
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look w" || comand == "look west")
 		{
 			printf("There is a Wall.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look s" || comand == "look south")
 		{
 			printf("There is a Wall.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look e" || comand == "look east")
 		{
 			printf("There is a Wall.\n");
 		}
@@ -1244,7 +1245,7 @@ void World::Look_Specify_Position() const
 				printf("There is a door and that room has not been discovered yet.\n");
 			}
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look w" || comand == "look west")
 		{
 			if (exit[3]->discover == 1)
 			{
@@ -1255,7 +1256,7 @@ void World::Look_Specify_Position() const
 				printf("There is a door and that room has not been discovered yet.\n");
 			}
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look s" || comand == "look south")
 		{
 			if (exit[0]->discover == 1)
 			{
@@ -1266,7 +1267,7 @@ void World::Look_Specify_Position() const
 				printf("There is a door and that room has not been discovered yet.\n");
 			}
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look e" || comand == "look east")
 		{
 			if (exit[8]->discover == 1)
 			{
@@ -1287,11 +1288,11 @@ void World::Look_Specify_Position() const
 		{
 			printf("There is a Wall.\n");
 		}
-		else if(comand == "look n" || comand == "look north")
+		else if(comand == "look w" || comand == "look west")
 		{
 			printf("There is a Wall.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look s" || comand == "look south")
 		{
 			if (exit[1]->discover == 1)
 			{
@@ -1302,7 +1303,7 @@ void World::Look_Specify_Position() const
 				printf("There is a door and that room has not been discovered yet.\n");
 			}
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look e" || comand == "look east")
 		{
 			printf("There is a Wall.\n");
 		}
@@ -1315,7 +1316,7 @@ void World::Look_Specify_Position() const
 		{
 			printf("There is a Wall.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look w" || comand == "look west")
 		{
 			if (exit[4]->discover == 1)
 			{
@@ -1326,7 +1327,7 @@ void World::Look_Specify_Position() const
 				printf("There is a door and that room has not been discovered yet.\n");
 			}
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look s" || comand == "look south")
 		{
 			if (exit[6]->discover == 1)
 			{
@@ -1337,7 +1338,7 @@ void World::Look_Specify_Position() const
 				printf("There is a door and that room has not been discovered yet.\n");
 			}
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look e" || comand == "look east")
 		{
 			if (exit[1]->discover == 1)
 			{
@@ -1364,15 +1365,15 @@ void World::Look_Specify_Position() const
 				printf("There is a door and that room has not been discovered yet.\n");
 			}
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look w" || comand == "look west")
 		{
 			printf("There is a Wall.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look s" || comand == "look south")
 		{
 			printf("There is a Wall.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look e" || comand == "look east")
 		{
 			if (exit[3]->discover == 1)
 			{
@@ -1392,11 +1393,11 @@ void World::Look_Specify_Position() const
 		{
 			printf("There is a Wall.\n");
 		}
-		else if(comand == "look n" || comand == "look north")
+		else if(comand == "look w" || comand == "look west")
 		{
 			printf("There is a Wall.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look s" || comand == "look south")
 		{
 			if (exit[4]->discover == 1)
 			{
@@ -1407,7 +1408,7 @@ void World::Look_Specify_Position() const
 				printf("There is a door and that room has not been discovered yet.\n");
 			}
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look e" || comand == "look east")
 		{
 			printf("There is a Wall.\n");
 		}
@@ -1428,7 +1429,7 @@ void World::Look_Specify_Position() const
 				printf("There is a door and that room has not been discovered yet.\n");
 			}
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look w" || comand == "look west")
 		{
 			if (exit[7]->discover == 1)
 			{
@@ -1439,11 +1440,11 @@ void World::Look_Specify_Position() const
 				printf("There is a door and that room has not been discovered yet.\n");
 			}
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look s" || comand == "look south")
 		{
 			printf("There is a Wall.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look e" || comand == "look east")
 		{
 			printf("There is a Wall.\n");
 		}
@@ -1456,15 +1457,15 @@ void World::Look_Specify_Position() const
 		{
 			printf("There is a Wall.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look w" || comand == "look west")
 		{
 			printf("There is a Wall.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look s" || comand == "look south")
 		{
 			printf("There is a Wall.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look e" || comand == "look east")
 		{
 			if (exit[6]->discover == 1)
 			{
@@ -1491,7 +1492,7 @@ void World::Look_Specify_Position() const
 				printf("There are stairs that go up and that room has not been discovered yet.\n");
 			}
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look w" || comand == "look west")
 		{
 			if (exit[1]->discover == 1)
 			{
@@ -1502,7 +1503,7 @@ void World::Look_Specify_Position() const
 				printf("There is a door and that room has not been discovered yet.\n");
 			}
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look s" || comand == "look south")
 		{
 			if (exit[9]->discover == 1)
 			{
@@ -1513,7 +1514,7 @@ void World::Look_Specify_Position() const
 				printf("There is a door and that room has not been discovered yet.\n");
 			}
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look e" || comand == "look east")
 		{
 			printf("There is a Wall.\n");
 		}
@@ -1533,15 +1534,15 @@ void World::Look_Specify_Position() const
 				printf("There is a door and that room has not been discovered yet.\n");
 			}
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look w" || comand == "look west")
 		{
 			printf("There is a Wall.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look s" || comand == "look south")
 		{
 			printf("There is a Wall.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look e" || comand == "look east")
 		{
 			if (exit[10]->discover == 1)
 			{
@@ -1561,7 +1562,7 @@ void World::Look_Specify_Position() const
 		{
 			printf("There is a Exit.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look w" || comand == "look west")
 		{
 			if (exit[9]->discover == 1)
 			{
@@ -1572,11 +1573,11 @@ void World::Look_Specify_Position() const
 				printf("There is a door and that room has not been discovered yet.\n");
 			}
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look s" || comand == "look south")
 		{
 			printf("There is a Exit.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look e" || comand == "look east")
 		{
 			printf("There is a Exit.\n");
 		}
@@ -1596,7 +1597,7 @@ void World::Look_Specify_Position() const
 				printf("There are stairs that go up and that room has not been discovered yet.\n");
 			}
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look w" || comand == "look west")
 		{
 			if (exit[12]->discover == 1)
 			{
@@ -1607,11 +1608,11 @@ void World::Look_Specify_Position() const
 				printf("There is a door and that room has not been discovered yet.\n");
 			}
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look s" || comand == "look south")
 		{
 			printf("There is a Wall.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look e" || comand == "look east")
 		{
 			printf("There is a Wall.\n");
 		}
@@ -1624,15 +1625,15 @@ void World::Look_Specify_Position() const
 		{
 			printf("There is a Wall.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look w" || comand == "look west")
 		{
 			printf("There is a Wall.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look s" || comand == "look south")
 		{
 			printf("There is a Wall.\n");
 		}
-		else if (comand == "look n" || comand == "look north")
+		else if (comand == "look e" || comand == "look east")
 		{
 			if (exit[11]->discover == 1)
 			{
