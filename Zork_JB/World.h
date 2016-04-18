@@ -37,9 +37,9 @@ public:
 
 	Item* inventory = nullptr;
 	ClString comand;
-	char option[40];
+	char option[80];
 	Player* player = nullptr;
-
+	int acon_moviment = 0;
 
 public:
 
