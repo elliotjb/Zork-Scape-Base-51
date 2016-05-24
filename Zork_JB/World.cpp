@@ -16,7 +16,7 @@ using namespace std;
 
 World::World()
 {
-	player = new Player;
+	player = new Player("Elliot", "I'm a strong", 1, 0, 0);
 }
 
 World::~World()
@@ -160,61 +160,61 @@ void World::Set_Command()
 			printf("-[quit]\n-[help]\n\n");
 		}
 
-		if (comand == "pick" || comand == "p")
+		else if (comand == "pick" || comand == "p")
 		{
 			printf("Please, put pick [item]\n\n");
 		}
 
-		if (comand_tok[0] == "pick" && option[4] == ' ' || comand_tok[0] == "p" && option[1] == ' '){
+		else if(comand_tok[0] == "pick" && option[4] == ' ' || comand_tok[0] == "p" && option[1] == ' '){
 			Pick_item(comand_tok);
 		}
 
-		if (comand == "drop" || comand == "d")
+		else if (comand == "drop" || comand == "d")
 		{
 			printf("Please, put drop [item]\n\n");
 		}
-		if (comand_tok[0] == "drop" && option[4] == ' ' || comand_tok[0] == "d" && option[1] == ' '){
+		else if (comand_tok[0] == "drop" && option[4] == ' ' || comand_tok[0] == "d" && option[1] == ' '){
 			Drop_item(comand_tok);
 		}
 
 		//Commands - Go
-		if (comand == "go"){
+		else if (comand == "go"){
 			printf("Where you want to go? [go north, go west, go south, go east]\n\n");
 		}
 
-		if (comand == "go n" || comand == "go w" || comand == "go s" || comand == "go e" || comand == "go u" || comand == "go d"){
+		else if (comand == "go n" || comand == "go w" || comand == "go s" || comand == "go e" || comand == "go u" || comand == "go d"){
 			Move();
 		}
-		if (comand == "go north" || comand == "go westw" || comand == "go south" || comand == "go east" || comand == "go up" || comand == "go down"){
+		else if (comand == "go north" || comand == "go westw" || comand == "go south" || comand == "go east" || comand == "go up" || comand == "go down"){
 			Move();
 		}
 
 		//Comands - Open and Close
-		if (comand == "open"){
+		else if (comand == "open"){
 			printf("The command to open is [open door (direction) -> example: open door north]\n\n");
 		}
-		if (comand == "close"){
+		else if (comand == "close"){
 			printf("The command to close is [close door (direction) -> example: close door north]\n\n");
 		}
 
 		//Open
-		if (comand == "open door" || comand == "open door n" || comand == "open door w" || comand == "open door s" || comand == "open door e"){
+		else if (comand == "open door" || comand == "open door n" || comand == "open door w" || comand == "open door s" || comand == "open door e"){
 			Open();
 		}
-		if (comand == "open door north" || comand == "open door west" || comand == "open door south" || comand == "open door east"){
+		else if (comand == "open door north" || comand == "open door west" || comand == "open door south" || comand == "open door east"){
 			Open();
 		}
 
 		//Close
-		if (comand == "close door" || comand == "close door n" || comand == "close door w" || comand == "close door s" || comand == "close door e"){
+		else if (comand == "close door" || comand == "close door n" || comand == "close door w" || comand == "close door s" || comand == "close door e"){
 			Close();
 		}
-		if (comand == "close door north" || comand == "close door west" || comand == "close door south" || comand == "close door east"){
+		else if (comand == "close door north" || comand == "close door west" || comand == "close door south" || comand == "close door east"){
 			Close();
 		}
 
 		//Command - Look
-		if (comand == "look"){
+		else if (comand == "look"){
 			Look();
 			if (cont < 2){
 				printf("If you want to specify where to look like this-> [ look north/n, look west/w, look south/s, look east/e ]\n\n");
@@ -223,76 +223,80 @@ void World::Set_Command()
 		}
 
 		//Comand - look inventory
-		if (comand == "look inventory" || comand == "look inv" || comand == "look i"
+		else if (comand == "look inventory" || comand == "look inv" || comand == "look i"
 			|| comand == "inventory" || comand == "inv" || comand == "i"){
 			Look_inventory();
 		}
 
-		if (comand_tok[0] == "look" && option[4] == ' ' && option[5] != '\0')
+		else if (comand_tok[0] == "look" && option[4] == ' ' && option[5] != '\0')
 		{
 			Look_item(comand_tok);
 		}
 
 		//Commands - Look Specify position
-		if (comand == "look n" || comand == "look w" || comand == "look s" || comand == "look e"){
+		else if (comand == "look n" || comand == "look w" || comand == "look s" || comand == "look e"){
 			Look_Specify_Position();
 		}
-		if (comand == "look north" || comand == "look west" || comand == "look south" || comand == "look east"){
+		else if (comand == "look north" || comand == "look west" || comand == "look south" || comand == "look east"){
 			Look_Specify_Position();
 		}
 
 		//comands - equip
-		if (comand == "equip" || comand == "e")
+		else if (comand == "equip" || comand == "e")
 		{
 			printf("Please, write <equip [item]>\n\n");
 		}
 
-		if (comand_tok[0] == "equip" && option[5] == ' ' || comand_tok[0] == "e" && option[1] == ' '){
+		else if (comand_tok[0] == "equip" && option[5] == ' ' || comand_tok[0] == "e" && option[1] == ' '){
 			Equip(comand_tok);
 		}
 
 		//comands - uneequip
-		if (comand == "unequip" || comand == "ue")
+		else if (comand == "unequip" || comand == "ue")
 		{
 			printf("Please, write <drop [item]>\n\n");
 		}
 
-		if (comand_tok[0] == "unequip" && option[7] == ' ' || comand_tok[0] == "ue" && option[2] == ' '){
+		else if (comand_tok[0] == "unequip" && option[7] == ' ' || comand_tok[0] == "ue" && option[2] == ' '){
 			UnEquip(comand_tok);
 		}
 
 		//Comand - put
-		if (comand == "put" || comand == "put")
+		else if (comand_tok[0] == "put" && option[4] != 'i')//TODO: Arreglar!
 		{
 			printf("Please, write <put [item] into [item]>\n\n");
 		}
 
-		if (comand_tok[0] == "put" && comand_tok[2] == "into")
+		else if (comand_tok[0] == "put" && comand_tok[2] == "into")
 		{
 			Put_into(comand_tok);
 		}
 
 		//Comand - get
-		if (comand == "g" || comand == "get")
+		else if (comand == "g" || comand == "get")
 		{
 			printf("Please, write get [item] from [item]\n\n");
 		}
 
-		if (comand_tok[0] == "get" && comand_tok[2] == "from")
+		else if (comand_tok[0] == "get" && comand_tok[2] == "from")
 		{
 			Get_from(comand_tok);
 		}
 		//Comand - stats
 
-		if (comand == "stats" || comand == "st")
+		else if (comand == "stats" || comand == "st")
 		{
 			Stats();
 		}
 
 		//Comand - Exit
-		if (comand == "quit" || comand == "q" || comand == "yes" &&  exit[10]->discover == 1 || comand == "y" &&  exit[10]->discover == 1){
+		else if (comand == "quit" || comand == "q" || comand == "yes" &&  exit[10]->discover == 1 || comand == "y" &&  exit[10]->discover == 1){
 			quit = 1;
 			Exit_zork();
+		}
+		else
+		{
+			printf("I beg your pardon?\n\n");
 		}
 	}
 	else
@@ -1006,7 +1010,7 @@ void World::Close()
 void World::Look()const{
 
 	int conti = 0, conto = 0;
-	for (int i = 0; i < NUM_ROOMS; i++)
+	for (int i = 0; i < 13; i++)
 	{
 		if (player->position == rooms[i])
 		{

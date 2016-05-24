@@ -5,10 +5,6 @@
 #include "String_Class.h"
 
 #define NUM_ITEMS 18
-#define NUM_ROOMS 13
-
-using namespace std;
-
 
 class Entity
 {
