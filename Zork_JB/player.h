@@ -10,9 +10,10 @@ class Criature:public Entity
 {
 public:
 	Criature();
-	Criature(const char* name, const char* description, int hp, int attack, int coins);
+	Criature(const char* name, const char* description, TYPE type, int hp, int attack, int coins);
 	~Criature();
 
+	TYPE type;
 	Item* haveitem;
 	Room* position;
 
@@ -43,9 +44,10 @@ class Player:public Criature
 {
 public:
 	Player();
-	Player(const char* name, const char* description,  int hp, int attack, int coins);
+	Player(const char* name, const char* description, TYPE type, int hp, int attack, int coins);
 	~Player();
 
+	TYPE type;
 	Room* position;
 	int hp;
 	int attack;

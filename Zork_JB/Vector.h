@@ -40,7 +40,7 @@ public:
 		delete[] buffer;
 	}
 
-	uint num_ele()const
+	uint size()const
 	{
 		return elements;
 	}

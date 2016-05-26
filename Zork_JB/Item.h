@@ -7,9 +7,10 @@ class Item : public Entity{
 public:
 
 
-	Item(const char* str1, const char* str2, Room* link, bool istatus, bool object, bool equiped, bool isinside, int hp, int attack, int durability);
+	Item(const char* str1, const char* str2, TYPE type, Room* link, bool istatus, bool object, bool equiped, bool isinside, int hp, int attack, int durability);
 	~Item();
 
+	TYPE type;
 	Room* link;
 	bool istatus;
 	bool object;

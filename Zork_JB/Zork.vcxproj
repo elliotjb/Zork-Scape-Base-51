@@ -80,6 +80,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Exits.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="My_list.h" />
     <ClInclude Include="String_Class.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="World.h" />

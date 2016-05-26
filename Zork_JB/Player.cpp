@@ -4,11 +4,10 @@ Criature::Criature()
 {
 
 }
-Criature::Criature(const char* name, const char* des, int hp, int attack, int coins) : Entity(name, des), hp(hp), attack(attack), coins(coins)
+Criature::Criature(const char* name, const char* des, TYPE type, int hp, int attack, int coins) : 
+Entity(name, des, type), hp(hp), attack(attack), coins(coins)
 {
-	/*hp = 0;
-	attack = 0;
-	coins = 0;*/
+	type = NPC;
 }
 
 Criature::~Criature()
@@ -21,11 +20,9 @@ Player::Player()
 {
 
 }
-Player::Player(const char* name, const char* des, int hp, int attack, int coins) : Criature(name, des, hp, attack, coins)
+Player::Player(const char* name, const char* des, TYPE type,  int hp, int attack, int coins) : Criature(name, des, type, hp, attack, coins)
 {
-	/*hp = 0;
-	attack = 0;
-	coins = 0;*/
+	type = PLAYER;
 }
 
 Player::~Player()
