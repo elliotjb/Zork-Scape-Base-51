@@ -11,29 +11,27 @@
 #include "Vector.h"
 #include "Item.h"
 #include "String_Class.h"
-#include <string.h>
 
-class Entity;
+#define NUM_ITEMS 18
+
+/*class Entity;
 class Exits;
 class Room;
 class Door;
-class Item;
+class Item;*/
 
 class World:public Entity
 {
 
 public:
 
-	Vector <Room*> rooms;
+	//Vector <Room*> rooms;
 	//Vector <Player*> player;
-
-	Vector <Exits*> exit;
-	Vector <Door*> door;
-	Vector <Item*> item;
-
-	//Vector<ClString> option; //for items?
+	/*Vector <Exits*> exit;
+	Vector <Item*> item;*/
 
 	Vector <Entity*> my_entities;
+	Vector <Door*> door;
 
 	Item* inventory = nullptr;
 	ClString comand;

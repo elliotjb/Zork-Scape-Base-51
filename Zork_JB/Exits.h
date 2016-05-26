@@ -15,6 +15,10 @@ public:
 	Room* origin;
 	Room* destination;
 	int direction;
+	//0 -> NORTH ->up
+	//1 -> WEST  ->left
+	//2 -> SOUTH ->down
+	//3 -> EAST  ->right
 
 };
 

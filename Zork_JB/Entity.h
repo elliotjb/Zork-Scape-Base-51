@@ -1,10 +1,12 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
 
-#include "Vector.h"
+#include "My_list.h"
 #include "String_Class.h"
 
-#define NUM_ITEMS 18
+
+enum TYPE{ ROOM, EXIT, PLAYER, ITEM, NPC };
+
 
 class Entity
 {
@@ -12,10 +14,12 @@ public:
 
 	ClString name;
 	ClString description;
+	TYPE type;
+	DList<Entity*> list;
 
 public:
 
-	Entity(const char* str1, const char* str2);
+	Entity(const char* str1, const char* str2, TYPE type);
 	Entity();
 	~Entity();
 
