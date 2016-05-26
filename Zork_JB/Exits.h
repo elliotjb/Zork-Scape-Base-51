@@ -1,17 +1,20 @@
 #ifndef __Exits_H_
 #define __Exits_H_
-#include <string.h>
-#include "Entity.h"
 
-using namespace std;
+#include "Entity.h"
+#include "Room.h"
 
 class Exits : public Entity
 {
 public:
-	Exits(const char* str1, const char* str2, int discover);
+	Exits(const char* str1, const char* str2, TYPE type, bool discover, Room* origin, Room* destination, int direction);
 	~Exits();
-	//char description[150];
-	int discover;
+
+	TYPE type;
+	bool discover;
+	Room* origin;
+	Room* destination;
+	int direction;
 
 };
 
