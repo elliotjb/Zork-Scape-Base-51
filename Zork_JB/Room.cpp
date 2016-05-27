@@ -1,7 +1,7 @@
 #include "Room.h"
 #include "World.h"
 
-Room::Room(const char* str1, const char* str2, TYPE type) :Entity(str1, str2, type)
+Room::Room(const char* str1, const char* str2) :Entity(str1, str2)
 {
 	type = ROOM;
 }

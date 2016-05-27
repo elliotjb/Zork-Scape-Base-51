@@ -19,8 +19,9 @@ public:
 
 public:
 
-	Entity(const char* str1, const char* str2, TYPE type);
+
 	Entity();
+	Entity(const char* str1, const char* str2);
 	~Entity();
 
 };

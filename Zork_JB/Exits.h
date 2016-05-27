@@ -7,10 +7,9 @@
 class Exits : public Entity
 {
 public:
-	Exits(const char* str1, const char* str2, TYPE type, bool discover, Room* origin, Room* destination, int direction);
+	Exits(const char* str1, const char* str2, bool discover, Room* origin, Room* destination, int direction);
 	~Exits();
 
-	TYPE type;
 	bool discover;
 	Room* origin;
 	Room* destination;
