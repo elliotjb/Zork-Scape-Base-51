@@ -1,15 +1,19 @@
 #ifndef _Door_
 #define _Door_
 
+#include "Room.h"
 
 using namespace std;
 
 class Door{
 
 public:
-	Door(int Num_doors);
+	Door(bool isOP, Room* door_origin, Room* door_dst);
 	~Door();
-	int Num_doors;
+	bool isOP;
+	Room* door_origin;
+	Room* door_dst;
+
 };
 
 #endif 
