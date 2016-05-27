@@ -9,10 +9,12 @@
 #include "Exits.h"
 #include "Entity.h"
 #include "Vector.h"
+#include "Criature.h"
 #include "Item.h"
 #include "String_Class.h"
 
 #define NUM_ITEMS 18
+#define NUM_DOORS 10
 
 /*class Entity;
 class Exits;
@@ -20,7 +22,7 @@ class Room;
 class Door;
 class Item;*/
 
-class World:public Entity
+class World
 {
 
 public:
@@ -54,11 +56,11 @@ public:
 	void Input();
 
 	//Funciton to go n, go w, go s and go e
-	void Move();
+	//void Move();
 	//void Move(Vector<ClString>&);
 
 	//Function to open
-	void Open();
+	/*void Open();
 
 	//Function to close
 	void Close();
@@ -75,9 +77,6 @@ public:
 	//Function to Look specify position (North, West, South and East)
 	void Look_Specify_Position() const;
 	
-	//Function to exit the game
-	bool Exit_zork();
-
 	//Function to pick a item
 	void Pick_item(Vector<ClString> &);
 
@@ -90,18 +89,24 @@ public:
 	//Function to unequip a item
 	void UnEquip(Vector<ClString> &);
 
-	//function to look your stats
-	void Stats()const;
-
 	//Function
 	void Put_into(Vector<ClString> &);
 
 	//Function
 	void Get_from(Vector<ClString> &);
+	*/
+
+	//function to look your stats
+	void Stats()const;
+
+	//Function to exit the game
+	bool Exit_zork();
+
+
 	
 };
 
-
+extern World* App;
 
 
 #endif 

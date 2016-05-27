@@ -1,16 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "World.h"
-#include "Room.h"
-#include "player.h"
-#include "Door.h"
-#include "Exits.h"
-#include "Entity.h"
-#include "Vector.h"
-#include "Item.h"
-#include "String_Class.h"
-
-using namespace std;
 
 
 
@@ -20,7 +10,10 @@ World::World()
 
 World::~World()
 {
-
+	for (int i = 0; i < my_entities.size(); i++)
+	{
+		delete my_entities[i];
+	}
 }
 
 void World::Create_World(){
@@ -29,8 +22,8 @@ void World::Create_World(){
 
 
 	//Create Rooms
-	Room* MainRoom;//0
-	Room* Aisle;//1...
+	Room* MainRoom = new Room("MAIN ROOM", "It is a small room with a table and chairs middle and one exit north");//0
+	Room* Aisle = new Room("SMALL AISLE", "It is small and with 3 outputs without why we have entered. To the north there is a door with a sign, it says: 'Dressing Room'");//1...
 	Room* DressingRoom;
 	Room* OfficeRoom;
 	Room* MysteryRoom;
@@ -44,176 +37,214 @@ void World::Create_World(){
 	Room* Laboratory;
 
 	//my_entities[0]
-	my_entities.push_back(MainRoom = new Room("MAIN ROOM", "It is a small room with a table and chairs middle and one exit north", ROOM));
+	my_entities.push_back(MainRoom);
 	
 	//my_entities[1]
-	my_entities.push_back(Aisle = new Room("SMALL AISLE", "It is small and with 3 outputs without why we have entered. To the north there is a door with a sign, it says: 'Dressing Room'", ROOM));
+	my_entities.push_back(Aisle);
 	
 	//my_entities[2]
-	my_entities.push_back(DressingRoom = new Room("DRESSING ROOM", "There are many lockers, you can see that there is an open locker", ROOM));
+	my_entities.push_back(DressingRoom = new Room("DRESSING ROOM", "There are many lockers, you can see that there is an open locker"));
 	
 	//my_entities[3]
-	my_entities.push_back(OfficeRoom = new Room("OFFICE ROOM", "It is a small room with a few tables working, there are 2 exits", ROOM));
+	my_entities.push_back(OfficeRoom = new Room("OFFICE ROOM", "It is a small room with a few tables working, there are 2 exits"));
 	
 	//my_entities[4]
-	my_entities.push_back(MysteryRoom = new Room("MYSTERY ROOM", "It is a very large room with a giant cage, there seems to be something inside and the door is open.\nThere is a door to the north.", ROOM));
+	my_entities.push_back(MysteryRoom = new Room("MYSTERY ROOM", "It is a very large room with a giant cage, there seems to be something inside and the door is open.\nThere is a door to the north."));
 	
 	//my_entities[5]
-	my_entities.push_back(Warehouse = new Room("WAREHOUSE 1", "It is a normal warehouse, you can see a safe and it's open", ROOM));
+	my_entities.push_back(Warehouse = new Room("WAREHOUSE 1", "It is a normal warehouse, you can see a safe and it's open"));
 	
 	//my_entities[6]
-	my_entities.push_back(Warehouse2 = new Room("WAREHOUSR 2", "It looks like a warehouse or I think, but there are not many things. There is a door to the west.", ROOM));
+	my_entities.push_back(Warehouse2 = new Room("WAREHOUSR 2", "It looks like a warehouse or I think, but there are not many things. There is a door to the west."));
 	
 	//my_entities[7]
-	my_entities.push_back(Gunsmith = new Room("GUNSMITH", "Is huge there are many boxes with weapons, there is an armory and is open", ROOM));
+	my_entities.push_back(Gunsmith = new Room("GUNSMITH", "Is huge there are many boxes with weapons, there is an armory and is open"));
 	
 	//my_entities[8]
-	my_entities.push_back(Aisle2 = new Room("AISLE 2", "It is normal in low light but enough to see everything hall.\nTo the north there are stairs going up and there is an exit south", ROOM));
+	my_entities.push_back(Aisle2 = new Room("AISLE 2", "It is normal in low light but enough to see everything hall.\nTo the north there are stairs going up and there is an exit south"));
 	
 	//my_entities[9]
-	my_entities.push_back(Hall = new Room("HALL", "Beside this departure, and I almost get it! To the east is a keyboard to enter a key, surely this I will pull through. (Not implemented yet)", ROOM));
+	my_entities.push_back(Hall = new Room("HALL", "Beside this departure, and I almost get it! To the east is a keyboard to enter a key, surely this I will pull through. (Not implemented yet)"));
 	
 	//my_entities[10]
-	my_entities.push_back(ExitRoom = new Room("THE EXIT", "These outside the building, no one is around, it seems as if the base was abandoned", ROOM));
+	my_entities.push_back(ExitRoom = new Room("THE EXIT", "These outside the building, no one is around, it seems as if the base was abandoned"));
 	
 	//my_entities[11]
-	my_entities.push_back(Aisle3 = new Room("AILSE 3", "To the north there is a staircase going down and east have a door, you can put a card into the scanner", ROOM));
+	my_entities.push_back(Aisle3 = new Room("AILSE 3", "To the north there is a staircase going down and east have a door, you can put a card into the scanner"));
 	
 	//my_entities[12]
-	my_entities.push_back(Laboratory = new Room("LABORATORY", "It is a research laboratory, it appears that all the material is new. In front there is a table with papers", ROOM));
+	my_entities.push_back(Laboratory = new Room("LABORATORY", "It is a research laboratory, it appears that all the material is new. In front there is a table with papers"));
 
 
 	//Create EXITS
 	//my_entities[13] - EXITS FROM MAIN ROOM
-	my_entities.push_back(new Exits("Exit to AILSE 1.\n", "The next room is the AILSE.\n", EXIT, false, MainRoom, Aisle, 0));
+	my_entities.push_back(new Exits("Exit to AILSE 1.\n", "The next room is the AILSE.\n", false, MainRoom, Aisle, 0));
 
 	//my_entities[14] - EXITS FROM AILSE
-	my_entities.push_back(new Exits("Exit to MAIN ROOM.\n", "The next room is the MAIN ROOM\n", EXIT, false, Aisle, MainRoom, 2));
+	my_entities.push_back(new Exits("Exit to MAIN ROOM.\n", "The next room is the MAIN ROOM\n", false, Aisle, MainRoom, 2));
 	//my_entities[15] - EXITS FROM AILSE
-	my_entities.push_back(new Exits("Exit to DRESSING ROOM.\n", "The next room is the DRESSING ROOM\n", EXIT, false, Aisle, DressingRoom, 0));
+	my_entities.push_back(new Exits("Exit to DRESSING ROOM.\n", "The next room is the DRESSING ROOM\n", false, Aisle, DressingRoom, 0));
 	//my_entities[16] - EXITS FROM AILSE
-	my_entities.push_back(new Exits("Exit to OFFICE ROOM.\n", "The next room is the OFFICE ROOM\n", EXIT, false, Aisle, OfficeRoom, 1));
+	my_entities.push_back(new Exits("Exit to OFFICE ROOM.\n", "The next room is the OFFICE ROOM\n", false, Aisle, OfficeRoom, 1));
 	//my_entities[17] - EXITS FROM AILSE
-	my_entities.push_back(new Exits("Exit to AILSE 2.\n", "The next room is the AILSE 2\n", EXIT, false, Aisle, Aisle2, 3));
+	my_entities.push_back(new Exits("Exit to AILSE 2.\n", "The next room is the AILSE 2\n", false, Aisle, Aisle2, 3));
 
 	//my_entities[18] - EXITS FROM DRESSING ROOM
-	my_entities.push_back(new Exits("Exit to AILSE 1.\n", "The next room is the Aisle.\n", EXIT, false, DressingRoom, Aisle, 2));
+	my_entities.push_back(new Exits("Exit to AILSE 1.\n", "The next room is the Aisle.\n", false, DressingRoom, Aisle, 2));
 
 	//my_entities[19] - EXITS FROM OFFICE ROOM
-	my_entities.push_back(new Exits("Exit to MYSTERY ROOM.\n", "The next room is the MYSTERY ROOM.\n", EXIT, false, OfficeRoom, MysteryRoom, 1));
+	my_entities.push_back(new Exits("Exit to MYSTERY ROOM.\n", "The next room is the MYSTERY ROOM.\n", false, OfficeRoom, MysteryRoom, 1));
 	//my_entities[20] - EXITS FROM OFFICE ROOM
-	my_entities.push_back(new Exits("Exit to WAREHOUSE 2.\n", "The next room is the WAREHOUSE 2.\n", EXIT, false, OfficeRoom, Warehouse2, 2));
+	my_entities.push_back(new Exits("Exit to WAREHOUSE 2.\n", "The next room is the WAREHOUSE 2.\n", false, OfficeRoom, Warehouse2, 2));
 	//my_entities[21] - EXITS FROM OFFICE ROOM
-	my_entities.push_back(new Exits("Exit to AILSE 1.\n", "The next room is the AILSE 1.\n", EXIT, false, OfficeRoom, Aisle, 3));
+	my_entities.push_back(new Exits("Exit to AILSE 1.\n", "The next room is the AILSE 1.\n", false, OfficeRoom, Aisle, 3));
 	
 	//my_entities[22] - EXITS FROM MYSTERY ROOM
-	my_entities.push_back(new Exits("Exit to DRESSING ROOM.\n", "The next room is the DRESSING ROOM.\n", EXIT, false, MysteryRoom, DressingRoom, 3));
+	my_entities.push_back(new Exits("Exit to DRESSING ROOM.\n", "The next room is the DRESSING ROOM.\n", false, MysteryRoom, DressingRoom, 3));
 	//my_entities[23] - EXITS FROM MYSTERY ROOM
-	my_entities.push_back(new Exits("Exit to WAREHOUSE.\n", "The next room is the WAREHOUSE.\n", EXIT, false, MysteryRoom, Warehouse, 0));
+	my_entities.push_back(new Exits("Exit to WAREHOUSE.\n", "The next room is the WAREHOUSE.\n", false, MysteryRoom, Warehouse, 0));
 	
 	//my_entities[24] - EXITS FROM WAREHOUSE
-	my_entities.push_back(new Exits("Exit to MYSTERY ROOM.\n", "The next room is the MYSTERY ROOM.\n", EXIT, false, Warehouse, MysteryRoom, 2));
+	my_entities.push_back(new Exits("Exit to MYSTERY ROOM.\n", "The next room is the MYSTERY ROOM.\n", false, Warehouse, MysteryRoom, 2));
 	
 	//my_entities[25] - EXITS FROM WAREHOUSE 2
-	my_entities.push_back(new Exits("Exit to OFFICE ROOM.\n", "The next room is the OFFICE ROOM.\n", EXIT, false, Warehouse2, OfficeRoom, 0));
+	my_entities.push_back(new Exits("Exit to OFFICE ROOM.\n", "The next room is the OFFICE ROOM.\n", false, Warehouse2, OfficeRoom, 0));
 	//my_entities[26] - EXITS FROM WAREHOUSE 2
-	my_entities.push_back(new Exits("Exit to GUNSMITH.\n", "The next room is the GUNSMITH.\n", EXIT, false, Warehouse2, Gunsmith, 1));
+	my_entities.push_back(new Exits("Exit to GUNSMITH.\n", "The next room is the GUNSMITH.\n", false, Warehouse2, Gunsmith, 1));
 	
 	//my_entities[27] - EXITS FROM GUNSMITH
-	my_entities.push_back(new Exits("Exit to WAREHOUSE 2.\n", "The next room is the WAREHOUSE 2.\n", EXIT, false, Gunsmith, Warehouse2, 3));
+	my_entities.push_back(new Exits("Exit to WAREHOUSE 2.\n", "The next room is the WAREHOUSE 2.\n", false, Gunsmith, Warehouse2, 3));
 	
 	//my_entities[28] - EXITS FROM AILSE 2
-	my_entities.push_back(new Exits("Exit to AISLE 3.\n", "The next room is the AISLE 3.\n", EXIT, false, Aisle2, Aisle3, 0));
+	my_entities.push_back(new Exits("Exit to AISLE 3.\n", "The next room is the AISLE 3.\n", false, Aisle2, Aisle3, 0));
 	//my_entities[29] - EXITS FROM AILSE 2
-	my_entities.push_back(new Exits("Exit to AISLE.\n", "The next room is the AISLE.\n", EXIT, false, Aisle2, Aisle, 1));
+	my_entities.push_back(new Exits("Exit to AISLE.\n", "The next room is the AISLE.\n", false, Aisle2, Aisle, 1));
 	//my_entities[30] - EXITS FROM AILSE 2
-	my_entities.push_back(new Exits("Exit to HALL.\n", "The next room is the HALL.\n", EXIT, false, Aisle2, Hall, 2));
+	my_entities.push_back(new Exits("Exit to HALL.\n", "The next room is the HALL.\n", false, Aisle2, Hall, 2));
 	
 	//my_entities[31] - EXITS FROM HALL
-	my_entities.push_back(new Exits("Exit to AISLE 2.\n", "The next room is the AISLE 2.\n", EXIT, false, Hall, Aisle2, 0));
+	my_entities.push_back(new Exits("Exit to AISLE 2.\n", "The next room is the AISLE 2.\n", false, Hall, Aisle2, 0));
 	//my_entities[32] - EXITS FROM HALL
-	my_entities.push_back(new Exits("Exit to EXIT.\n", "The next room is the EXIT.\n", EXIT, false, Hall, ExitRoom, 3));
+	my_entities.push_back(new Exits("Exit to EXIT.\n", "The next room is the EXIT.\n", false, Hall, ExitRoom, 3));
 	
 	//my_entities[33] - EXITS FROM EXITROOM
-	my_entities.push_back(new Exits("Exit to HALL.\n", "The next room is the HALL.\n", EXIT, false, ExitRoom, Hall, 1));
+	my_entities.push_back(new Exits("Exit to HALL.\n", "The next room is the HALL.\n", false, ExitRoom, Hall, 1));
 	
 	//my_entities[34] - EXITS FROM AILSE 3
-	my_entities.push_back(new Exits("Exit to AISLE 2.\n", "The next room is the AISLE 2.\n", EXIT, false, Aisle3, Aisle2, 2));
+	my_entities.push_back(new Exits("Exit to AISLE 2.\n", "The next room is the AISLE 2.\n", false, Aisle3, Aisle2, 2));
 	//my_entities[35] - EXITS FROM AILSE 3
-	my_entities.push_back(new Exits("Exit to LABORATORY.\n", "The next room is the LABORATORY.\n", EXIT, false, Aisle3, Laboratory, 1));
+	my_entities.push_back(new Exits("Exit to LABORATORY.\n", "The next room is the LABORATORY.\n", false, Aisle3, Laboratory, 1));
 	
 	//my_entities[36] - EXITS FROM LABORATORY
-	my_entities.push_back(new Exits("Exit to AISLE 3.\n", "The next room is the AISLE 3.\n", EXIT, false, Laboratory, Aisle3, 3));
+	my_entities.push_back(new Exits("Exit to AISLE 3.\n", "The next room is the AISLE 3.\n", false, Laboratory, Aisle3, 3));
 	
 	//Create Doors
-	door.push_back(new Door(0));
-	door.push_back(new Door(0));
-	door.push_back(new Door(0));
-	door.push_back(new Door(0));
-	door.push_back(new Door(0));
+	//door[0]  -   DOOR 0
+	door.push_back(new Door(false, Aisle, DressingRoom));
+	//door[1]  -   DOOR 0
+	door.push_back(new Door(false, DressingRoom, Aisle));
+
+	//door[2]  -   DOOR 1
+	door.push_back(new Door(false, MysteryRoom, Warehouse));
+	//door[3]  -   DOOR 1
+	door.push_back(new Door(false, Warehouse, MysteryRoom));
+
+	//door[4]  -   DOOR 2
+	door.push_back(new Door(false, Warehouse2, Gunsmith));
+	//door[5]  -   DOOR 2
+	door.push_back(new Door(false, Gunsmith, Warehouse2));
+
+	//door[6]  -   DOOR 3
+	door.push_back(new Door(false, ExitRoom, Hall));
+	//door[7]  -   DOOR 3
+	door.push_back(new Door(false, Hall, ExitRoom));
+
+	//door[8]  -   DOOR 4
+	door.push_back(new Door(false, Aisle3, Laboratory));
+	//door[9]  -   DOOR 4
+	door.push_back(new Door(false, Laboratory, Aisle3));
+
 
 	//PLAYER
-
-	//my_entities[26]
-	my_entities.push_back(new Player("Elliot", "I'm a strong", PLAYER, 1, 0, 0));
+	//my_entities[37]
+	my_entities.push_back(new Player("Elliot", "I'm a strong", 1, 0, 0));
+	player = (Player*)my_entities[37];
 	player->position = MainRoom;
 
 	//ITEMS
-
-	//my_entities[25]
-	my_entities.push_back(new Item("bag", "It is a military backpack brown and is quite large\n", ITEM, MainRoom, false, false, false, false, 0, 0, 100));
-
-	//my_entities[26]
-	my_entities.push_back(new Item("lantern", "It is a lantern of those that are small but more light than the sun\n", ITEM, MainRoom, false, false, false, false, 0, 0, 10));//item[1], 
-
-	//my_entities[27]
-	my_entities.push_back(new Item("card", "It looks like a card to pass a security check, it may be useful\n", ITEM, Warehouse, false, false, false, false, 0, 0, 50));//item[2], 
-
-	//my_entities[28]
-	my_entities.push_back(new Item("lockpick", "It can be useful to open doors, thank god know how to use it\n", ITEM, OfficeRoom, false, false, false, false, 0, 0, 1));//item[3], 
-
-	//my_entities[29]
-	my_entities.push_back(new Item("key", "It is a normal key, with a label that puts armory\n", ITEM, DressingRoom, false, false, false, false, 0, 0, 10));//item[4], 
-
-	//my_entities[30]
-	my_entities.push_back(new Item("paper", "It is a small role. It has written a command: 'SZKMS'\n", ITEM, Laboratory, false, false, false, false, 0, 0, 100));//item[5], 12
-
-	//my_entities[31]
-	my_entities.push_back(new Item("gun", "It is a M4A1-S, it is one of my favorite weapons\n", ITEM, Gunsmith, false, false, false, false, 0, 5, 100));//item[6], 
-
-	//my_entities[32]
-	my_entities.push_back(new Item("ammo", "It is a ammo pack, but only has 10 bullets\n", ITEM, Gunsmith, false, false, false, false, 0, 45, 10));//item[7], 
-
-	//my_entities[33]
-	my_entities.push_back(new Item("camera", "Oh my camera, finally I ever have\n", ITEM, Warehouse, false, false, false, false, 0, 0, 100));//item[8], 5
-
-	//my_entities[34]
-	my_entities.push_back(new Item("vest", "It's a bulletproof vest might be useful.\n", ITEM, DressingRoom, false, false, false, false, 100, 0, 10));//item[9], 
-
-	//my_entities[35]
-	my_entities.push_back(new Item("safe", "It is safe, it seems that this open\n", ITEM, Warehouse, false, true, false, false, 0, 0, 15));//item[10], 
-
-	//my_entities[36]
-	my_entities.push_back(new Item("reader", "It seems that putting a password the door opened (no implemented yet)\n", ITEM, Hall, false, true, false, false, 0, 0, 0));//item[11], 
-
-	//my_entities[37]
-	my_entities.push_back(new Item("scanner", "It is a card reader, if I put a card surely will open\n", ITEM, Aisle3, false, true, false, false, 0, 0, 0));//item[12], to open door of laboratory
+	Item* Bag;
+	Item* Lantern;
+	Item* Card;
+	Item* Lockpick;
+	Item* Key;
+	Item* Paper;
+	Item* Gun;
+	Item* Ammo;
+	Item* Camera;
+	Item* Vest;
+	Item* Safe;
+	Item* Reader;
+	Item* Scanner;
+	Item* Lock;
+	Item* Padlock;
+	Item* Deadbolt;
+	Item* Armory;
+	Item* Locker;
 
 	//my_entities[38]
-	my_entities.push_back(new Item("lock", "I think that i can force the lock with a lockpick would get it\n", ITEM, Aisle, false, true, false, false, 0, 0, 0));//item[13], 
-
+	my_entities.push_back(Bag = new Item("bag", "It is a military backpack brown and is quite large\n", MainRoom, false, false, false, false, 0, 0, 100));
+	MainRoom->list.push_back(Bag);
 	//my_entities[39]
-	my_entities.push_back(new Item("padlock", "It's a big padlock, I think that I need something more than a lockpick, I could use the gun\n", ITEM, MysteryRoom, false, true, false, false, 0, 0, 0));//item[14], Candado
-
+	my_entities.push_back(Lantern = new Item("lantern", "It is a lantern of those that are small but more light than the sun\n", MainRoom, false, false, false, false, 0, 0, 10));
+	MainRoom->list.push_back(Lantern);
 	//my_entities[40]
-	my_entities.push_back(new Item("deadbolt", "This lock is special, I only can open with a key\n", ITEM, Warehouse2, false, true, false, false, 0, 0, 0));//item[15], 
-
+	my_entities.push_back(Card = new Item("card", "It looks like a card to pass a security check, it may be useful\n", Warehouse, false, false, false, false, 0, 0, 50));
+	Warehouse->list.push_back(Card);
 	//my_entities[41]
-	my_entities.push_back(new Item("armory", "It's an armory, it seems that there is only one gun and ammo\n", ITEM, Gunsmith, false, true, false, false, 0, 0, 15));//item[16], 
-
+	my_entities.push_back(Lockpick = new Item("lockpick", "It can be useful to open doors, thank god know how to use it\n", OfficeRoom, false, false, false, false, 0, 0, 1));
+	OfficeRoom->list.push_back(Lockpick);
 	//my_entities[42]
-	my_entities.push_back(new Item("locker", "It's a locker, I can keep things inside\n", ITEM, DressingRoom, false, true, false, false, 0, 0, 15));//item[17], 
-
+	my_entities.push_back(Key = new Item("key", "It is a normal key, with a label that puts armory\n", DressingRoom, false, false, false, false, 0, 0, 10));//item[4], 
+	DressingRoom->list.push_back(Key);
+	//my_entities[43]
+	my_entities.push_back(Paper = new Item("paper", "It is a small role. It has written a command: 'SZKMS'\n", Laboratory, false, false, false, false, 0, 0, 100));//item[5], 12
+	Laboratory->list.push_back(Paper);
+	//my_entities[44]
+	my_entities.push_back(Gun = new Item("gun", "It is a M4A1-S, it is one of my favorite weapons\n", Gunsmith, false, false, false, false, 0, 5, 100));//item[6], 
+	Gunsmith->list.push_back(Gun);
+	//my_entities[45]
+	my_entities.push_back(Ammo = new Item("ammo", "It is a ammo pack, but only has 10 bullets\n", Gunsmith, false, false, false, false, 0, 45, 10));//item[7], 
+	Gunsmith->list.push_back(Ammo);
+	//my_entities[46]
+	my_entities.push_back(Camera = new Item("camera", "Oh my camera, finally I ever have\n", Warehouse, false, false, false, false, 0, 0, 100));//item[8], 5
+	Warehouse->list.push_back(Camera);
+	//my_entities[47]
+	my_entities.push_back(Vest = new Item("vest", "It's a bulletproof vest might be useful.\n", DressingRoom, false, false, false, false, 100, 0, 10));//item[9], 
+	DressingRoom->list.push_back(Vest);
+	//my_entities[48]
+	my_entities.push_back(Safe = new Item("safe", "It is safe, it seems that this open\n", Warehouse, false, true, false, false, 0, 0, 15));//item[10], 
+	Warehouse->list.push_back(Safe);
+	//my_entities[49]
+	my_entities.push_back(Reader = new Item("reader", "It seems that putting a password the door opened (no implemented yet)\n", Hall, false, true, false, false, 0, 0, 0));//item[11], 
+	Hall->list.push_back(Reader);
+	//my_entities[50]
+	my_entities.push_back(Scanner = new Item("scanner", "It is a card reader, if I put a card surely will open\n", Aisle3, false, true, false, false, 0, 0, 0));//item[12], to open door of laboratory
+	Aisle3->list.push_back(Scanner);
+	//my_entities[51]
+	my_entities.push_back(Lock = new Item("lock", "I think that i can force the lock with a lockpick would get it\n", Aisle, false, true, false, false, 0, 0, 0));//item[13], 
+	Aisle->list.push_back(Lock);
+	//my_entities[52]
+	my_entities.push_back(Padlock = new Item("padlock", "It's a big padlock, I think that I need something more than a lockpick, I could use the gun\n", MysteryRoom, false, true, false, false, 0, 0, 0));//item[14], Candado
+	MysteryRoom->list.push_back(Padlock);
+	//my_entities[53]
+	my_entities.push_back(Deadbolt = new Item("deadbolt", "This lock is special, I only can open with a key\n", Warehouse2, false, true, false, false, 0, 0, 0));//item[15], 
+	Warehouse2->list.push_back(Deadbolt);
+	//my_entities[54]
+	my_entities.push_back(Armory = new Item("armory", "It's an armory, it seems that there is only one gun and ammo\n", Gunsmith, false, true, false, false, 0, 0, 15));//item[16], 
+	Gunsmith->list.push_back(Armory);
+	//my_entities[55]
+	my_entities.push_back(Locker = new Item("locker", "It's a locker, I can keep things inside\n", DressingRoom, false, true, false, false, 0, 0, 15));//item[17], 
+	DressingRoom->list.push_back(Locker);
 }
 
 void World::Input()
@@ -257,8 +288,16 @@ void World::Set_Command()
 			printf("Please, put pick [item]\n\n");
 		}
 
+		else if (comand == "go n" || comand == "go w" || comand == "go s" || comand == "go e" || comand == "go u" || comand == "go d")
+		{
+			player->Move(comand_tok);
+		}
+		else if (comand == "look")
+		{
+			player->Look();
+		}
 		else if(comand_tok[0] == "pick" && option[4] == ' ' || comand_tok[0] == "p" && option[1] == ' '){
-			Pick_item(comand_tok);
+			player->Pick_item(comand_tok);
 		}
 
 		else if (comand == "drop" || comand == "d")
@@ -266,10 +305,15 @@ void World::Set_Command()
 			printf("Please, put drop [item]\n\n");
 		}
 		else if (comand_tok[0] == "drop" && option[4] == ' ' || comand_tok[0] == "d" && option[1] == ' '){
-			Drop_item(comand_tok);
+			player->Drop_item(comand_tok);
+		}
+		else if (comand == "look inventory" || comand == "look inv" || comand == "look i" || 
+			comand == "inventory" || comand == "inv" || comand == "i")
+		{
+			player->Look_inventory();
 		}
 
-		//Commands - Go
+		/*//Commands - Go
 		else if (comand == "go"){
 			printf("Where you want to go? [go north, go west, go south, go east]\n\n");
 		}
@@ -315,10 +359,7 @@ void World::Set_Command()
 		}
 
 		//Comand - look inventory
-		else if (comand == "look inventory" || comand == "look inv" || comand == "look i"
-			|| comand == "inventory" || comand == "inv" || comand == "i"){
-			Look_inventory();
-		}
+		
 
 		else if (comand_tok[0] == "look" && option[4] == ' ' && option[5] != '\0')
 		{
@@ -375,7 +416,7 @@ void World::Set_Command()
 			Get_from(comand_tok);
 		}
 		//Comand - stats
-
+		*/
 		else if (comand == "stats" || comand == "st")
 		{
 			Stats();
@@ -398,450 +439,7 @@ void World::Set_Command()
 	}
 }
 
-void World::Move()
-{
-	//NEW FUNCTION MOVE
-
-}
-	/*//Main Room
-	if (player->position == rooms[0])
-	{
-		exit[0]->discover = 1;
-		if (comand == "go n" || comand == "go north")
-		{
-			exit[1]->discover = 1;
-			player->position = rooms[1];
-			Look();
-			return;
-		}
-		else if (comand == "go w" || comand == "go west")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go s" || comand == "go south")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go e" || comand == "go east")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-	}
-	//Ailse 1
-	if (player->position == rooms[1])
-	{
-		if (comand == "go n" || comand == "go north")
-		{
-			if (door[0]->Num_doors == 1)
-			{
-				exit[2]->discover = 1;
-				player->position = rooms[2];
-				Look();
-				return;
-			}
-			else{
-				printf("You can't move, there is a front door and closed.\n\n");
-			}
-		}
-		else if (comand == "go w" || comand == "go west")
-		{
-			exit[3]->discover = 1;
-			player->position = rooms[3];
-			Look();
-			return;
-		}
-		if (comand == "go s" || comand == "go south")
-		{
-			player->position = rooms[0];
-			Look();
-			return;
-		}
-		else if (comand == "go e" || comand == "go east")
-		{
-			exit[8]->discover = 1;
-			player->position = rooms[8];
-			Look();
-			return;
-		}
-	}
-	//Dressing Room
-	if (player->position == rooms[2])
-	{
-		if (comand == "go n" || comand == "go north")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go w" || comand == "go west")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go s" || comand == "go south")
-		{
-			if (door[0]->Num_doors == 1)
-			{
-				player->position = rooms[1];
-				Look();
-				return;
-			}
-			else{
-				printf("You can't move, there is a front door and closed.\n\n");
-			}
-		}
-		else if (comand == "go e" || comand == "go east")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-	}
-
-	//Office Room
-	if (player->position == rooms[3])
-	{
-		if (comand == "go n" || comand == "go north")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go w" || comand == "go west")
-		{
-			exit[4]->discover = 1;
-			player->position = rooms[4];
-			Look();
-			return;
-		}
-		else if (comand == "go s" || comand == "go south")
-		{
-			exit[6]->discover = 1;
-			player->position = rooms[6];
-			Look();
-			return;
-		}
-		else if (comand == "go e" || comand == "go east")
-		{
-			player->position = rooms[1];
-			Look();
-			return;
-		}
-	}
-
-	//Alien Spawn
-	if (player->position == rooms[4])
-	{
-		if (comand == "go n" || comand == "go north")
-		{
-			if (door[1]->Num_doors == 1)
-			{
-				exit[5]->discover = 1;
-				player->position = rooms[5];
-				Look();
-				return;
-			}
-			else{
-				printf("You can't move, there is a front door and closed.\n\n");
-			}
-		}
-		else if (comand == "go w" || comand == "go west")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go s" || comand == "go south")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go e" || comand == "go east")
-		{
-			player->position = rooms[3];
-			Look();
-			return;
-		}
-	}
-
-	//Warehouse
-	if (player->position == rooms[5])
-	{
-		if (comand == "go n" || comand == "go north")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go w" || comand == "go west")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go s" || comand == "go south")
-		{
-			if (door[1]->Num_doors == 1){
-				player->position = rooms[4];
-				Look();
-				return;
-			}
-			else{
-				printf("You can't move, there is a front door and closed.\n\n");
-			}
-		}
-		else if (comand == "go e" || comand == "go east")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-	}
-
-	//Warehouse 2
-	if (player->position == rooms[6])
-	{
-		if (comand == "go n" || comand == "go north")
-		{
-			player->position = rooms[3];
-			Look();
-			return;
-		}
-		else if (comand == "go w" || comand == "go west")
-		{
-			if (door[2]->Num_doors == 1)
-			{
-				exit[7]->discover = 1;
-				player->position = rooms[7];
-				Look();
-				return;
-			}
-			else{
-				printf("You can't move, there is a front door and closed.\n\n");
-			}
-		}
-		else if (comand == "go s" || comand == "go south")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go e" || comand == "go east")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-	}
-
-	//Gunsmith
-	if (player->position == rooms[7])
-	{
-		if (comand == "go n" || comand == "go north")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go w" || comand == "go west")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go s" || comand == "go south")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go e" || comand == "go east")
-		{
-			if (door[2]->Num_doors == 1){
-				player->position = rooms[6];
-				Look();
-				return;
-			}
-			else{
-				printf("You can't move, there is a front door and closed.\n\n");
-			}
-		}
-	}
-
-	//Aisle 2
-	if (player->position == rooms[8])
-	{
-		if (comand == "go n" || comand == "go north")
-		{
-			printf("There are stairs that go up.\n\n");
-			return;
-		}
-		if (comand == "go u" || comand == "go up")
-		{		
-			exit[11]->discover = 1;
-			player->position = rooms[11];
-			Look();
-			return;
-		}
-
-		else if (comand == "go w" || comand == "go west")
-		{
-			player->position = rooms[1];
-			Look();
-			return;
-		}
-		else if (comand == "go s" || comand == "go south")
-		{
-			exit[9]->discover = 1;
-			player->position = rooms[9];
-			Look();
-			return;
-		}
-		else if (comand == "go e" || comand == "go east")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-	}
-
-	//Hall
-	if (player->position == rooms[9])
-	{
-		if (comand == "go n" || comand == "go north")
-		{
-			player->position = rooms[8];
-			Look();
-			return;
-		}
-		else if (comand == "go w" || comand == "go west")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go s" || comand == "go south")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go e" || comand == "go east")
-		{
-			if (door[3]->Num_doors == 1)
-			{
-				if (item[8]->istatus == true)
-				{
-					exit[10]->discover = 1;
-					player->position = rooms[10];
-					Look();
-					printf("Congratulations, you've got to leave the building.\n");
-					printf("You want to leave the game? if you like to put [yes]\nif you want you can re-enter!!\n\n");
-					return;
-				}
-				else{
-					printf("WAIT! Before leaving I need the camera!\n\n");
-					return;
-				}
-
-			}
-			else{
-				printf("You can't move, there is a front door and closed.\n\n");
-			}
-		}
-	}
-
-	//Exit
-	if (player->position == rooms[10])
-	{
-		if (comand == "go n" || comand == "go north")
-		{
-			printf("You're out of the building, you want to leave the game?\n\n");
-			return;
-		}
-		else if (comand == "go w" || comand == "go west")
-		{
-			if (door[3]->Num_doors == 1){
-				player->position = rooms[9];
-				Look();
-				return;
-			}
-			else{
-				printf("You can't move, there is a front door and closed.\n\n");
-			}
-		}
-		else if (comand == "go s" || comand == "go south")
-		{
-			printf("You're out of the building, you want to leave the game?\n\n");
-			return;
-		}
-		else if (comand == "go e" || comand == "go east")
-		{
-			printf("You're out of the building, you want to leave the game?\n\n");
-			return;
-		}
-	}
-
-	//Aisle 3
-	if (player->position == rooms[11])
-	{
-		if (comand == "go n" || comand == "go north")
-		{
-			printf("There are stairs that go down.\n\n");
-			return;
-		}
-		if (comand == "go d" || comand == "go down")
-		{
-			player->position = rooms[8];
-			Look();
-			return;
-		}
-		else if (comand == "go w" || comand == "go west")
-		{
-			if (door[4]->Num_doors == 1)
-			{
-				exit[12]->discover = 1;
-				player->position = rooms[12];
-				Look();
-				return;
-			}
-			else{
-				printf("You can't move, there is a front door and closed.\n");
-			}
-		}
-		else if (comand == "go s" || comand == "go south")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go e" || comand == "go east")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-	}
-
-	//Laboratory
-	if (player->position == rooms[12])
-	{
-		if (comand == "go n" || comand == "go north")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go w" || comand == "go west")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go s" || comand == "go south")
-		{
-			printf("There is a wall!.\n\n");
-			return;
-		}
-		else if (comand == "go e" || comand == "go east")
-		{
-			if (door[4]->Num_doors == 1){
-				player->position = rooms[11];
-				Look();
-				return;
-			}
-			else{
-				printf("You can't move, there is a front door and closed.\n\n");
-			}
-		}
-	}
-}*/
-
-void World::Open()
+/*void World::Open()
 {
 	if (comand == "open door")
 	{
@@ -985,8 +583,8 @@ void World::Open()
 			printf("Here there is no door\n\n");
 		}
 	}
-}
-
+}*/
+/*
 void World::Close()
 {
 	if (comand == "close door")
@@ -1100,9 +698,9 @@ void World::Close()
 			printf("Here there is no door\n\n");
 		}
 	}
-}
+}*/
 
-void World::Look()const{
+/*void World::Look()const{
 
 	int conti = 0, conto = 0;
 	for (int i = 0; i < 13; i++)
@@ -1152,27 +750,6 @@ void World::Look()const{
 				}
 			}
 		}
-	}
-	printf("\n");
-}
-
-void World::Look_inventory() const
-{
-	if (item[0]->istatus == true)
-	{
-		printf("You have these items:\n");
-		for (int i = 1; i < NUM_ITEMS; i++)
-		{
-			if (item[i]->istatus == true && item[i]->equiped == false && item[i]->object == false)
-			{
-				printf("- %s\n", item[i]->name.getstr());
-			}
-		}
-	}
-	else
-	{
-		printf("Sorry you don't have inventory!\n");
-		printf("First you need a bag to look inventory!!!\n");
 	}
 	printf("\n");
 }
@@ -1656,18 +1233,14 @@ void World::Look_Specify_Position() const
 	}
 }
 
-bool World::Exit_zork(){
-	if (quit == 1)
-		return false;
-	else
-		return true;
-}
+
 
 void World::Pick_item(Vector<ClString> &comand)
 {
 	for (int i = 0; i < NUM_ITEMS; i++)
 	{
-		if (player->position == item[i]->link && item[i]->istatus == false && item[i]->name == comand[1] && item[i]->object == false && item[i]->isinside == false)
+		if (player->position == item[i]->link && item[i]->istatus == false && item[i]->name == comand[1] && 
+		item[i]->object == false && item[i]->isinside == false)
 		{
 			item[i]->istatus = true;
 			if (item[0]->istatus == true)
@@ -1691,7 +1264,8 @@ void World::Drop_item(Vector<ClString> &comand)
 {
 	for (int i = 0; i < NUM_ITEMS; i++)
 	{
-		if (item[i]->istatus == true && item[i]->name == comand[1] && item[i]->object == false && item[i]->equiped == false)
+		if (item[i]->istatus == true && item[i]->name == comand[1] && item[i]->object == false && 
+		item[i]->equiped == false)
 		{
 			item[i]->istatus = false;
 			item[i]->link = player->position;
@@ -1786,13 +1360,7 @@ void World::UnEquip(Vector<ClString> &comand)
 	return;
 }
 
-void World::Stats()const
-{
-	printf("----------\n");
-	printf("HP:     %i\n", player->hp);
-	printf("ATTACK: %i\n", player->attack);
-	printf("----------\n");
-}
+
 
 void World::Put_into(Vector<ClString> &comand_tok)
 {
@@ -1973,4 +1541,18 @@ void World::Get_from(Vector<ClString> &comand_tok)
 		}
 	}
 }
+*/
+void World::Stats()const
+{
+	printf("----------\n");
+	printf("HP:     %i\n", player->hp);
+	printf("ATTACK: %i\n", player->attack);
+	printf("----------\n");
+}
 
+bool World::Exit_zork(){
+	if (quit == 1)
+		return false;
+	else
+		return true;
+}
