@@ -124,24 +124,29 @@ public:
 
 	void erase(Node* data)
 	{
-		Node* temp = data;
-		if (temp != nullptr)
+		if (size() > 1)
 		{
-			if (temp->prev == nullptr)
+			if (data->prev == nullptr)
 			{
-				temp = temp->next;
-				temp->prev = nullptr;
-				first = temp;
+				first = data->next;
+				first->prev = nullptr;
 			}
-			else if (temp->next == nullptr)
+
+			else if (data->next == nullptr)
 			{
-				temp->prev->next = nullptr;
+				data->prev->next = nullptr;
 			}
+
 			else
 			{
-				temp->prev->next = temp->next;
-				temp->next->prev = temp->prev;
+				data->prev->next = data->next;
+				data->next->prev = data->prev;
 			}
+			delete data;
+		}
+		else
+		{
+			first = nullptr;
 			delete data;
 		}
 	}

@@ -21,7 +21,6 @@ int main()
 	printf("\nTo do this you'll have to get items to open doors, and overcome obstacles.\n\n");
 
 	//world.Look();
-	App->my_entities[30];
 	while (App->Exit_zork())
 	{
 		App->Set_Command();

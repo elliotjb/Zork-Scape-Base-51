@@ -191,58 +191,58 @@ void World::Create_World(){
 	Item* Armory;
 	Item* Locker;
 
-	//my_entities[38]
+	//my_entities[38] - Item[0]
 	my_entities.push_back(Bag = new Item("bag", "It is a military backpack brown and is quite large\n", MainRoom, false, false, false, false, 0, 0, 100));
 	MainRoom->list.push_back(Bag);
-	//my_entities[39]
+	//my_entities[39] - Item[1]
 	my_entities.push_back(Lantern = new Item("lantern", "It is a lantern of those that are small but more light than the sun\n", MainRoom, false, false, false, false, 0, 0, 10));
 	MainRoom->list.push_back(Lantern);
-	//my_entities[40]
+	//my_entities[40] - Item[2]
 	my_entities.push_back(Card = new Item("card", "It looks like a card to pass a security check, it may be useful\n", Warehouse, false, false, false, false, 0, 0, 50));
 	Warehouse->list.push_back(Card);
-	//my_entities[41]
+	//my_entities[41] - Item[3]
 	my_entities.push_back(Lockpick = new Item("lockpick", "It can be useful to open doors, thank god know how to use it\n", OfficeRoom, false, false, false, false, 0, 0, 1));
 	OfficeRoom->list.push_back(Lockpick);
-	//my_entities[42]
+	//my_entities[42] - Item[4]
 	my_entities.push_back(Key = new Item("key", "It is a normal key, with a label that puts armory\n", DressingRoom, false, false, false, false, 0, 0, 10));//item[4], 
 	DressingRoom->list.push_back(Key);
-	//my_entities[43]
+	//my_entities[43] - Item[5]
 	my_entities.push_back(Paper = new Item("paper", "It is a small role. It has written a command: 'SZKMS'\n", Laboratory, false, false, false, false, 0, 0, 100));//item[5], 12
 	Laboratory->list.push_back(Paper);
-	//my_entities[44]
+	//my_entities[44] - Item[6]
 	my_entities.push_back(Gun = new Item("gun", "It is a M4A1-S, it is one of my favorite weapons\n", Gunsmith, false, false, false, false, 0, 5, 100));//item[6], 
 	Gunsmith->list.push_back(Gun);
-	//my_entities[45]
+	//my_entities[45] - Item[7]
 	my_entities.push_back(Ammo = new Item("ammo", "It is a ammo pack, but only has 10 bullets\n", Gunsmith, false, false, false, false, 0, 45, 10));//item[7], 
 	Gunsmith->list.push_back(Ammo);
-	//my_entities[46]
+	//my_entities[46] - Item[8]
 	my_entities.push_back(Camera = new Item("camera", "Oh my camera, finally I ever have\n", Warehouse, false, false, false, false, 0, 0, 100));//item[8], 5
 	Warehouse->list.push_back(Camera);
-	//my_entities[47]
+	//my_entities[47] - Item[9]
 	my_entities.push_back(Vest = new Item("vest", "It's a bulletproof vest might be useful.\n", DressingRoom, false, false, false, false, 100, 0, 10));//item[9], 
 	DressingRoom->list.push_back(Vest);
-	//my_entities[48]
+	//my_entities[48] - Item[10]
 	my_entities.push_back(Safe = new Item("safe", "It is safe, it seems that this open\n", Warehouse, false, true, false, false, 0, 0, 15));//item[10], 
 	Warehouse->list.push_back(Safe);
-	//my_entities[49]
+	//my_entities[49] - Item[11]
 	my_entities.push_back(Reader = new Item("reader", "It seems that putting a password the door opened (no implemented yet)\n", Hall, false, true, false, false, 0, 0, 0));//item[11], 
 	Hall->list.push_back(Reader);
-	//my_entities[50]
+	//my_entities[50] - Item[12]
 	my_entities.push_back(Scanner = new Item("scanner", "It is a card reader, if I put a card surely will open\n", Aisle3, false, true, false, false, 0, 0, 0));//item[12], to open door of laboratory
 	Aisle3->list.push_back(Scanner);
-	//my_entities[51]
+	//my_entities[51] - Item[13]
 	my_entities.push_back(Lock = new Item("lock", "I think that i can force the lock with a lockpick would get it\n", Aisle, false, true, false, false, 0, 0, 0));//item[13], 
 	Aisle->list.push_back(Lock);
-	//my_entities[52]
+	//my_entities[52] - Item[14]
 	my_entities.push_back(Padlock = new Item("padlock", "It's a big padlock, I think that I need something more than a lockpick, I could use the gun\n", MysteryRoom, false, true, false, false, 0, 0, 0));//item[14], Candado
 	MysteryRoom->list.push_back(Padlock);
-	//my_entities[53]
+	//my_entities[53] - Item[15]
 	my_entities.push_back(Deadbolt = new Item("deadbolt", "This lock is special, I only can open with a key\n", Warehouse2, false, true, false, false, 0, 0, 0));//item[15], 
 	Warehouse2->list.push_back(Deadbolt);
-	//my_entities[54]
+	//my_entities[54] - Item[16]
 	my_entities.push_back(Armory = new Item("armory", "It's an armory, it seems that there is only one gun and ammo\n", Gunsmith, false, true, false, false, 0, 0, 15));//item[16], 
 	Gunsmith->list.push_back(Armory);
-	//my_entities[55]
+	//my_entities[55] - Item[17]
 	my_entities.push_back(Locker = new Item("locker", "It's a locker, I can keep things inside\n", DressingRoom, false, true, false, false, 0, 0, 15));//item[17], 
 	DressingRoom->list.push_back(Locker);
 }
@@ -439,355 +439,8 @@ void World::Set_Command()
 	}
 }
 
-/*void World::Open()
-{
-	if (comand == "open door")
-	{
-		if (player->position == rooms[1])
-		{
-			if (item[3]->link == item[13]->link)
-			{
-				if (door[0]->Num_doors == 1){
-					printf("The door was already open.\n\n");
-				}
-				else{
-					door[0]->Num_doors = 1;
-					printf("DOOR OPEN\n\n");
-				}
-			}
-			else
-			{
-				printf("First you need to unlock! Uses a key or something.\n\n");
-			}
-		}
-		else if (player->position == rooms[4])
-		{
-			if (item[6]->link == item[14]->link)
-			{
-				if (door[1]->Num_doors == 1){
-					printf("The door was already open.\n\n");
-				}
-				else{
-					door[1]->Num_doors = 1;
-					printf("DOOR OPEN\n\n");
-				}
-			}
-			else
-			{
-				printf("First you need to unlock! Uses a key or something.\n\n");
-			}
-		}
-		else if (player->position == rooms[6])
-		{
-			if (item[4]->link == item[15]->link)
-			{
-				if (door[2]->Num_doors == 1){
-					printf("The door was already open.\n\n");
-				}
-				else{
-					door[2]->Num_doors = 1;
-					printf("DOOR OPEN\n\n");
-				}
-			}
-			else
-			{
-				printf("First you need to unlock! Uses a key or something.\n\n");
-			}
-		}
-		else if (player->position == rooms[11])
-		{
-			if (item[2]->link == item[12]->link)
-			{
-				if (door[4]->Num_doors == 1){
-					printf("The door was already open.\n\n");
-				}
-				else{
-					door[4]->Num_doors = 1;
-					printf("DOOR OPEN\n\n");
-				}
-			}
-			else
-			{
-				printf("First you need to unlock! Uses a key or something.\n\n");
-			}
-		}
-		else if (player->position == rooms[10])
-		{
-			if (item[6]->link == item[13]->link)
-			{
-				if (door[3]->Num_doors == 1){
-					printf("The door was already open.\n\n");
-				}
-				else{
-					door[3]->Num_doors = 1;
-					printf("DOOR OPEN\n\n");
-				}
-			}
-			else
-			{
-				printf("First you need to unlock! Uses a key or something.\n\n");
-			}
-		}
-		else if (player->position == rooms[2])
-		{
-			if (door[0]->Num_doors == 1){
-				printf("The door was already open.\n\n");
-			}
-			else{
-				door[0]->Num_doors = 1;
-				printf("DOOR OPEN\n\n");
-			}
-		}
-		else if (player->position == rooms[5])
-		{
-			if (door[1]->Num_doors == 1){
-				printf("The door was already open.\n");
-			}
-			else{
-				door[1]->Num_doors = 1;
-				printf("DOOR OPEN\n\n");
-			}
-		}
-		else if (player->position == rooms[7])
-		{
-			if (door[2]->Num_doors == 1){
-				printf("The door was already open.\n");
-			}
-			else{
-				door[2]->Num_doors = 1;
-				printf("DOOR OPEN\n\n");
-			}
-		}
-		else if (player->position == rooms[9])
-		{
-			if (door[3]->Num_doors == 1){
-				printf("The door was already open.\n");
-			}
-			else{
-				door[3]->Num_doors = 1;
-				printf("DOOR OPEN\n\n");
-			}
-		}
-		else if (player->position == rooms[12])
-		{
-			if (door[4]->Num_doors == 1){
-				printf("The door was already open.\n");
-			}
-			else{
-				door[4]->Num_doors = 1;
-				printf("DOOR OPEN\n\n");
-			}
-		}
-		else if (player->position == rooms[0] || player->position == rooms[8] || player->position == rooms[3])
-		{
-			printf("Here there is no door\n\n");
-		}
-	}
-}*/
-/*
-void World::Close()
-{
-	if (comand == "close door")
-	{
-		if (player->position == rooms[1])
-		{
-			if (door[0]->Num_doors == 0){
-				printf("The door was already closed.\n");
-			}
-			else{
-				door[0]->Num_doors = 0;
-				printf("The door is already close.\n");
-			}
 
-		}
-		else if (player->position == rooms[4])
-		{
-			if (door[1]->Num_doors == 0){
-				printf("The door was already closed.\n");
-			}
-			else{
-				door[1]->Num_doors = 0;
-				printf("The door is already close.\n");
-			}
-		}
-		else if (player->position == rooms[10])
-		{
-			if (door[3]->Num_doors == 0){
-				printf("The door was already closed.\n");
-			}
-			else{
-				door[3]->Num_doors = 0;
-				printf("The door is already close.\n");
-			}
-
-		}
-		else if (player->position == rooms[6])
-		{
-			if (door[2]->Num_doors == 0){
-				printf("The door was already closed.\n");
-			}
-			else{
-				door[2]->Num_doors = 0;
-				printf("The door is already close.\n");
-			}
-		}
-		else if (player->position == rooms[11])
-		{
-			if (door[4]->Num_doors == 0){
-				printf("The door was already closed.\n");
-			}
-			else{
-				door[4]->Num_doors = 0;
-				printf("The door is already close.\n");
-			}
-		}
-		else if (player->position == rooms[2])
-		{
-			if (door[0]->Num_doors == 0){
-				printf("The door was already closed.\n");
-			}
-			else{
-				door[0]->Num_doors = 0;
-				printf("The door is already close.\n");
-			}
-
-		}
-		else if (player->position == rooms[5])
-		{
-			if (door[1]->Num_doors == 0){
-				printf("The door was already closed.\n");
-			}
-			else{
-				door[1]->Num_doors = 0;
-				printf("The door is already close.\n");
-			}
-		}
-		if (player->position == rooms[7])
-		{
-			if (door[2]->Num_doors == 0){
-				printf("The door was already closed.\n");
-			}
-			else{
-				door[2]->Num_doors = 0;
-				printf("The door is already close.\n");
-			}
-
-		}
-		else if (player->position == rooms[12])
-		{
-			if (door[4]->Num_doors == 0){
-				printf("The door was already closed.\n");
-			}
-			else{
-				door[4]->Num_doors = 0;
-				printf("The door is already close.\n");
-			}
-		}
-		else if (player->position == rooms[9])
-		{
-			if (door[3]->Num_doors == 0){
-				printf("The door was already closed.\n");
-			}
-			else{
-				door[3]->Num_doors = 0;
-				printf("The door is already close.\n");
-			}
-		}
-		else if (player->position == rooms[0] || player->position == rooms[8] || player->position == rooms[3])
-		{
-			printf("Here there is no door\n\n");
-		}
-	}
-}*/
-
-/*void World::Look()const{
-
-	int conti = 0, conto = 0;
-	for (int i = 0; i < 13; i++)
-	{
-		if (player->position == rooms[i])
-		{
-			printf("%s\n", rooms[i]->name.getstr());
-			printf("%s\n", rooms[i]->description.getstr());
-
-
-			for (int j = 0; j < NUM_ITEMS; j++)
-			{
-				if (item[j]->link == rooms[i] && item[j]->istatus == false && item[j]->object == false && item[j]->isinside == false)
-				{
-					conti++;
-				}
-			}
-			if (conti > 0)
-			{
-				printf("\nItems in this room:\n");
-			}
-
-			for (int j = 0; j < NUM_ITEMS; j++)
-			{
-				if (item[j]->link == rooms[i] && item[j]->istatus == false && item[j]->object == false && item[j]->isinside == false)
-				{
-					printf("- %s\n", item[j]->name.getstr());
-				}
-			}
-
-			for (int z = 0; z < NUM_ITEMS; z++)
-			{
-				if (item[z]->link == rooms[i] && item[z]->object == true)
-				{
-					conto++;
-				}
-			}
-			if (conto > 0)
-			{
-				printf("\nObjects in this room:\n");
-			}
-			for (int j = 0; j < NUM_ITEMS; j++)
-			{
-				if (item[j]->link == rooms[i] && item[j]->object == true)
-				{
-					printf("- %s\n", item[j]->name.getstr());
-				}
-			}
-		}
-	}
-	printf("\n");
-}
-
-void World::Look_item(Vector<ClString> &comand)const
-{
-	int cont = 0;
-	for (int i = 0; i < NUM_ITEMS; i++)
-	{
-		if (item[i]->name == comand[1])
-		{
-			if (item[i]->istatus == true && item[i]->isinside == false || item[i]->istatus == false && item[i]->isinside == false
-				|| item[i]->equiped == true)
-			{
-				printf("- %s\n", item[i]->name.getstr());
-				printf("%s\n", item[i]->description.getstr());
-			}
-			if (item[i]->object == true )
-			{
-				printf("Inside there: \n");
-				for (int i = 0; i < NUM_ITEMS; i++)
-				{
-					if (item[i]->link == player->position && item[i]->isinside == true)
-					{
-						printf("%s\n", item[i]->name.getstr());
-					}
-				}
-				printf("\n");
-				return;
-			}
-		}
-		else if (item[i]->name == comand[1] && item[i]->link != player->position)
-		{
-		}
-	}
-}
-
-void World::Look_Specify_Position() const
+/*void World::Look_Specify_Position() const
 {
 	//Main Room
 	if (player->position == (Room*)my_entities[0])
