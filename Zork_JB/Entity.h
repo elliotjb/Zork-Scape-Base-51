@@ -5,7 +5,7 @@
 #include "String_Class.h"
 
 
-enum TYPE{ ROOM, EXIT, PLAYER, ITEM, NPC };
+enum TYPE{ ROOM, EXIT, PLAYER, ITEM, OBJECT, NPC };
 
 
 class Entity

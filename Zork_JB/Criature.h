@@ -27,19 +27,13 @@ public:
 	virtual void Close() = 0;
 	virtual void Pick_item(Vector<ClString> &) = 0;
 	virtual void Drop_item(Vector<ClString> &) = 0;
-	/*
-	virtual void Look() const = 0;
-	
-	virtual void Look_Specify_Position() const = 0;
-	virtual void Move() = 0;
-	virtual void Open() = 0;
-	virtual void Close() = 0;
-	
 	virtual void Equip(Vector<ClString> &) = 0;
 	virtual void UnEquip(Vector<ClString> &) = 0;
 	virtual void Stats()const = 0;
 	virtual void Put_into(Vector<ClString> &) = 0;
-	virtual void Get_from(Vector<ClString> &) = 0;*/
+	virtual void Get_from(Vector<ClString> &) = 0;
+	//virtual void Look_Specify_Position() const = 0;
+
 
 
 };

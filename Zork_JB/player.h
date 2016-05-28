@@ -26,16 +26,12 @@ public:
 	void Close();
 	void Pick_item(Vector<ClString> &);
 	void Drop_item(Vector<ClString> &);
-	/*void Look_Specify_Position() const;
-	void Move();
-	void Open();
-	void Close();
-
 	void Equip(Vector<ClString> &);
 	void UnEquip(Vector<ClString> &);
-	void Stats()const;
 	void Put_into(Vector<ClString> &);
-	void Get_from(Vector<ClString> &);*/
+	void Get_from(Vector<ClString> &);
+	void Stats()const;
+	//void Look_Specify_Position() const;
 };
 
 #endif
