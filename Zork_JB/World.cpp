@@ -100,7 +100,7 @@ void World::Create_World(){
 	my_entities.push_back(new Exits("Exit to AILSE 1.\n", "The next room is the AILSE 1.\n", OfficeRoom, Aisle, 3));
 	
 	//my_entities[22] - EXITS FROM MYSTERY ROOM
-	my_entities.push_back(new Exits("Exit to DRESSING ROOM.\n", "The next room is the DRESSING ROOM.\n", MysteryRoom, DressingRoom, 3));
+	my_entities.push_back(new Exits("Exit to DRESSING ROOM.\n", "The next room is the DRESSING ROOM.\n", MysteryRoom, OfficeRoom, 3));
 	//my_entities[23] - EXITS FROM MYSTERY ROOM
 	my_entities.push_back(new Exits("Exit to WAREHOUSE.\n", "The next room is the WAREHOUSE.\n", MysteryRoom, Warehouse, 0));
 	
@@ -167,7 +167,7 @@ void World::Create_World(){
 
 	//PLAYER
 	//my_entities[37]
-	my_entities.push_back(new Player("Elliot", "I'm a strong", 1, 0, 0));
+	my_entities.push_back(new Player("Elliot", "I'm a strong", 5, 10, 0));
 	player = (Player*)my_entities[37];
 	player->position = MainRoom;
 
@@ -202,7 +202,8 @@ void World::Create_World(){
 	Warehouse->list.push_back(Card);
 	//my_entities[41] - Item[3]
 	my_entities.push_back(Lockpick = new Item("lockpick", "It can be useful to open doors, thank god know how to use it\n", OfficeRoom, false, false, false, false, 0, 0, 1));
-	OfficeRoom->list.push_back(Lockpick);
+	//OfficeRoom->list.push_back(Lockpick);
+	MainRoom->list.push_back(Lockpick);
 	//my_entities[42] - Item[4]
 	my_entities.push_back(Key = new Item("key", "It is a normal key, with a label that puts armory\n", DressingRoom, false, false, false, false, 0, 0, 10));//item[4], 
 	DressingRoom->list.push_back(Key);
@@ -255,12 +256,16 @@ void World::Create_World(){
 	Locker->type = OBJECT;
 
 	//ALIEN
-	//my_entities[66] - ALIEN
-	my_entities.push_back(new Alien("Predator", "He is large and has a gun in his hand.", 300, 5, 250));
-	alien = (Alien*)my_entities[37];
+	//my_entities[56] - ALIEN
+	my_entities.push_back(new Alien("alien", "He is large and has a gun in his hand.", 200, 5, 250));
+	alien = (Alien*)my_entities[56];
 	alien->position = MysteryRoom;
-}
 
+	Room* God;
+	//my_entities[57] _ Room god
+	my_entities.push_back(God = new Room("GOD ROOM", "Only ADMIN ACCESS", false));
+
+}
 void World::Input()
 {
 	do
@@ -270,7 +275,6 @@ void World::Input()
 	} while (option == NULL);
 
 }
-
 void World::Set_Command()
 {
 	Input();
@@ -280,8 +284,8 @@ void World::Set_Command()
 	{
 		Vector<ClString> comand_tok = comand.tokenize(option);
 		acon_moviment++;
-		//Command - Help
-		if (comand_tok[0] == "help"){
+		if (comand_tok[0] == "help" && comand_tok.size() == 1)
+		{
 			printf("Useful commands:\n\n");
 			printf("-[go north] or [go n]\n-[go west] or [go w]\n-[go south] or [go s]\n-[go east] or [go e]\n");
 			printf("-[go up] or [go u]\n-[go down] or [go d]\n");
@@ -296,161 +300,142 @@ void World::Set_Command()
 			printf("-[stats] or [st]\n");
 			printf("-[quit]\n-[help]\n\n");
 		}
-
-		else if (comand == "pick" || comand == "p")
-		{
-			printf("Please, put pick [item]\n\n");
-		}
-
-		else if (comand == "go n" || comand == "go w" || comand == "go s" || comand == "go e" || comand == "go u" || comand == "go d")
-		{
-			player->Move(comand_tok);
-		}
-		else if (comand == "look")
+		else if (comand_tok[0] == "look" && comand_tok.size() == 1)
 		{
 			player->Look();
 		}
-		else if(comand_tok[0] == "pick" && option[4] == ' ' || comand_tok[0] == "p" && option[1] == ' '){
-			player->Pick_item(comand_tok);
-		}
-
-		else if (comand == "drop" || comand == "d")
+		else if (comand_tok[0] == "attack" && comand_tok.size() == 2)
 		{
-			printf("Please, put drop [item]\n\n");
+			player->Attack(comand_tok);
 		}
-		else if (comand_tok[0] == "drop" && option[4] == ' ' || comand_tok[0] == "d" && option[1] == ' '){
-			player->Drop_item(comand_tok);
-		}
-		else if (comand == "look inventory" || comand == "look inv" || comand == "look i" || 
-			comand == "inventory" || comand == "inv" || comand == "i")
+		else if (comand_tok[0] == "stats" || comand_tok[0] == "st")
 		{
-			player->Look_inventory();
+			player->Stats();
 		}
-		else if (comand_tok[0] == "look" &&  option[4] == ' ')
+		//Comand - Exit
+		else if (comand_tok[0] == "quit" || comand_tok[0] == "q" || comand_tok[0] == "yes" && ((Room*)my_entities[10])->discover == true ||
+			comand_tok[0] == "y" && ((Room*)my_entities[10])->discover == true){
+			quit = 1;
+			Exit_zork();
+		}
+		else if (App->combat == false)
 		{
-			player->Look_item(comand_tok);
-		}
+			if (comand_tok[0] == "go" && comand_tok.size() == 1 || comand_tok[0] == "g" && comand_tok.size() == 1)
+			{
+				printf("Where you want to go? [go north, go west, go south, go east]\n\n");
+			}
+			else if (comand_tok[0] == "g" && comand_tok.size() == 2 || comand_tok[0] == "go" && comand_tok.size() == 2)
+			{
+				if (comand_tok[1] == "north" || comand_tok[1] == "west" || comand_tok[1] == "south" || comand_tok[1] == "east")
+				{
+					player->Move(comand_tok);
+				}
+				else if (comand_tok[1] == "n" || comand_tok[1] == "w" || comand_tok[1] == "s" || comand_tok[1] == "e")
+				{
+					player->Move(comand_tok);
+				}
+				else
+				{
+					printf("Invalid direction!\n\n");
+				}
+			}
+			//Comands - Open and Close
+			else if (comand_tok[0] == "open" && comand_tok.size() == 1){
+				printf("The command to open is [open door (direction) -> example: open door north]\n\n");
+			}
+			else if (comand_tok[0] == "close" && comand_tok.size() == 1){
+				printf("The command to close is [close door (direction) -> example: close door north]\n\n");
+			}
+			else if (comand_tok[0] == "open" && comand_tok[1] == "door")
+			{
+				player->Open();
+			}
+			else if (comand_tok[0] == "close" && comand_tok[1] == "door")
+			{
+				player->Open();
+			}
+			else if (comand_tok[0] == "pick" && comand_tok.size() == 1 || comand_tok[0] == "p" && comand_tok.size() == 1)
+			{
+				printf("Please, put pick [item]\n\n");
+			}
+			else if (comand_tok[0] == "pick" && comand_tok.size() == 2 || comand_tok[0] == "p" && comand_tok.size() == 2)
+			{
+				player->Pick_item(comand_tok);
+			}
 
-		else if (comand_tok[0] == "put" && comand_tok.size() == 4 && comand_tok[2] == "into")
-		{
-			player->Put_into(comand_tok);
-		}
+			else if (comand_tok[0] == "drop" && comand_tok.size() == 1 || comand_tok[0] == "d" && comand_tok.size() == 1)
+			{
+				printf("Please, put drop [item]\n\n");
+			}
+			else if (comand_tok[0] == "drop" && comand_tok.size() == 2 || comand_tok[0] == "d" && comand_tok.size() == 2)
+			{
+				player->Drop_item(comand_tok);
+			}
+			else if (comand_tok[0] == "look" && comand_tok[1] == "inventory" ||
+				comand_tok[0] == "look" && comand_tok[1] == "inv" || comand_tok[0] == "look" &&
+				comand_tok[1] == "i" || comand_tok[0] == "inventory" || comand_tok[0] == "inv" || comand_tok[0] == "i")
+			{
+				player->Look_inventory();
+			}
+			else if (comand_tok[0] == "look" &&  comand_tok.size() == 2)
+			{
+				player->Look_item(comand_tok);
+			}
 
-		/*//Commands - Go
-		else if (comand == "go"){
-			printf("Where you want to go? [go north, go west, go south, go east]\n\n");
-		}
+			else if (comand_tok[0] == "put" && comand_tok.size() == 2)
+			{
+				printf("Please, write <put [item] into [object]>\n\n");
+			}
 
-		else if (comand == "go n" || comand == "go w" || comand == "go s" || comand == "go e" || comand == "go u" || comand == "go d"){
-			Move();
-		}
-		else if (comand == "go north" || comand == "go westw" || comand == "go south" || comand == "go east" || comand == "go up" || comand == "go down"){
-			Move();
-		}
+			else if (comand_tok[0] == "put" && comand_tok.size() == 4 && comand_tok[2] == "into")
+			{
+				player->Put_into(comand_tok);
+			}
+			else if (comand_tok[0] == "get" && comand_tok.size() == 2)
+			{
+				printf("Please, write <get [item] from [object]>\n\n");
+			}
+			else if (comand_tok[0] == "get" && comand_tok.size() == 4 && comand_tok[2] == "from")
+			{
+				player->Get_from(comand_tok);
+			}
+			else if (comand_tok[0] == "equip" &&  comand_tok.size() == 2 || comand_tok[0] == "e" && comand_tok.size() == 2)
+			{
+				player->Equip(comand_tok);
+			}
+			else if (comand_tok[0] == "unequip" &&  comand_tok.size() == 2 || comand_tok[0] == "ue" && comand_tok.size() == 2)
+			{
+				player->UnEquip(comand_tok);
+			}
+			else
+			{
+				printf("I beg your pardon?\n\n");
+			}
 
-		//Comands - Open and Close
-		else if (comand == "open"){
-			printf("The command to open is [open door (direction) -> example: open door north]\n\n");
 		}
-		else if (comand == "close"){
-			printf("The command to close is [close door (direction) -> example: close door north]\n\n");
-		}
+		
 
-		//Open
-		else if (comand == "open door" || comand == "open door n" || comand == "open door w" || comand == "open door s" || comand == "open door e"){
-			Open();
-		}
-		else if (comand == "open door north" || comand == "open door west" || comand == "open door south" || comand == "open door east"){
-			Open();
-		}
 
-		//Close
-		else if (comand == "close door" || comand == "close door n" || comand == "close door w" || comand == "close door s" || comand == "close door e"){
-			Close();
-		}
-		else if (comand == "close door north" || comand == "close door west" || comand == "close door south" || comand == "close door east"){
-			Close();
-		}
-
-		//Command - Look
+		/*Command - Look
 		else if (comand == "look"){
 			Look();
 			if (cont < 2){
 				printf("If you want to specify where to look like this-> [ look north/n, look west/w, look south/s, look east/e ]\n\n");
 				cont++;
 			}
-		}
+		}*/
 
-		//Comand - look inventory
-		
-
-		else if (comand_tok[0] == "look" && option[4] == ' ' && option[5] != '\0')
-		{
-			Look_item(comand_tok);
-		}
-
-		//Commands - Look Specify position
+		/*Commands - Look Specify position
 		else if (comand == "look n" || comand == "look w" || comand == "look s" || comand == "look e"){
 			Look_Specify_Position();
 		}
 		else if (comand == "look north" || comand == "look west" || comand == "look south" || comand == "look east"){
 			Look_Specify_Position();
-		}
+		}*/
 
-		//comands - equip
-		else if (comand == "equip" || comand == "e")
-		{
-			printf("Please, write <equip [item]>\n\n");
-		}
 
-		else if (comand_tok[0] == "equip" && option[5] == ' ' || comand_tok[0] == "e" && option[1] == ' '){
-			Equip(comand_tok);
-		}
 
-		//comands - uneequip
-		else if (comand == "unequip" || comand == "ue")
-		{
-			printf("Please, write <drop [item]>\n\n");
-		}
 
-		else if (comand_tok[0] == "unequip" && option[7] == ' ' || comand_tok[0] == "ue" && option[2] == ' '){
-			UnEquip(comand_tok);
-		}
-
-		//Comand - put
-		else if (comand_tok[0] == "put" && option[4] != 'i')//TODO: Arreglar!
-		{
-			printf("Please, write <put [item] into [item]>\n\n");
-		}
-
-		else if (comand_tok[0] == "put" && comand_tok[2] == "into")//TODO: Arreglar!
-		{
-			Put_into(comand_tok);
-		}
-
-		//Comand - get
-		else if (comand == "g" || comand == "get")//TODO: Arreglar!
-		{
-			printf("Please, write get [item] from [item]\n\n");
-		}
-
-		else if (comand_tok[0] == "get" && comand_tok[2] == "from")//TODO: Arreglar!
-		{
-			Get_from(comand_tok);
-		}
-		//Comand - stats
-		*/
-		else if (comand == "stats" || comand == "st")
-		{
-			player->Stats();
-		}
-
-		//Comand - Exit
-		else if (comand == "quit" || comand == "q" || comand == "yes" && ((Room*)my_entities[10])->discover == true ||
-			comand == "y" && ((Room*)my_entities[10])->discover == true){
-			quit = 1;
-			Exit_zork();
-		}
 		else
 		{
 			printf("I beg your pardon?\n\n");
