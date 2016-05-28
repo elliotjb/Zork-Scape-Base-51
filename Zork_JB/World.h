@@ -50,6 +50,10 @@ public:
 
 	int quit = 0, cont = 0;
 	bool combat = false;
+	bool respawn = false;
+	bool canmove = false;
+	bool alien_dead = false;
+	bool stop = false;
 	void Create_World();
 
 	//fucntions to put comands

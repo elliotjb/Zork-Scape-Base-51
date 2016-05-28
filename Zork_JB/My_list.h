@@ -57,7 +57,7 @@ public:
 
 	void push_back(const TYPE &data)
 	{
-		Node* last = end();
+		Node* last = first;
 		Node* temp = new Node(data);
 		if (last == nullptr)
 		{
@@ -65,8 +65,12 @@ public:
 		}
 		else
 		{
-			temp->prev = last;
+			while (last->next != nullptr)
+			{
+				last = last->next;
+			}
 			last->next = temp;
+			temp->prev = last;
 		}
 	}
 

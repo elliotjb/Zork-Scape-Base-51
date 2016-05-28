@@ -10,6 +10,7 @@
 #include <conio.h>
 #include <string.h>
 #include <time.h>
+#include <Windows.h>
 
 World* App = nullptr;
 
@@ -24,18 +25,47 @@ int main()
 
 	App->player->Look();
 
-
-	while (App->Exit_zork())
+	int now = GetTickCount();
+	while (App->stop == false)
 	{
-		if (App->combat == false)
+		while (App->Exit_zork())
 		{
-			App->alien->Update();
-		}
-		while (_kbhit())
-		{
-			App->Set_Command();
+			int actualtime = GetTickCount();
+			if (App->player->position == App->alien->position)
+			{
+				App->canmove = false;
+				App->combat = true;
+			}
+			if (App->alien_dead == false)
+			{
+				if (actualtime >= now + 1000 && ((Room*)App->my_entities[4])->discover == false)
+				{
+					now = actualtime;
+					App->alien->Update();
+				}
+			}
+			if (App->player->hp <= 0)
+			{
+
+				break;
+			}
+			if (App->alien_dead == true)
+			{
+				if (actualtime >= now + 20000)
+				{
+					now = actualtime;
+					App->alien_dead = false;
+				}
+			}
+
+
+			if (_kbhit() != 0)
+			{
+				App->Set_Command();
+			}
 		}
 	}
+
 
 	printf("\nThanks for Playing!!!\n\n");
 	system("pause");

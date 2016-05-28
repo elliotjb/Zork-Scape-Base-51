@@ -15,10 +15,11 @@ public:
 
 	Item* haveitem;
 	Room* position;
-
+	
 	int hp;
 	int attack;
 	int coins;
+
 	virtual void Move(const Vector<ClString> &){};
 	virtual void Look() const{};
 	virtual void Look_inventory() const{};
@@ -32,6 +33,7 @@ public:
 	virtual void Stats()const{};
 	virtual void Put_into(Vector<ClString> &){};
 	virtual void Get_from(Vector<ClString> &){};
+	virtual void Attack(Vector<ClString> &){};
 	//virtual void Look_Specify_Position() const = 0;
 
 

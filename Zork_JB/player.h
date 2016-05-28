@@ -14,11 +14,8 @@ public:
 	TYPE type;
 	Room* position;
 	Vector<Item*>inv;
-	int hp = 1;
-	int attack=0;
-	int coins=0;
 
-	void Move(const Vector<ClString> &);
+	void Move(Vector<ClString> &);
 	void Look() const;
 	void Look_inventory() const;
 	void Look_item(Vector<ClString> &) const;
@@ -31,6 +28,7 @@ public:
 	void Put_into(Vector<ClString> &);
 	void Get_from(Vector<ClString> &);
 	void Stats()const;
+	void Attack(Vector<ClString> &);
 	//void Look_Specify_Position() const;
 };
 
