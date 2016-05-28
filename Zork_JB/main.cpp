@@ -7,8 +7,10 @@
 #include "World.h"
 #include "Entity.h"
 #include "String_Class.h"
-
+#include <conio.h>
 #include <string.h>
+#include <time.h>
+
 World* App = nullptr;
 
 int main()
@@ -20,31 +22,22 @@ int main()
 	printf("Your name is Ros. A few days ago you desided to enter at the Area 51, but you were captured by soldiers when you were in and they took away your camera.\nYour mission is to leave the building with your camera.");
 	printf("\nTo do this you'll have to get items to open doors, and overcome obstacles.\n\n");
 
-	//world.Look();
+	App->player->Look();
+
+
 	while (App->Exit_zork())
 	{
-		App->Set_Command();
+		if (App->combat == false)
+		{
+			App->alien->Update();
+		}
+		while (_kbhit())
+		{
+			App->Set_Command();
+		}
 	}
 
 	printf("\nThanks for Playing!!!\n\n");
-	/*printf("Your score is: %i\n", world->acon_moviment);
-	if (world->acon_moviment < 44)
-	{
-		printf("Next time you try sure you will get it!\n\n");
-	}
-	if (world->acon_moviment == 44)
-	{
-		printf("OH!!!  You have the perfect score!!! Nicee :D!!\n\nBye professional player!!\n\n");
-	}
-	else if (world->acon_moviment > 44 && world->acon_moviment <= 70)
-	{
-		printf("Nice, you are really good!!\n\n");
-	}
-	else if (world->acon_moviment > 70)
-	{
-		printf("Its ok! Not everyone is good at playing!\n\n");
-	}*/
-
 	system("pause");
 	return 0;
 }

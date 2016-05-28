@@ -22,8 +22,8 @@ void World::Create_World(){
 
 
 	//Create Rooms
-	Room* MainRoom = new Room("MAIN ROOM", "It is a small room with a table and chairs middle and one exit north");//0
-	Room* Aisle = new Room("SMALL AISLE", "It is small and with 3 outputs without why we have entered. To the north there is a door with a sign, it says: 'Dressing Room'");//1...
+	Room* MainRoom;//0
+	Room* Aisle;
 	Room* DressingRoom;
 	Room* OfficeRoom;
 	Room* MysteryRoom;
@@ -37,106 +37,106 @@ void World::Create_World(){
 	Room* Laboratory;
 
 	//my_entities[0]
-	my_entities.push_back(MainRoom);
+	my_entities.push_back(MainRoom = new Room("MAIN ROOM", "It is a small room with a table and chairs middle and one exit north", true));
 	
 	//my_entities[1]
-	my_entities.push_back(Aisle);
+	my_entities.push_back(Aisle = new Room("SMALL AISLE", "It is small and with 3 outputs without why we have entered. To the north there is a door with a sign, it says: 'Dressing Room'", false));
 	
 	//my_entities[2]
-	my_entities.push_back(DressingRoom = new Room("DRESSING ROOM", "There are many lockers, you can see that there is an open locker"));
+	my_entities.push_back(DressingRoom = new Room("DRESSING ROOM", "There are many lockers, you can see that there is an open locker", false));
 	
 	//my_entities[3]
-	my_entities.push_back(OfficeRoom = new Room("OFFICE ROOM", "It is a small room with a few tables working, there are 2 exits"));
+	my_entities.push_back(OfficeRoom = new Room("OFFICE ROOM", "It is a small room with a few tables working, there are 2 exits", false));
 	
 	//my_entities[4]
-	my_entities.push_back(MysteryRoom = new Room("MYSTERY ROOM", "It is a very large room with a giant cage, there seems to be something inside and the door is open.\nThere is a door to the north."));
+	my_entities.push_back(MysteryRoom = new Room("MYSTERY ROOM", "It is a very large room with a giant cage, there seems to be something inside and the door is open.\nThere is a door to the north.", false));
 	
 	//my_entities[5]
-	my_entities.push_back(Warehouse = new Room("WAREHOUSE 1", "It is a normal warehouse, you can see a safe and it's open"));
+	my_entities.push_back(Warehouse = new Room("WAREHOUSE 1", "It is a normal warehouse, you can see a safe and it's open", false));
 	
 	//my_entities[6]
-	my_entities.push_back(Warehouse2 = new Room("WAREHOUSR 2", "It looks like a warehouse or I think, but there are not many things. There is a door to the west."));
+	my_entities.push_back(Warehouse2 = new Room("WAREHOUSR 2", "It looks like a warehouse or I think, but there are not many things. There is a door to the west.", false));
 	
 	//my_entities[7]
-	my_entities.push_back(Gunsmith = new Room("GUNSMITH", "Is huge there are many boxes with weapons, there is an armory and is open"));
+	my_entities.push_back(Gunsmith = new Room("GUNSMITH", "Is huge there are many boxes with weapons, there is an armory and is open", false));
 	
 	//my_entities[8]
-	my_entities.push_back(Aisle2 = new Room("AISLE 2", "It is normal in low light but enough to see everything hall.\nTo the north there are stairs going up and there is an exit south"));
+	my_entities.push_back(Aisle2 = new Room("AISLE 2", "It is normal in low light but enough to see everything hall.\nTo the north there are stairs going up and there is an exit south", false));
 	
 	//my_entities[9]
-	my_entities.push_back(Hall = new Room("HALL", "Beside this departure, and I almost get it! To the east is a keyboard to enter a key, surely this I will pull through. (Not implemented yet)"));
+	my_entities.push_back(Hall = new Room("HALL", "Beside this departure, and I almost get it! To the east is a keyboard to enter a key, surely this I will pull through. (Not implemented yet)", false));
 	
 	//my_entities[10]
-	my_entities.push_back(ExitRoom = new Room("THE EXIT", "These outside the building, no one is around, it seems as if the base was abandoned"));
+	my_entities.push_back(ExitRoom = new Room("THE EXIT", "These outside the building, no one is around, it seems as if the base was abandoned", false));
 	
 	//my_entities[11]
-	my_entities.push_back(Aisle3 = new Room("AILSE 3", "To the north there is a staircase going down and east have a door, you can put a card into the scanner"));
+	my_entities.push_back(Aisle3 = new Room("AILSE 3", "To the north there is a staircase going down and east have a door, you can put a card into the scanner", false));
 	
 	//my_entities[12]
-	my_entities.push_back(Laboratory = new Room("LABORATORY", "It is a research laboratory, it appears that all the material is new. In front there is a table with papers"));
+	my_entities.push_back(Laboratory = new Room("LABORATORY", "It is a research laboratory, it appears that all the material is new. In front there is a table with papers", false));
 
 
 	//Create EXITS
 	//my_entities[13] - EXITS FROM MAIN ROOM
-	my_entities.push_back(new Exits("Exit to AILSE 1.\n", "The next room is the AILSE.\n", false, MainRoom, Aisle, 0));
+	my_entities.push_back(new Exits("Exit to AILSE 1.\n", "The next room is the AILSE.\n", MainRoom, Aisle, 0));
 
 	//my_entities[14] - EXITS FROM AILSE
-	my_entities.push_back(new Exits("Exit to MAIN ROOM.\n", "The next room is the MAIN ROOM\n", false, Aisle, MainRoom, 2));
+	my_entities.push_back(new Exits("Exit to MAIN ROOM.\n", "The next room is the MAIN ROOM\n", Aisle, MainRoom, 2));
 	//my_entities[15] - EXITS FROM AILSE
-	my_entities.push_back(new Exits("Exit to DRESSING ROOM.\n", "The next room is the DRESSING ROOM\n", false, Aisle, DressingRoom, 0));
+	my_entities.push_back(new Exits("Exit to DRESSING ROOM.\n", "The next room is the DRESSING ROOM\n", Aisle, DressingRoom, 0));
 	//my_entities[16] - EXITS FROM AILSE
-	my_entities.push_back(new Exits("Exit to OFFICE ROOM.\n", "The next room is the OFFICE ROOM\n", false, Aisle, OfficeRoom, 1));
+	my_entities.push_back(new Exits("Exit to OFFICE ROOM.\n", "The next room is the OFFICE ROOM\n", Aisle, OfficeRoom, 1));
 	//my_entities[17] - EXITS FROM AILSE
-	my_entities.push_back(new Exits("Exit to AILSE 2.\n", "The next room is the AILSE 2\n", false, Aisle, Aisle2, 3));
+	my_entities.push_back(new Exits("Exit to AILSE 2.\n", "The next room is the AILSE 2\n", Aisle, Aisle2, 3));
 
 	//my_entities[18] - EXITS FROM DRESSING ROOM
-	my_entities.push_back(new Exits("Exit to AILSE 1.\n", "The next room is the Aisle.\n", false, DressingRoom, Aisle, 2));
+	my_entities.push_back(new Exits("Exit to AILSE 1.\n", "The next room is the Aisle.\n", DressingRoom, Aisle, 2));
 
 	//my_entities[19] - EXITS FROM OFFICE ROOM
-	my_entities.push_back(new Exits("Exit to MYSTERY ROOM.\n", "The next room is the MYSTERY ROOM.\n", false, OfficeRoom, MysteryRoom, 1));
+	my_entities.push_back(new Exits("Exit to MYSTERY ROOM.\n", "The next room is the MYSTERY ROOM.\n", OfficeRoom, MysteryRoom, 1));
 	//my_entities[20] - EXITS FROM OFFICE ROOM
-	my_entities.push_back(new Exits("Exit to WAREHOUSE 2.\n", "The next room is the WAREHOUSE 2.\n", false, OfficeRoom, Warehouse2, 2));
+	my_entities.push_back(new Exits("Exit to WAREHOUSE 2.\n", "The next room is the WAREHOUSE 2.\n", OfficeRoom, Warehouse2, 2));
 	//my_entities[21] - EXITS FROM OFFICE ROOM
-	my_entities.push_back(new Exits("Exit to AILSE 1.\n", "The next room is the AILSE 1.\n", false, OfficeRoom, Aisle, 3));
+	my_entities.push_back(new Exits("Exit to AILSE 1.\n", "The next room is the AILSE 1.\n", OfficeRoom, Aisle, 3));
 	
 	//my_entities[22] - EXITS FROM MYSTERY ROOM
-	my_entities.push_back(new Exits("Exit to DRESSING ROOM.\n", "The next room is the DRESSING ROOM.\n", false, MysteryRoom, DressingRoom, 3));
+	my_entities.push_back(new Exits("Exit to DRESSING ROOM.\n", "The next room is the DRESSING ROOM.\n", MysteryRoom, DressingRoom, 3));
 	//my_entities[23] - EXITS FROM MYSTERY ROOM
-	my_entities.push_back(new Exits("Exit to WAREHOUSE.\n", "The next room is the WAREHOUSE.\n", false, MysteryRoom, Warehouse, 0));
+	my_entities.push_back(new Exits("Exit to WAREHOUSE.\n", "The next room is the WAREHOUSE.\n", MysteryRoom, Warehouse, 0));
 	
 	//my_entities[24] - EXITS FROM WAREHOUSE
-	my_entities.push_back(new Exits("Exit to MYSTERY ROOM.\n", "The next room is the MYSTERY ROOM.\n", false, Warehouse, MysteryRoom, 2));
+	my_entities.push_back(new Exits("Exit to MYSTERY ROOM.\n", "The next room is the MYSTERY ROOM.\n", Warehouse, MysteryRoom, 2));
 	
 	//my_entities[25] - EXITS FROM WAREHOUSE 2
-	my_entities.push_back(new Exits("Exit to OFFICE ROOM.\n", "The next room is the OFFICE ROOM.\n", false, Warehouse2, OfficeRoom, 0));
+	my_entities.push_back(new Exits("Exit to OFFICE ROOM.\n", "The next room is the OFFICE ROOM.\n", Warehouse2, OfficeRoom, 0));
 	//my_entities[26] - EXITS FROM WAREHOUSE 2
-	my_entities.push_back(new Exits("Exit to GUNSMITH.\n", "The next room is the GUNSMITH.\n", false, Warehouse2, Gunsmith, 1));
+	my_entities.push_back(new Exits("Exit to GUNSMITH.\n", "The next room is the GUNSMITH.\n", Warehouse2, Gunsmith, 1));
 	
 	//my_entities[27] - EXITS FROM GUNSMITH
-	my_entities.push_back(new Exits("Exit to WAREHOUSE 2.\n", "The next room is the WAREHOUSE 2.\n", false, Gunsmith, Warehouse2, 3));
+	my_entities.push_back(new Exits("Exit to WAREHOUSE 2.\n", "The next room is the WAREHOUSE 2.\n", Gunsmith, Warehouse2, 3));
 	
 	//my_entities[28] - EXITS FROM AILSE 2
-	my_entities.push_back(new Exits("Exit to AISLE 3.\n", "The next room is the AISLE 3.\n", false, Aisle2, Aisle3, 0));
+	my_entities.push_back(new Exits("Exit to AISLE 3.\n", "The next room is the AISLE 3.\n", Aisle2, Aisle3, 0));
 	//my_entities[29] - EXITS FROM AILSE 2
-	my_entities.push_back(new Exits("Exit to AISLE.\n", "The next room is the AISLE.\n", false, Aisle2, Aisle, 1));
+	my_entities.push_back(new Exits("Exit to AISLE.\n", "The next room is the AISLE.\n", Aisle2, Aisle, 1));
 	//my_entities[30] - EXITS FROM AILSE 2
-	my_entities.push_back(new Exits("Exit to HALL.\n", "The next room is the HALL.\n", false, Aisle2, Hall, 2));
+	my_entities.push_back(new Exits("Exit to HALL.\n", "The next room is the HALL.\n", Aisle2, Hall, 2));
 	
 	//my_entities[31] - EXITS FROM HALL
-	my_entities.push_back(new Exits("Exit to AISLE 2.\n", "The next room is the AISLE 2.\n", false, Hall, Aisle2, 0));
+	my_entities.push_back(new Exits("Exit to AISLE 2.\n", "The next room is the AISLE 2.\n", Hall, Aisle2, 0));
 	//my_entities[32] - EXITS FROM HALL
-	my_entities.push_back(new Exits("Exit to EXIT.\n", "The next room is the EXIT.\n", false, Hall, ExitRoom, 3));
+	my_entities.push_back(new Exits("Exit to EXIT.\n", "The next room is the EXIT.\n", Hall, ExitRoom, 3));
 	
 	//my_entities[33] - EXITS FROM EXITROOM
-	my_entities.push_back(new Exits("Exit to HALL.\n", "The next room is the HALL.\n", false, ExitRoom, Hall, 1));
+	my_entities.push_back(new Exits("Exit to HALL.\n", "The next room is the HALL.\n", ExitRoom, Hall, 1));
 	
 	//my_entities[34] - EXITS FROM AILSE 3
-	my_entities.push_back(new Exits("Exit to AISLE 2.\n", "The next room is the AISLE 2.\n", false, Aisle3, Aisle2, 2));
+	my_entities.push_back(new Exits("Exit to AISLE 2.\n", "The next room is the AISLE 2.\n", Aisle3, Aisle2, 2));
 	//my_entities[35] - EXITS FROM AILSE 3
-	my_entities.push_back(new Exits("Exit to LABORATORY.\n", "The next room is the LABORATORY.\n", false, Aisle3, Laboratory, 1));
+	my_entities.push_back(new Exits("Exit to LABORATORY.\n", "The next room is the LABORATORY.\n", Aisle3, Laboratory, 1));
 	
 	//my_entities[36] - EXITS FROM LABORATORY
-	my_entities.push_back(new Exits("Exit to AISLE 3.\n", "The next room is the AISLE 3.\n", false, Laboratory, Aisle3, 3));
+	my_entities.push_back(new Exits("Exit to AISLE 3.\n", "The next room is the AISLE 3.\n", Laboratory, Aisle3, 3));
 	
 	//Create Doors
 	//door[0]  -   DOOR 0
@@ -253,6 +253,12 @@ void World::Create_World(){
 	my_entities.push_back(Locker = new Item("locker", "It's a locker, I can keep things inside\n", DressingRoom, false, true, false, false, 0, 0, 15));//item[17], 
 	DressingRoom->list.push_back(Locker);
 	Locker->type = OBJECT;
+
+	//ALIEN
+	//my_entities[66] - ALIEN
+	my_entities.push_back(new Alien("Predator", "He is large and has a gun in his hand.", 300, 5, 250));
+	alien = (Alien*)my_entities[37];
+	alien->position = MysteryRoom;
 }
 
 void World::Input()
@@ -436,12 +442,12 @@ void World::Set_Command()
 		*/
 		else if (comand == "stats" || comand == "st")
 		{
-			Stats();
+			player->Stats();
 		}
 
 		//Comand - Exit
-		else if (comand == "quit" || comand == "q" || comand == "yes" && ((Exits*)my_entities[32])->discover == true ||
-			comand == "y" && ((Exits*)my_entities[32])->discover == true){
+		else if (comand == "quit" || comand == "q" || comand == "yes" && ((Room*)my_entities[10])->discover == true ||
+			comand == "y" && ((Room*)my_entities[10])->discover == true){
 			quit = 1;
 			Exit_zork();
 		}

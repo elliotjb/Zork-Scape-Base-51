@@ -52,6 +52,13 @@ void Player::Move(const Vector<ClString> &str)
 						if (((Door*)App->door[j])->isOP == true)
 						{
 							position = ((Exits*)App->my_entities[i])->destination;
+							for (int z = 0; i < 13; i++)
+							{
+								if (position == ((Room*)App->my_entities[z]) && ((Room*)App->my_entities[z])->discover == false)
+								{
+									((Room*)App->my_entities[z])->discover = true;
+								}
+							}
 							Look();
 							return;
 						}
