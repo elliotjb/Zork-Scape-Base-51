@@ -72,24 +72,28 @@ And now only have to go to the end (Hall) and insert the paper and you can open 
 
 
 ##Added and Delete from the release 0.5
-Add NPC-> **Seller**
-Add NPC-> **Alien**
+Add NPC:
+- **Seller**
+
+Add Enemy:
+- **Alien**
+
 Add Comand:
-		-> **Shoot**
-		-> **Buy**
-		-> **Sell**
-		-> **throw granade**
+- **Shoot**
+- **Buy**
+- **Sell**
+- **throw granade**
 		
 Add Items:
-		-> **ammo1**
-		-> **potion**
-		-> **potion1**
+- **ammo1**
+- **potion**
+- **potion1**
 		
 Add Rooms:
-		-> **God Room**: It is where the alien waiting to appear again.
+- **God Room**: It is where the alien waiting to appear again.
 
 Delete comand:
-		-> **Look Direction**: This command has been removed because my intention is that when you kill the alien this when it reappears is moving and i didn't want that the player could know if the alien was in the next room.
+- **Look Direction**: This command has been removed because my intention is that when you kill the alien this when it reappears is moving and i didn't want that the player could know if the alien was in the next room.
 		
 
 		
