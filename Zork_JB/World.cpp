@@ -167,7 +167,7 @@ void World::Create_World(){
 
 	//PLAYER
 	//my_entities[37]
-	my_entities.push_back(new Player("Elliot", "I'm a strong", 100, 10, 10000));
+	my_entities.push_back(new Player("Elliot", "I'm a strong", 100, 10, 0));
 	player = (Player*)my_entities[37];
 	player->position = MainRoom;
 
@@ -211,10 +211,10 @@ void World::Create_World(){
 	Laboratory->list.push_back(Paper);
 	//my_entities[44] - Item[6]
 	my_entities.push_back(Gun = new Item("gun", "It is a M4A1-S, it is one of my favorite weapons\n", Gunsmith, false, false, false, false, true, 0, 5, 100, 2000));//item[6], 
-	MainRoom->list.push_back(Gun);
+	Gunsmith->list.push_back(Gun);
 	//my_entities[45] - Item[7]
 	my_entities.push_back(Ammo = new Item("ammo", "It is a ammo pack, but only has 30 bullets\n", Gunsmith, false, false, false, false, true, 0, 45, 30, 500));//item[7], 
-	MainRoom->list.push_back(Ammo);
+	Gunsmith->list.push_back(Ammo);
 	//my_entities[46] - Item[8]
 	my_entities.push_back(Camera = new Item("camera", "Oh my camera, finally I ever have\n", Warehouse, false, false, false, false, false, 0, 0, 100, 450));//item[8], 5
 	Warehouse->list.push_back(Camera);
@@ -256,7 +256,7 @@ void World::Create_World(){
 
 	//ALIEN
 	//my_entities[56] - ALIEN
-	my_entities.push_back(new Alien("alien", "He is large and has a gun in his hand.", 200, 5, 250));
+	my_entities.push_back(new Alien("alien", "He is large and has a gun in his hand.", 200, 5, 350));
 	alien = (Alien*)my_entities[56];
 	alien->position = MysteryRoom;
 	//my_entities[57] - ROOM ADMIN

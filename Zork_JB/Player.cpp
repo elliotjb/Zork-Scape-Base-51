@@ -154,7 +154,7 @@ void Player::Look() const
 	}
 	if (App->seller->position == position)
 	{
-		printf("\nHere are a Seller, can that have something to help me escape...\n");
+		printf("\nHere are a Seller, He can have interesting things.\n");
 	}
 	if (App->combat == true)
 	{
