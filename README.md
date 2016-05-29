@@ -39,6 +39,7 @@ Github Zork: https://github.com/elliotjb/Zork-Scape-Base-51/
 
 ##Move and open
 You can open doors and close doors, if the door was close you can't move to next room. You have to put an item inside the door so that it can open.
+
 **IMPORTANT**-> You can only put the item in a door from one side.
 
 
