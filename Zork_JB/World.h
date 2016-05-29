@@ -56,6 +56,8 @@ public:
 	bool canmove = false;
 	bool alien_dead = false;
 	bool stop = false;
+	bool special_attack = true;
+	bool want_special = false;
 	void Create_World();
 
 	//fucntions to put comands

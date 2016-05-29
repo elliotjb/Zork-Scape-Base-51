@@ -167,7 +167,7 @@ void World::Create_World(){
 
 	//PLAYER
 	//my_entities[37]
-	my_entities.push_back(new Player("Elliot", "I'm a strong", 20, 10, 0));
+	my_entities.push_back(new Player("Elliot", "I'm a strong", 100, 10, 10000));
 	player = (Player*)my_entities[37];
 	player->position = MainRoom;
 
@@ -275,10 +275,10 @@ void World::Create_World(){
 	Item* Potion;
 	Item* Potion2;
 	//my_entities[60] - LIFE POTION ("POTION")
-	my_entities.push_back(Potion = new Item("potion", "If you use a Life Potion, you will receive 100 points of life.", MainRoom, false, false, false, false, true, 100, 45, 10, 750));//item[7]
+	my_entities.push_back(Potion = new Item("potion", "If you use a Life Potion, you will receive 100 points of life.", MainRoom, false, false, false, false, true, 100, 0, 10, 750));//item[7]
 	seller->list.push_back(Potion);
 	//my_entities[61] - LIFE POTION ("POTION")
-	my_entities.push_back(Potion2 = new Item("potion2", "If you use a Life Potion, you will receive 100 points of life.", MainRoom, false, false, false, false, true, 100, 45, 10, 750));//item[7]
+	my_entities.push_back(Potion2 = new Item("potion2", "If you use a Life Potion, you will receive 100 points of life.", MainRoom, false, false, false, false, true, 100, 0, 10, 750));//item[7]
 	seller->list.push_back(Potion2);
 
 }
@@ -307,13 +307,14 @@ void World::Set_Command(const char* str)
 			printf("-[go up] or [go u]\n-[go down] or [go d]\n");
 			printf("-[look]\n");
 			printf("-[look inventory] or [i] and diminutives\n");
-			printf("-[look (item)]\n");
-			printf("-[look (the same way as above)]\n");
+			printf("-[look <item>]\n");
 			printf("-[open door]\n-[close door]\n");
-			printf("-[pick (item)]\n-[drop (item)]\n");
-			printf("-[put (item) into (item)]\n-[get (item) from (item)]\n");
-			printf("-[equip (item)] or [e (item)]\n-[unequip (item)] or [ue (item)]\n");
+			printf("-[pick <item>]\n-[drop <item>]\n");
+			printf("-[put <item> into (item>]\n-[get <item> from <item>]\n");
+			printf("-[equip <item>] or [e <item>]\n-[unequip <item>] or [ue <item>]\n");
 			printf("-[stats] or [st]\n");
+			printf("-[shoot] or [shoot <npc>]\n-[throw granade]\n");
+			printf("-[buy seller] ->Items list\n-[buy <item> from seller]\n-[sell <item> to seller]\n");
 			printf("-[quit]\n-[help]\n\n");
 		}
 		else if (comand_tok[0] == "look" && comand_tok.size() == 1)
@@ -327,6 +328,10 @@ void World::Set_Command(const char* str)
 		else if (comand_tok[0] == "shoot" && comand_tok.size() == 2)
 		{
 			player->Attack(comand_tok);
+		}
+		else if (comand_tok[0] == "throw" && comand_tok.size() == 2)
+		{
+			player->Special_attack(comand_tok);
 		}
 		else if (comand_tok[0] == "stats" || comand_tok[0] == "st")
 		{

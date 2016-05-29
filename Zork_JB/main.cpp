@@ -28,11 +28,13 @@ int main()
 	App->player->Look();
 
 	int now = GetTickCount();
+	int now_g = GetTickCount();
 	while (App->stop == false)
 	{
 		while (App->Exit_zork())
 		{
 			int actualtime = GetTickCount();
+			int coldown_g = GetTickCount();
 			if (App->player->position == App->alien->position && App->combat == false)
 			{
 				printf("MODE COMBAT ACTIVATED!!\n\n");
@@ -41,17 +43,27 @@ int main()
 			}
 			if (App->alien_dead == false)
 			{
-				if (actualtime >= now + 2000 && ((Room*)App->my_entities[4])->discover == false)
+				if (actualtime >= now + 3000 && ((Room*)App->my_entities[4])->discover == false)
 				{
 					now = actualtime;
 					App->alien->Update();
 				}
 			}
-			if (App->player->hp <= 0)
-			{
 
-				//break;
+			if (App->special_attack == false)
+			{
+				if (coldown_g >= now_g + 20000)
+				{
+					now_g = coldown_g;
+					App->special_attack = true;
+				}
+				if (App->want_special == true)
+				{
+					App->want_special = false;
+					printf("Attack-> throw granade, is coldown!\n\n");
+				}
 			}
+
 			if (App->alien_dead == true)
 			{
 				if (actualtime >= now + 20000)

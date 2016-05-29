@@ -54,7 +54,6 @@ void Alien::Update()
 	/*Implemented MOVE*/
 }
 
-
 void Alien::Move(const int dir)
 {
 	if (App->combat == false)
@@ -103,7 +102,7 @@ void Alien::Dead()
 	App->player->coins += coins;
 	position = ((Room*)App->my_entities[57]);
 	printf("You kill the Predator\n");
-	printf("You earn 250 coins!\n");
+	printf("You earn 250 coins!\n\n");
 	return;
 }
 
@@ -114,8 +113,16 @@ void Alien::Attack()
 		App->player->hp -= attack;
 		printf("ALIEN hit you, he has made 5 damage!\n\n");
 		printf("Your life-> %i\n\n", App->player->hp);
+		if (App->player->hp <= 0)
+		{
+			printf("YOU DEAD\n\n");
+			App->quit = 1;
+			App->Exit_zork();
+			App->stop = true;
+		}
 		return;
 	}
+
 	else
 	{
 		return;

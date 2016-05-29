@@ -33,6 +33,7 @@ public:
 	void Sell_to(Vector<ClString> &);
 	void Buy_from(Vector<ClString> &);
 	void Shoot_attack();
+	void Special_attack(Vector<ClString> &str);
 	//void Look_Specify_Position() const;
 };
 

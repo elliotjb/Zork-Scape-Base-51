@@ -1053,6 +1053,44 @@ void Player::Attack(Vector<ClString> &str)
 				return;
 			}
 		}
+		else if (((Item*)App->my_entities[59])->equiped == true)
+		{
+			if (((Item*)App->my_entities[59])->durability > 0)
+			{
+				if (str[1] == "padlock" && ((Item*)App->my_entities[52])->istatus == false)
+				{
+					((Item*)App->my_entities[59])->durability -= 1;
+					printf("You broke the padlock, now you can open the door.\n\n");
+					((Item*)App->my_entities[52])->istatus = true;
+					return;
+				}
+				if (App->combat == true)
+				{
+					if (str[1] == App->alien->name)
+					{
+						((Item*)App->my_entities[59])->durability - 1;
+						App->alien->hp -= attack;
+						printf("You hit ALIEN, you did %i damage!\n\n", attack);
+						return;
+					}
+					else if (str[1] == "seller")
+					{
+						printf("You can't attack a Seller, he is a inmortal person\n\n");
+						return;
+					}
+				}
+				else
+				{
+					printf("Who do you want to attack? if no one here...\n\n");
+					return;
+				}
+			}
+			else
+			{
+				printf("Oh my god, There are no bullets\n\n");
+				return;
+			}
+		}
 		else
 		{
 			printf("First equip an ammo!!!\n\n");
@@ -1064,7 +1102,7 @@ void Player::Attack(Vector<ClString> &str)
 		printf("First equip a gun!!!\n\n");
 		return;
 	}
-	
+
 }
 
 void Player::Buy_list()
@@ -1079,7 +1117,16 @@ void Player::Buy_list()
 			{
 				if (node_Seller->data == ((Item*)App->my_entities[i]))
 				{
-					printf("- %s,  price-> %i\n", node_Seller->data->name.getstr(), ((Item*)App->my_entities[i])->price);
+					printf("- %s\nprice-> %i\n", node_Seller->data->name.getstr(), ((Item*)App->my_entities[i])->price);
+					if (((Item*)App->my_entities[i])->hp > 0)
+					{
+						printf("hp->  +%i\n\n", ((Item*)App->my_entities[i])->hp);
+					}
+					if (((Item*)App->my_entities[i])->attack > 0)
+					{
+						printf("attack-> +%i\n\n", ((Item*)App->my_entities[i])->attack);
+					}
+					
 				}
 			}
 			node_Seller = node_Seller->next;
@@ -1168,4 +1215,36 @@ void Player::Sell_to(Vector<ClString> &str)
 	return;
 }
 
+void Player::Special_attack(Vector<ClString> &str)
+{
+	if (str[1] == "granade")
+	{
+		if (App->special_attack == true)
+		{
+			App->special_attack = false;
+			if (App->combat == true)
+			{
+				printf("You throw a granade to alien\n");
+				App->alien->hp -= 150;
+				printf("You inflicted 150 damage\n");
+				return;
+			}
+			else
+			{
+				printf("You throw a granade, Oh my god, its dangerous!!!\n\n");
+				return;
+			}
+		}
+		else
+		{
+			App->want_special = true;
+			return;
+		}
+	}
+	else
+	{
+		printf("You can't throw this...\n\n");
+		return;
+	}
+}
 
