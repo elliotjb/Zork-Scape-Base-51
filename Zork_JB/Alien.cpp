@@ -35,6 +35,7 @@ void Alien::Update()
 	}
 	if (App->combat == true)
 	{
+		printf("\n");
 		Attack();
 	}
 
@@ -83,11 +84,9 @@ void Alien::Move(const int dir)
 					position = ((Exits*)App->my_entities[i])->destination;
 					if (App->player->position == position)
 					{
-						printf("WTF!!, Another fucking alien here, I have to shoot fast!\n\n");
-						printf("-> %s\n", position->name.getstr());
+						printf("WTF!!, ANOTHER FUKING ALIEN HERE, I HAVE TO SHOOT HIM FAST!\n\n");
 						return;
 					}
-					printf("-> %s\n", position->name.getstr());
 					return;
 				}
 			}
@@ -112,9 +111,9 @@ void Alien::Attack()
 {
 	if (App->combat == true)
 	{
-		printf("%i\n", hp);
 		App->player->hp -= attack;
 		printf("ALIEN hit you, he has made 5 damage!\n\n");
+		printf("Your life-> %i\n\n", App->player->hp);
 		return;
 	}
 	else

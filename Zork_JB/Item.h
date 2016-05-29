@@ -9,7 +9,7 @@ class Item : public Entity
 public:
 
 
-	Item(const char* str1, const char* str2, Room* link, bool istatus, bool object, bool equiped, bool isinside, int hp, int attack, int durability, int price);
+	Item(const char* str1, const char* str2, Room* link, bool istatus, bool object, bool equiped, bool isinside, bool canequip, int hp, int attack, int durability, int price);
 	~Item();
 
 	Room* link;
@@ -17,6 +17,7 @@ public:
 	bool object;
 	bool equiped;
 	bool isinside;
+	bool canequip;
 	int hp;
 	int attack;
 	int durability; //With comand PUT [item] into/from [item]

@@ -157,7 +157,7 @@ void World::Create_World(){
 	//door[6]  -   DOOR 3
 	door.push_back(new Door(false, ExitRoom, Hall));
 	//door[7]  -   DOOR 3
-	door.push_back(new Door(false, Hall, ExitRoom));
+	door.push_back(new Door(true, Hall, ExitRoom));
 
 	//door[8]  -   DOOR 4
 	door.push_back(new Door(false, Aisle3, Laboratory));
@@ -167,7 +167,7 @@ void World::Create_World(){
 
 	//PLAYER
 	//my_entities[37]
-	my_entities.push_back(new Player("Elliot", "I'm a strong", 5, 1000, 9000));
+	my_entities.push_back(new Player("Elliot", "I'm a strong", 20, 10, 0));
 	player = (Player*)my_entities[37];
 	player->position = MainRoom;
 
@@ -192,65 +192,65 @@ void World::Create_World(){
 	Item* Locker;
 
 	//my_entities[38] - Item[0]
-	my_entities.push_back(Bag = new Item("bag", "It is a military backpack brown and is quite large\n", MainRoom, false, false, false, false, 0, 0, 100, 1000));
+	my_entities.push_back(Bag = new Item("bag", "It is a military backpack brown and is quite large\n", MainRoom, false, false, false, false, false, 0, 0, 100, 1000));
 	MainRoom->list.push_back(Bag);
 	//my_entities[39] - Item[1]
-	my_entities.push_back(Lantern = new Item("lantern", "It is a lantern of those that are small but more light than the sun\n", MainRoom, false, false, false, false, 0, 0, 10, 200));
+	my_entities.push_back(Lantern = new Item("lantern", "It is a lantern of those that are small but more light than the sun\n", MainRoom, false, false, false, false, false, 0, 0, 10, 200));
 	MainRoom->list.push_back(Lantern);
 	//my_entities[40] - Item[2]
-	my_entities.push_back(Card = new Item("card", "It looks like a card to pass a security check, it may be useful\n", Warehouse, false, false, false, false, 0, 0, 50, 300));
+	my_entities.push_back(Card = new Item("card", "It looks like a card to pass a security check, it may be useful\n", Warehouse, false, false, false, false, false, 0, 0, 50, 300));
 	Warehouse->list.push_back(Card);
 	//my_entities[41] - Item[3]
-	my_entities.push_back(Lockpick = new Item("lockpick", "It can be useful to open doors, thank god know how to use it\n", OfficeRoom, false, false, false, false, 0, 0, 1, 300));
+	my_entities.push_back(Lockpick = new Item("lockpick", "It can be useful to open doors, thank god know how to use it\n", OfficeRoom, false, false, false, false, false, 0, 0, 1, 300));
 	OfficeRoom->list.push_back(Lockpick);
 	//my_entities[42] - Item[4]
-	my_entities.push_back(Key = new Item("key", "It is a normal key, with a label that puts armory\n", DressingRoom, false, false, false, false, 0, 0, 10, 300));//item[4], 
+	my_entities.push_back(Key = new Item("key", "It is a normal key, with a label that puts armory\n", DressingRoom, false, false, false, false, false, 0, 0, 10, 300));//item[4], 
 	DressingRoom->list.push_back(Key);
 	//my_entities[43] - Item[5]
-	my_entities.push_back(Paper = new Item("paper", "It is a small role. It has written a command: 'SZKMS'\n", Laboratory, false, false, false, false, 0, 0, 100, 300));//item[5], 12
+	my_entities.push_back(Paper = new Item("paper", "It is a small role. It has written a command: 'SZKMS'\n", Laboratory, false, false, false, false, false, 0, 0, 100, 300));//item[5], 12
 	Laboratory->list.push_back(Paper);
 	//my_entities[44] - Item[6]
-	my_entities.push_back(Gun = new Item("gun", "It is a M4A1-S, it is one of my favorite weapons\n", Gunsmith, false, false, false, false, 0, 5, 100, 2000));//item[6], 
+	my_entities.push_back(Gun = new Item("gun", "It is a M4A1-S, it is one of my favorite weapons\n", Gunsmith, false, false, false, false, true, 0, 5, 100, 2000));//item[6], 
 	MainRoom->list.push_back(Gun);
 	//my_entities[45] - Item[7]
-	my_entities.push_back(Ammo = new Item("ammo", "It is a ammo pack, but only has 10 bullets\n", Gunsmith, false, false, false, false, 0, 45, 10, 500));//item[7], 
+	my_entities.push_back(Ammo = new Item("ammo", "It is a ammo pack, but only has 30 bullets\n", Gunsmith, false, false, false, false, true, 0, 45, 30, 500));//item[7], 
 	MainRoom->list.push_back(Ammo);
 	//my_entities[46] - Item[8]
-	my_entities.push_back(Camera = new Item("camera", "Oh my camera, finally I ever have\n", Warehouse, false, false, false, false, 0, 0, 100, 450));//item[8], 5
+	my_entities.push_back(Camera = new Item("camera", "Oh my camera, finally I ever have\n", Warehouse, false, false, false, false, false, 0, 0, 100, 450));//item[8], 5
 	Warehouse->list.push_back(Camera);
 	//my_entities[47] - Item[9]
-	my_entities.push_back(Vest = new Item("vest", "It's a bulletproof vest might be useful.\n", DressingRoom, false, false, false, false, 100, 0, 10, 1500));//item[9], 
+	my_entities.push_back(Vest = new Item("vest", "It's a bulletproof vest might be useful.\n", DressingRoom, false, false, false, false, true, 250, 0, 10, 1500));//item[9], 
 	DressingRoom->list.push_back(Vest);
 	//my_entities[48] - Item[10]
-	my_entities.push_back(Safe = new Item("safe", "It is safe, it seems that this open\n", Warehouse, false, true, false, false, 0, 0, 15, 0));//item[10], 
+	my_entities.push_back(Safe = new Item("safe", "It is safe, it seems that this open\n", Warehouse, false, true, false, false, false, 0, 0, 15, 0));//item[10], 
 	Warehouse->list.push_back(Safe);
 	Safe->type = OBJECT;
 	//my_entities[49] - Item[11]
-	my_entities.push_back(Reader = new Item("reader", "It seems that putting a password the door opened (no implemented yet)\n", Hall, false, true, false, false, 0, 0, 0, 0));//item[11], 
+	my_entities.push_back(Reader = new Item("reader", "It seems that putting a password the door opened (no implemented yet)\n", Hall, false, true, false, false, false, 0, 0, 0, 0));//item[11], 
 	Hall->list.push_back(Reader);
 	Reader->type = OBJECT;
 	//my_entities[50] - Item[12]
-	my_entities.push_back(Scanner = new Item("scanner", "It is a card reader, if I put a card surely will open\n", Aisle3, false, true, false, false, 0, 0, 0, 0));//item[12], to open door of laboratory
+	my_entities.push_back(Scanner = new Item("scanner", "It is a card reader, if I put a card surely will open\n", Aisle3, false, true, false, false, false, 0, 0, 0, 0));//item[12], to open door of laboratory
 	Aisle3->list.push_back(Scanner);
 	Scanner->type = OBJECT;
 	//my_entities[51] - Item[13]
-	my_entities.push_back(Lock = new Item("lock", "I think that i can force the lock with a lockpick would get it\n", Aisle, false, true, false, false, 0, 0, 0, 0));//item[13], 
+	my_entities.push_back(Lock = new Item("lock", "I think that i can force the lock with a lockpick would get it\n", Aisle, false, true, false, false, false, 0, 0, 0, 0));//item[13], 
 	Aisle->list.push_back(Lock);
 	Lock->type = OBJECT;
 	//my_entities[52] - Item[14]
-	my_entities.push_back(Padlock = new Item("padlock", "It's a big padlock, I think that I need something more than a lockpick, I could use the gun\n", MysteryRoom, false, true, false, false, 0, 0, 0, 0));//item[14], Candado
+	my_entities.push_back(Padlock = new Item("padlock", "It's a big padlock, I think that I need something more than a lockpick, I could use the gun\n", MysteryRoom, false, true, false, false, false, 0, 0, 0, 0));//item[14], Candado
 	MysteryRoom->list.push_back(Padlock);
 	Padlock->type = OBJECT;
 	//my_entities[53] - Item[15]
-	my_entities.push_back(Deadbolt = new Item("deadbolt", "This lock is special, I only can open with a key\n", Warehouse2, false, true, false, false, 0, 0, 0, 0));//item[15], 
+	my_entities.push_back(Deadbolt = new Item("deadbolt", "This lock is special, I only can open with a key\n", Warehouse2, false, true, false, false, false, 0, 0, 0, 0));//item[15], 
 	Warehouse2->list.push_back(Deadbolt);
 	Deadbolt->type = OBJECT;
 	//my_entities[54] - Item[16]
-	my_entities.push_back(Armory = new Item("armory", "It's an armory, it seems that there is only one gun and ammo\n", Gunsmith, false, true, false, false, 0, 0, 15, 0));//item[16], 
+	my_entities.push_back(Armory = new Item("armory", "It's an armory, it seems that there is only one gun and ammo\n", Gunsmith, false, true, false, false, false, 0, 0, 15, 0));//item[16], 
 	Gunsmith->list.push_back(Armory);
 	Armory->type = OBJECT;
 	//my_entities[55] - Item[17]
-	my_entities.push_back(Locker = new Item("locker", "It's a locker, I can keep things inside\n", DressingRoom, false, true, false, false, 0, 0, 15, 0));//item[17], 
+	my_entities.push_back(Locker = new Item("locker", "It's a locker, I can keep things inside\n", DressingRoom, false, true, false, false, false, 0, 0, 15, 0));//item[17], 
 	DressingRoom->list.push_back(Locker);
 	Locker->type = OBJECT;
 
@@ -258,7 +258,7 @@ void World::Create_World(){
 	//my_entities[56] - ALIEN
 	my_entities.push_back(new Alien("alien", "He is large and has a gun in his hand.", 200, 5, 250));
 	alien = (Alien*)my_entities[56];
-	alien->position = ExitRoom;
+	alien->position = MysteryRoom;
 	//my_entities[57] - ROOM ADMIN
 	Room* God;
 	my_entities.push_back(God = new Room("GOD ROOM", "Only ADMIN ACCESS", false));
@@ -269,18 +269,17 @@ void World::Create_World(){
 	seller = (Seller*)my_entities[58];
 	seller->position = MainRoom;
 	//my_entities[59] - AMMO
-	my_entities.push_back(Ammo = new Item("ammo", "It is a ammo pack, but only has 10 bullets\n", MainRoom, false, false, false, false, 0, 45, 10, 500));//item[7], 
-	seller->list.push_back(Ammo);
-	//my_entities[60] - AMMO
-	my_entities.push_back(Ammo = new Item("ammo", "It is a ammo pack, but only has 10 bullets\n", MainRoom, false, false, false, false, 0, 45, 10, 500));//item[7], 
-	seller->list.push_back(Ammo);
+	Item* Ammo1;
+	my_entities.push_back(Ammo1 = new Item("ammo1", "It is a ammo pack but it have more damage, but only has 30 bullets\n", MainRoom, false, false, false, false, true, 0, 90, 30, 500));//item[7], 
+	seller->list.push_back(Ammo1);
 	Item* Potion;
+	Item* Potion2;
+	//my_entities[60] - LIFE POTION ("POTION")
+	my_entities.push_back(Potion = new Item("potion", "If you use a Life Potion, you will receive 100 points of life.", MainRoom, false, false, false, false, true, 100, 45, 10, 750));//item[7]
+	seller->list.push_back(Potion);
 	//my_entities[61] - LIFE POTION ("POTION")
-	my_entities.push_back(Potion = new Item("potion", "If you use a Life Potion, you will receive 100 points of life.", MainRoom, false, false, false, false, 0, 45, 10, 750));//item[7]
-	seller->list.push_back(Potion);
-	//my_entities[62] - LIFE POTION ("POTION")
-	my_entities.push_back(Potion = new Item("potion", "If you use a Life Potion, you will receive 100 points of life.", MainRoom, false, false, false, false, 0, 45, 10, 750));//item[7]
-	seller->list.push_back(Potion);
+	my_entities.push_back(Potion2 = new Item("potion2", "If you use a Life Potion, you will receive 100 points of life.", MainRoom, false, false, false, false, true, 100, 45, 10, 750));//item[7]
+	seller->list.push_back(Potion2);
 
 }
 void World::Input()
@@ -292,14 +291,14 @@ void World::Input()
 	} while (option == NULL);
 
 }
-void World::Set_Command()
+void World::Set_Command(const char* str)
 {
-	Input();
-	comand = option;
-
-	if (option[0] != NULL && option[0] != ' ')
+	/*Input();
+	comand = option;*/
+	printf("> %s\n", str);
+	if (str[0] != NULL && str[0] != ' ')
 	{
-		Vector<ClString> comand_tok = comand.tokenize(option);
+		Vector<ClString> comand_tok = comand.tokenize(str);
 		acon_moviment++;
 		if (comand_tok[0] == "help" && comand_tok.size() == 1)
 		{
@@ -334,10 +333,28 @@ void World::Set_Command()
 			player->Stats();
 		}
 		//Comand - Exit
-		else if (comand_tok[0] == "quit" || comand_tok[0] == "q" || comand_tok[0] == "yes" && ((Room*)my_entities[10])->discover == true ||
-			comand_tok[0] == "y" && ((Room*)my_entities[10])->discover == true){
+		else if (comand_tok[0] == "quit" || comand_tok[0] == "q")
+		{
 			quit = 1;
 			Exit_zork();
+		}
+		else if (comand_tok[0] == "look" && comand_tok[1] == "inventory" ||
+			comand_tok[0] == "look" && comand_tok[1] == "inv" || comand_tok[0] == "look" &&
+			comand_tok[1] == "i" || comand_tok[0] == "inventory" || comand_tok[0] == "inv" || comand_tok[0] == "i")
+		{
+			player->Look_inventory();
+		}
+		else if (comand_tok[0] == "look" &&  comand_tok.size() == 2)
+		{
+			player->Look_item(comand_tok);
+		}
+		else if (comand_tok[0] == "equip" &&  comand_tok.size() == 2 || comand_tok[0] == "e" && comand_tok.size() == 2)
+		{
+			player->Equip(comand_tok);
+		}
+		else if (comand_tok[0] == "unequip" &&  comand_tok.size() == 2 || comand_tok[0] == "ue" && comand_tok.size() == 2)
+		{
+			player->UnEquip(comand_tok);
 		}
 		else if (App->combat == false)
 		{
@@ -420,16 +437,6 @@ void World::Set_Command()
 			{
 				player->Drop_item(comand_tok);
 			}
-			else if (comand_tok[0] == "look" && comand_tok[1] == "inventory" ||
-				comand_tok[0] == "look" && comand_tok[1] == "inv" || comand_tok[0] == "look" &&
-				comand_tok[1] == "i" || comand_tok[0] == "inventory" || comand_tok[0] == "inv" || comand_tok[0] == "i")
-			{
-				player->Look_inventory();
-			}
-			else if (comand_tok[0] == "look" &&  comand_tok.size() == 2)
-			{
-				player->Look_item(comand_tok);
-			}
 
 			else if (comand_tok[0] == "put" && comand_tok.size() == 2)
 			{
@@ -447,14 +454,6 @@ void World::Set_Command()
 			else if (comand_tok[0] == "get" && comand_tok.size() == 4 && comand_tok[2] == "from")
 			{
 				player->Get_from(comand_tok);
-			}
-			else if (comand_tok[0] == "equip" &&  comand_tok.size() == 2 || comand_tok[0] == "e" && comand_tok.size() == 2)
-			{
-				player->Equip(comand_tok);
-			}
-			else if (comand_tok[0] == "unequip" &&  comand_tok.size() == 2 || comand_tok[0] == "ue" && comand_tok.size() == 2)
-			{
-				player->UnEquip(comand_tok);
 			}
 			else
 			{
@@ -493,6 +492,18 @@ void World::Set_Command()
 	else
 	{
 	printf("I beg your pardon?\n\n");
+	}
+	if (App->player->hp <= 0)
+	{
+		quit = 1;
+		Exit_zork();
+		App->stop = true;
+	}
+	if (App->player->position == ((Room*)App->my_entities[10]))
+	{
+		quit = 1;
+		Exit_zork();
+		App->stop = true;
 	}
 }
 

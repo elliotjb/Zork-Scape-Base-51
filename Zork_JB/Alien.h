@@ -19,7 +19,6 @@ public:
 	void Attack();
 	void Dead();
 	void Update();
-	void Revive();
 
 	/*void Look() const;
 	void Look_inventory() const;

@@ -59,7 +59,7 @@ public:
 	void Create_World();
 
 	//fucntions to put comands
-	void Set_Command();
+	void Set_Command(const char*);
 
 	void Input();
 
