@@ -328,7 +328,7 @@ void World::Set_Command(const char* str)
 			player->Stats();
 		}
 		//Comand - Exit
-		else if (comand_tok[0] == "quit" || comand_tok[0] == "q")
+		else if (comand_tok[0] == "quit" || comand_tok[0] == "q" && comand_tok.size() == 1)
 		{
 			quit = 1;
 			Exit_zork();
@@ -481,7 +481,14 @@ void World::Set_Command(const char* str)
 
 bool World::Exit_zork(){
 	if (quit == 1)
+	{
+		App->stop = true;
 		return false;
+	}
+
 	else
+	{
 		return true;
+	}
+
 }
