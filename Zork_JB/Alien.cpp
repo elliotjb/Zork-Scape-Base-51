@@ -81,6 +81,12 @@ void Alien::Move(const int dir)
 						}
 					}
 					position = ((Exits*)App->my_entities[i])->destination;
+					if (App->player->position == position)
+					{
+						printf("WTF!!, Another fucking alien here, I have to shoot fast!\n\n");
+						printf("-> %s\n", position->name.getstr());
+						return;
+					}
 					printf("-> %s\n", position->name.getstr());
 					return;
 				}

@@ -38,7 +38,7 @@ int main()
 			}
 			if (App->alien_dead == false)
 			{
-				if (actualtime >= now + 1000 && ((Room*)App->my_entities[4])->discover == false)
+				if (actualtime >= now + 2000 && ((Room*)App->my_entities[4])->discover == false)
 				{
 					now = actualtime;
 					App->alien->Update();

@@ -71,9 +71,32 @@ void Player::Move(Vector<ClString> &str)
 						}
 					}
 				}
-				position = ((Exits*)App->my_entities[i])->destination;
-				Look();
-				return;
+				if (((Exits*)App->my_entities[i])->destination == App->alien->position)
+				{
+					DList<Entity*>::Node* node_player = App->player->list.first;
+					while (node_player != nullptr)
+					{
+						if (node_player->data->name == ((Item*)App->my_entities[44])->name)
+						{
+							printf("WHAT THE FUCK??, There's a fucking alien inside! I think it's better not to go, but i have a gun...\nBufff, okey lets go!!");
+							position = ((Exits*)App->my_entities[i])->destination;
+							Look();
+							return;
+						}
+						node_player = node_player->next;
+					}
+					printf("WAIT, WAIT, WAIT\nYou're crazy???, there's a fucking alien inside! and i don't have any gun!!\n\n");
+					//BORRAR
+					position = ((Exits*)App->my_entities[i])->destination;
+					Look();
+					return;
+				}
+				if (((Exits*)App->my_entities[i])->destination != ((Room*)App->my_entities[4]))
+				{
+					position = ((Exits*)App->my_entities[i])->destination;
+					Look();
+					return;
+				}
 			}
 		}
 	}
@@ -129,7 +152,7 @@ void Player::Look() const
 	}
 	if (App->combat == true)
 	{
-
+		printf("In front of me there is an alien with a gun... WTF GUN???\nI think that is better kill him or I'll die.\n");
 	}
 	printf("\n");
 }
@@ -810,7 +833,7 @@ void Player::Attack(Vector<ClString> &str)
 			printf("You hit ALIEN, you did 40 damage!\n\n");
 			return;
 		}
-		else if (str[1] == "seller")//Next implementation
+		else if (str[1] == "seller")
 		{
 			printf("You can't attack a Seller, he is a inmortal person\n\n");
 			return;
@@ -822,3 +845,4 @@ void Player::Attack(Vector<ClString> &str)
 		return;
 	}
 }
+

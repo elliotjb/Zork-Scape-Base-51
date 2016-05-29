@@ -74,6 +74,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="player.h" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="Seller.cpp" />
     <ClCompile Include="String_class.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -85,6 +86,7 @@
     <ClInclude Include="Exits.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="My_list.h" />
+    <ClInclude Include="Seller.h" />
     <ClInclude Include="String_Class.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="World.h" />

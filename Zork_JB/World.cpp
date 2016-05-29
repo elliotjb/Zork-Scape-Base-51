@@ -167,7 +167,7 @@ void World::Create_World(){
 
 	//PLAYER
 	//my_entities[37]
-	my_entities.push_back(new Player("Elliot", "I'm a strong", 5, 10, 0));
+	my_entities.push_back(new Player("Elliot", "I'm a strong", 5, 1000, 0));
 	player = (Player*)my_entities[37];
 	player->position = MainRoom;
 
