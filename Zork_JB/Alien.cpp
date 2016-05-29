@@ -101,7 +101,7 @@ void Alien::Dead()
 	App->combat = false;
 	App->player->coins += coins;
 	position = ((Room*)App->my_entities[57]);
-	printf("You kill the Predator\n");
+	printf("You kill the Alien\n");
 	printf("You earn 250 coins!\n\n");
 	return;
 }
