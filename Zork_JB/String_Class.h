@@ -24,9 +24,6 @@ public:
 	ClString(const ClString& copy);
 	~ClString();
 
-	//Function to set 
-	void set(char* command);
-
 	//Funcion para devolver longitud
 	uint length()const;
 

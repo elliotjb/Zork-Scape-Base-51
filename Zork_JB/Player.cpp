@@ -66,7 +66,7 @@ void Player::Move(Vector<ClString> &str)
 						}
 						if (((Door*)App->door[j])->isOP == false)
 						{
-							printf("Frist You need open the door!\n");
+							printf("Frist You need open the door!\n\n");
 							return;
 						}
 					}
@@ -75,10 +75,10 @@ void Player::Move(Vector<ClString> &str)
 				Look();
 				return;
 			}
-			printf("In this direction there is a wall\n\n");
-			return;
 		}
 	}
+	printf("In this direction there is a wall\n\n");
+	return;
 }
 
 void Player::Look() const
@@ -552,33 +552,36 @@ void Player::Pick_item(Vector<ClString> &str)
 		DList<Entity*>::Node* node_room = position->list.first;
 		for (int i = 0; i < 13; i++)
 		{
-			while (node_room != nullptr)
+			if (((Room*)App->my_entities[i]) == position)
 			{
-				if (node_room->data->name == str[1])
+				while (node_room != nullptr)
 				{
-					if (node_room->data->type == ITEM)
+					if (node_room->data->name == str[1])
 					{
-						list.push_back(node_room->data);
-						if (list.first->data == ((Item*)App->my_entities[38]))
+						if (node_room->data->type == ITEM)
 						{
-							printf("You picked-> %s\n\n", node_room->data->name.getstr());
-							((Room*)App->my_entities[i])->list.erase(node_room);
-							return;
+							list.push_back(node_room->data);
+							if (list.first->data == ((Item*)App->my_entities[38]))
+							{
+								printf("You picked-> %s\n\n", node_room->data->name.getstr());
+								((Room*)App->my_entities[i])->list.erase(node_room);
+								return;
+							}
+							else
+							{
+								printf("First you need a bag to pick items!\n\n");
+								list.pop_back();
+								return;
+							}
 						}
 						else
 						{
-							printf("First you need a bag to pick items!\n\n");
-							list.pop_back();
+							printf("You can PICK this, this is a Object!\n\n");
 							return;
 						}
 					}
-					else
-					{
-						printf("You can PICK this, this is a Object!\n\n");
-						return;
-					}
+					node_room = node_room->next;
 				}
-				node_room = node_room->next;
 			}
 		}
 	}
@@ -588,21 +591,25 @@ void Player::Pick_item(Vector<ClString> &str)
 
 void Player::Drop_item(Vector<ClString> &str)
 {
-	if (list.empty())
+	if (list.empty() == false)
 	{
 		DList<Entity*>::Node* node_player = list.first;
 		for (int i = 0; i < 13; i++)
 		{
-			while (node_player != nullptr)
+			if (((Room*)App->my_entities[i]) == position)
 			{
-				if (node_player->data->name == str[1] && node_player->data->type == ITEM)
+				while (node_player != nullptr)
 				{
-					((Room*)App->my_entities[i])->list.push_back(node_player->data);
-					printf("You Droped-> %s\n\n", node_player->data->name.getstr());
-					list.erase(node_player);
-					return;
+					if (node_player->data->name == str[1] && node_player->data->type == ITEM)
+					{
+
+						((Room*)App->my_entities[i])->list.push_back(node_player->data);
+						printf("You Droped-> %s\n\n", node_player->data->name.getstr());
+						list.erase(node_player);
+						return;
+					}
+					node_player = node_player->next;
 				}
-				node_player = node_player->next;
 			}
 		}
 	}

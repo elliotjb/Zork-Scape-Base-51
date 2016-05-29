@@ -33,19 +33,6 @@ ClString::~ClString()
 	delete[]buffer;
 }
 
-void ClString::set(char* command)
-{
-	char str[20];
-	gets_s(str, 20);
-	int lent = strlen(str) + 1;
-	if (memory < lent){
-		delete[]buffer;
-		memory = lent;
-		buffer = new char[memory];
-	}
-	strcpy_s(buffer, memory, str);
-}
-
 uint ClString::length()const
 {
 	return strlen(buffer);
@@ -80,7 +67,6 @@ bool ClString::operator ==(const char* str) const
 {
 	return strcmp(buffer, str) == 0;
 }
-
 
 void ClString::operator =(const ClString& str)
 {

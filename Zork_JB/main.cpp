@@ -47,7 +47,7 @@ int main()
 			if (App->player->hp <= 0)
 			{
 
-				break;
+				//break;
 			}
 			if (App->alien_dead == true)
 			{
@@ -59,7 +59,7 @@ int main()
 			}
 
 
-			if (_kbhit() != 0)
+			if (_kbhit())
 			{
 				App->Set_Command();
 			}
