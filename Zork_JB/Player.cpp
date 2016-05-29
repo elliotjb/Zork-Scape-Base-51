@@ -457,6 +457,7 @@ void Player::Close()
 				else
 				{
 					printf("First you need put <item> into the door!!\n\n");
+					return;
 				}
 			}
 			else if (position == ((Door*)App->door[i])->door_origin && ((Door*)App->door[i])->isOP == false)
@@ -506,6 +507,7 @@ void Player::Close()
 				else
 				{
 					printf("First you need put <item> into the door!!\n\n");
+					return;
 				}
 			}
 			else if (position == ((Door*)App->door[i])->door_origin && ((Door*)App->door[i])->isOP == false)
@@ -537,6 +539,7 @@ void Player::Close()
 				else
 				{
 					printf("First you need put <item> into the door!!\n\n");
+					return;
 				}
 			}
 			else if (position == ((Door*)App->door[i])->door_origin && ((Door*)App->door[i])->isOP == false)
@@ -568,6 +571,7 @@ void Player::Close()
 				else
 				{
 					printf("First you need put <item> into the door!!\n\n");
+					return;
 				}
 			}
 			else if (position == ((Door*)App->door[i])->door_origin && ((Door*)App->door[i])->isOP == false)
