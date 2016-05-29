@@ -157,7 +157,7 @@ void World::Create_World(){
 	//door[6]  -   DOOR 3
 	door.push_back(new Door(false, ExitRoom, Hall));
 	//door[7]  -   DOOR 3
-	door.push_back(new Door(true, Hall, ExitRoom));
+	door.push_back(new Door(false, Hall, ExitRoom));
 
 	//door[8]  -   DOOR 4
 	door.push_back(new Door(false, Aisle3, Laboratory));
