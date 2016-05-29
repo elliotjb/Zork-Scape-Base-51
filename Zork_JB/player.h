@@ -32,6 +32,7 @@ public:
 	void Buy_list();
 	void Sell_to(Vector<ClString> &);
 	void Buy_from(Vector<ClString> &);
+	void Shoot_attack();
 	//void Look_Specify_Position() const;
 };
 

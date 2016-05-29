@@ -91,7 +91,7 @@ void Player::Move(Vector<ClString> &str)
 					Look();
 					return;
 				}
-				if (((Exits*)App->my_entities[i])->destination != ((Room*)App->my_entities[4]))
+				if (((Exits*)App->my_entities[i])->destination != App->alien->position)
 				{
 					position = ((Exits*)App->my_entities[i])->destination;
 					Look();
@@ -111,7 +111,7 @@ void Player::Look() const
 	bool oneprint_item = false;
 	bool oneprint_obj = false;
 
-	const DList<Entity*>::Node* node_room = position->list.first;
+	DList<Entity*>::Node* node_room = position->list.first;
 	while (node_room != nullptr)
 	{
 		if (node_room->data->type == ITEM)
@@ -120,7 +120,10 @@ void Player::Look() const
 		}
 		if (node_room->data->type == OBJECT)
 		{
-			oneprint_obj = true;
+			if (((Item*)App->my_entities[52])->istatus == false)
+			{
+				oneprint_obj = true;
+			}
 		}
 		node_room = node_room->next;
 	}
@@ -142,7 +145,7 @@ void Player::Look() const
 		printf("\nObjects in this Room: \n");
 	}
 	new_node_room = position->list.first;
-	while (new_node_room != nullptr)
+	while (new_node_room != nullptr && oneprint_obj == true)
 	{
 		if (new_node_room->data->type == OBJECT)
 		{
@@ -164,9 +167,9 @@ void Player::Look() const
 void Player::Look_inventory() const
 {
 	DList<Entity*>::Node* node_player = App->player->list.first;
-	printf("You have these items:\n");
 	if (App->player->list.first->data == ((Item*)App->my_entities[38]))
 	{
+		printf("You have these items:\n");
 		while (node_player != nullptr)
 		{
 			printf("- %s\n", node_player->data->name.getstr());
@@ -205,11 +208,18 @@ void Player::Look_item(Vector<ClString> &str) const
 				{
 					if (App->my_entities[i]->type == OBJECT && ((Item*)App->my_entities[i])->link == position && node_room->data->name == str[1])
 					{
-						DList<Entity*>::Node* node_item = ((Item*)App->my_entities[i])->list.first;
-						if (((Item*)App->my_entities[i])->list.empty() == false)
+						if (((Item*)App->my_entities[i])->isinside == true)
 						{
-							printf("%s\n", node_item->data->name.getstr());
-							printf("%s\n", node_item->data->description.getstr());
+							DList<Entity*>::Node* node_item = ((Item*)App->my_entities[i])->list.first;
+							while (node_item != nullptr)
+							{
+								if (((Item*)App->my_entities[i])->list.empty() == false)
+								{
+									printf("- %s\n", node_item->data->name.getstr());
+									printf("%s\n", node_item->data->description.getstr());
+								}
+								node_item = node_item->next;
+							}
 						}
 					}
 				}
@@ -224,6 +234,12 @@ void Player::Look_item(Vector<ClString> &str) const
 		{
 			if (node_player->data->type == ITEM && node_player->data->name == str[1])
 			{
+				if (node_player->data->name == ((Item*)App->my_entities[45])->name)
+				{
+					printf("%s\n", node_player->data->name.getstr());
+					printf("It is a ammo pack, but only has %i bullets\n\n", ((Item*)App->my_entities[45])->durability);
+					return;
+				}
 				printf("%s\n", node_player->data->name.getstr());
 				printf("%s\n", node_player->data->description.getstr());
 				return;
@@ -241,18 +257,26 @@ void Player::Open()
 		if (position == ((Door*)App->door[0])->door_origin || position == ((Door*)App->door[1])->door_origin)
 		{
 			DList<Entity*>::Node* node_item = ((Item*)App->my_entities[51])->list.first;
-			if (((Door*)App->door[i])->isOP == false)
+			if (((Door*)App->door[0])->isOP == false)
 			{
-				if (node_item->data == ((Item*)App->my_entities[41]))
+				if (node_item != nullptr)
 				{
-					((Door*)App->door[i])->isOP = true;
-					printf("The door has just been opened.\n\n");
-					return;
+					if (node_item->data == ((Item*)App->my_entities[41]))
+					{
+						((Door*)App->door[0])->isOP = true;
+						((Door*)App->door[1])->isOP = true;
+						printf("The door has just been opened.\n\n");
+						return;
+					}
+					else
+					{
+						printf("First you need a key to Unlock the door!\n\n");
+						return;
+					}
 				}
 				else
 				{
-					printf("First you need a key to Unlock the door!\n\n");
-					return;
+					printf("First you need unlock the door!!\n\n");
 				}
 			}
 			else if (position == ((Door*)App->door[i])->door_origin && ((Door*)App->door[i])->isOP == true)
@@ -263,19 +287,34 @@ void Player::Open()
 		}
 		if (position == ((Door*)App->door[2])->door_origin || position == ((Door*)App->door[3])->door_origin)
 		{
-			DList<Entity*>::Node* node_item = ((Item*)App->my_entities[52])->list.first;
-			if (((Door*)App->door[i])->isOP == false)
+			if (((Door*)App->door[2])->isOP == false)
 			{
-				if (node_item->data == ((Item*)App->my_entities[44]))
+				if (((Item*)App->my_entities[52])->istatus == true)
 				{
-					((Door*)App->door[i])->isOP = true;
 					printf("The door has just been opened.\n\n");
+					((Door*)App->door[2])->isOP = true;
+					((Door*)App->door[3])->isOP = true;
 					return;
 				}
-				else
+				DList<Entity*>::Node* node_player = list.first;
+				bool havegun = false;
+				while (node_player != nullptr)
 				{
-					printf("First you need a key to Unlock the door!\n\n");
-					return;
+					if (node_player->data == ((Item*)App->my_entities[44]))
+					{
+						havegun = true;
+					}
+					node_player = node_player->next;
+				}
+				node_player = list.first;
+				while (node_player != nullptr)
+				{
+					if (node_player->data == ((Item*)App->my_entities[45]) && havegun == true)
+					{
+						printf("Attempts to shoot the padlock\n\n");
+						return;
+					}
+					node_player = node_player->next;
 				}
 			}
 			else if (position == ((Door*)App->door[i])->door_origin && ((Door*)App->door[i])->isOP == true)
@@ -287,18 +326,26 @@ void Player::Open()
 		if (position == ((Door*)App->door[4])->door_origin || position == ((Door*)App->door[5])->door_origin)
 		{
 			DList<Entity*>::Node* node_item = ((Item*)App->my_entities[53])->list.first;
-			if (((Door*)App->door[i])->isOP == false)
+			if (((Door*)App->door[4])->isOP == false)
 			{
-				if (node_item->data == ((Item*)App->my_entities[42]))
+				if (node_item != nullptr)
 				{
-					((Door*)App->door[i])->isOP = true;
-					printf("The door has just been opened.\n\n");
-					return;
+					if (node_item->data == ((Item*)App->my_entities[42]))
+					{
+						((Door*)App->door[4])->isOP = true;
+						((Door*)App->door[5])->isOP = true;
+						printf("The door has just been opened.\n\n");
+						return;
+					}
+					else
+					{
+						printf("First you need a key to Unlock the door!\n\n");
+						return;
+					}
 				}
 				else
 				{
-					printf("First you need a key to Unlock the door!\n\n");
-					return;
+					printf("First you need unlock the door!!\n\n");
 				}
 			}
 			else if (position == ((Door*)App->door[i])->door_origin && ((Door*)App->door[i])->isOP == true)
@@ -310,18 +357,26 @@ void Player::Open()
 		if (position == ((Door*)App->door[6])->door_origin || position == ((Door*)App->door[7])->door_origin)
 		{
 			DList<Entity*>::Node* node_item = ((Item*)App->my_entities[49])->list.first;
-			if (((Door*)App->door[i])->isOP == false)
+			if (((Door*)App->door[6])->isOP == false)
 			{
-				if (node_item->data == ((Item*)App->my_entities[43]))
+				if (node_item != nullptr)
 				{
-					((Door*)App->door[i])->isOP = true;
-					printf("The door has just been opened.\n\n");
-					return;
+					if (node_item->data == ((Item*)App->my_entities[43]))
+					{
+						((Door*)App->door[6])->isOP = true;
+						((Door*)App->door[7])->isOP = true;
+						printf("The door has just been opened.\n\n");
+						return;
+					}
+					else
+					{
+						printf("First you need a key to Unlock the door!\n\n");
+						return;
+					}
 				}
 				else
 				{
-					printf("First you need a key to Unlock the door!\n\n");
-					return;
+					printf("First you need unlock the door!!\n\n");
 				}
 			}
 			else if (position == ((Door*)App->door[i])->door_origin && ((Door*)App->door[i])->isOP == true)
@@ -333,18 +388,26 @@ void Player::Open()
 		if (position == ((Door*)App->door[8])->door_origin || position == ((Door*)App->door[9])->door_origin)
 		{
 			DList<Entity*>::Node* node_item = ((Item*)App->my_entities[50])->list.first;
-			if (((Door*)App->door[i])->isOP == false)
+			if (((Door*)App->door[8])->isOP == false)
 			{
-				if (node_item->data == ((Item*)App->my_entities[40]))
+				if (node_item != nullptr)
 				{
-					((Door*)App->door[i])->isOP = true;
-					printf("The door has just been opened.\n\n");
-					return;
+					if (node_item->data == ((Item*)App->my_entities[40]))
+					{
+						((Door*)App->door[8])->isOP = true;
+						((Door*)App->door[9])->isOP = true;
+						printf("The door has just been opened.\n\n");
+						return;
+					}
+					else
+					{
+						printf("First you need a key to Unlock the door!\n\n");
+						return;
+					}
 				}
 				else
 				{
-					printf("First you need a key to Unlock the door!\n\n");
-					return;
+					printf("First you need unlock the door!!\n\n");
 				}
 			}
 			else if (position == ((Door*)App->door[i])->door_origin && ((Door*)App->door[i])->isOP == true)
@@ -363,18 +426,26 @@ void Player::Close()
 		if (position == ((Door*)App->door[0])->door_origin || position == ((Door*)App->door[1])->door_origin)
 		{
 			DList<Entity*>::Node* node_item = ((Item*)App->my_entities[51])->list.first;
-			if (((Door*)App->door[i])->isOP == true)
+			if (((Door*)App->door[0])->isOP == true)
 			{
-				if (node_item->data == ((Item*)App->my_entities[41]))
+				if (node_item != nullptr)
 				{
-					((Door*)App->door[i])->isOP = false;
-					printf("The door has just been Closed.\n\n");
-					return;
+					if (node_item->data == ((Item*)App->my_entities[41]))
+					{
+						((Door*)App->door[0])->isOP = false;
+						((Door*)App->door[1])->isOP = false;
+						printf("The door has just been Closed.\n\n");
+						return;
+					}
+					else
+					{
+						printf("First you need a key to lock the door!\n\n");
+						return;
+					}
 				}
 				else
 				{
-					printf("First you need a key to lock the door!\n\n");
-					return;
+					printf("First you need put <item> into the door!!\n\n");
 				}
 			}
 			else if (position == ((Door*)App->door[i])->door_origin && ((Door*)App->door[i])->isOP == false)
@@ -385,18 +456,13 @@ void Player::Close()
 		}
 		if (position == ((Door*)App->door[2])->door_origin || position == ((Door*)App->door[3])->door_origin)
 		{
-			DList<Entity*>::Node* node_item = ((Item*)App->my_entities[52])->list.first;
-			if (((Door*)App->door[i])->isOP == true)
+			if (((Door*)App->door[2])->isOP == true)
 			{
-				if (node_item->data == ((Item*)App->my_entities[44]))
+				if (((Item*)App->my_entities[52])->istatus == true)
 				{
-					((Door*)App->door[i])->isOP = false;
 					printf("The door has just been Closed.\n\n");
-					return;
-				}
-				else
-				{
-					printf("First you need a key to lock the door!\n\n");
+					((Door*)App->door[2])->isOP = false;
+					((Door*)App->door[3])->isOP = false;
 					return;
 				}
 			}
@@ -409,18 +475,26 @@ void Player::Close()
 		if (position == ((Door*)App->door[4])->door_origin || position == ((Door*)App->door[5])->door_origin)
 		{
 			DList<Entity*>::Node* node_item = ((Item*)App->my_entities[53])->list.first;
-			if (((Door*)App->door[i])->isOP == true)
+			if (((Door*)App->door[4])->isOP == true)
 			{
-				if (node_item->data == ((Item*)App->my_entities[42]))
+				if (node_item != nullptr)
 				{
-					((Door*)App->door[i])->isOP = false;
-					printf("The door has just been Closed.\n\n");
-					return;
+					if (node_item->data == ((Item*)App->my_entities[42]))
+					{
+						((Door*)App->door[4])->isOP = false;
+						((Door*)App->door[5])->isOP = false;
+						printf("The door has just been Closed.\n\n");
+						return;
+					}
+					else
+					{
+						printf("First you need a key to lock the door!\n\n");
+						return;
+					}
 				}
 				else
 				{
-					printf("First you need a key to lock the door!\n\n");
-					return;
+					printf("First you need put <item> into the door!!\n\n");
 				}
 			}
 			else if (position == ((Door*)App->door[i])->door_origin && ((Door*)App->door[i])->isOP == false)
@@ -432,18 +506,26 @@ void Player::Close()
 		if (position == ((Door*)App->door[6])->door_origin || position == ((Door*)App->door[7])->door_origin)
 		{
 			DList<Entity*>::Node* node_item = ((Item*)App->my_entities[49])->list.first;
-			if (((Door*)App->door[i])->isOP == true)
+			if (((Door*)App->door[6])->isOP == true)
 			{
-				if (node_item->data == ((Item*)App->my_entities[43]))
+				if (node_item != nullptr)
 				{
-					((Door*)App->door[i])->isOP = false;
-					printf("The door has just been Closed.\n\n");
-					return;
+					if (node_item->data == ((Item*)App->my_entities[43]))
+					{
+						((Door*)App->door[6])->isOP = false;
+						((Door*)App->door[7])->isOP = false;
+						printf("The door has just been Closed.\n\n");
+						return;
+					}
+					else
+					{
+						printf("First you need a key to lock the door!\n\n");
+						return;
+					}
 				}
 				else
 				{
-					printf("First you need a key to lock the door!\n\n");
-					return;
+					printf("First you need put <item> into the door!!\n\n");
 				}
 			}
 			else if (position == ((Door*)App->door[i])->door_origin && ((Door*)App->door[i])->isOP == false)
@@ -455,18 +537,26 @@ void Player::Close()
 		if (position == ((Door*)App->door[8])->door_origin || position == ((Door*)App->door[9])->door_origin)
 		{
 			DList<Entity*>::Node* node_item = ((Item*)App->my_entities[50])->list.first;
-			if (((Door*)App->door[i])->isOP == true)
+			if (((Door*)App->door[8])->isOP == true)
 			{
-				if (node_item->data == ((Item*)App->my_entities[40]))
+				if (node_item != nullptr)
 				{
-					((Door*)App->door[i])->isOP = false;
-					printf("The door has just been Closed.\n\n");
-					return;
+					if (node_item->data == ((Item*)App->my_entities[40]))
+					{
+						((Door*)App->door[8])->isOP = false;
+						((Door*)App->door[9])->isOP = false;
+						printf("The door has just been Closed.\n\n");
+						return;
+					}
+					else
+					{
+						printf("First you need a key to lock the door!\n\n");
+						return;
+					}
 				}
 				else
 				{
-					printf("First you need a key to lock the door!\n\n");
-					return;
+					printf("First you need put <item> into the door!!\n\n");
 				}
 			}
 			else if (position == ((Door*)App->door[i])->door_origin && ((Door*)App->door[i])->isOP == false)
@@ -487,14 +577,14 @@ void Player::Equip(Vector<ClString> &str)
 		{
 			if (node_player->data->name == ((Item*)App->my_entities[44])->name && ((Item*)App->my_entities[44])->equiped == false)
 			{
-				((Item*)App->my_entities[44])->equiped == true;
+				((Item*)App->my_entities[44])->equiped = true;
 				attack += ((Item*)App->my_entities[44])->attack;
 				printf("You equiped-> %s\n\n", node_player->data->name.getstr());
 				return;
 			}
 			else if (node_player->data->name == ((Item*)App->my_entities[47])->name && ((Item*)App->my_entities[47])->equiped == false)
 			{
-				((Item*)App->my_entities[47])->equiped == true;
+				((Item*)App->my_entities[47])->equiped = true;
 				hp += ((Item*)App->my_entities[47])->hp;
 				printf("You equiped-> %s\n\n", node_player->data->name.getstr());
 				return;
@@ -503,7 +593,7 @@ void Player::Equip(Vector<ClString> &str)
 			{
 				if (((Item*)App->my_entities[44])->equiped == true)
 				{
-					((Item*)App->my_entities[45])->equiped == true;
+					((Item*)App->my_entities[45])->equiped = true;
 					attack += ((Item*)App->my_entities[45])->attack;
 					printf("You equiped-> %s\n\n", node_player->data->name.getstr());
 					return;
@@ -533,8 +623,8 @@ void Player::UnEquip(Vector<ClString> &str)
 		{
 			if (node_player->data->name == ((Item*)App->my_entities[44])->name && ((Item*)App->my_entities[44])->equiped == true)
 			{
-				((Item*)App->my_entities[44])->equiped == false;
-				((Item*)App->my_entities[45])->equiped == false;
+				((Item*)App->my_entities[44])->equiped = false;
+				((Item*)App->my_entities[45])->equiped = false;
 				attack -= ((Item*)App->my_entities[44])->attack;
 				attack -= ((Item*)App->my_entities[45])->attack;
 				printf("You unequiped-> %s\n\n", node_player->data->name.getstr());
@@ -542,7 +632,7 @@ void Player::UnEquip(Vector<ClString> &str)
 			}
 			else if (node_player->data->name == ((Item*)App->my_entities[47])->name && ((Item*)App->my_entities[47])->equiped == true)
 			{
-				((Item*)App->my_entities[47])->equiped == false;
+				((Item*)App->my_entities[47])->equiped = false;
 				hp -= ((Item*)App->my_entities[47])->hp;
 				printf("You unequiped-> %s\n\n", node_player->data->name.getstr());
 				return;
@@ -551,7 +641,7 @@ void Player::UnEquip(Vector<ClString> &str)
 			{
 				if (((Item*)App->my_entities[44])->equiped == true)
 				{
-					((Item*)App->my_entities[45])->equiped == false;
+					((Item*)App->my_entities[45])->equiped = false;
 					attack -= ((Item*)App->my_entities[45])->attack;
 					printf("You unequiped-> %s\n\n", node_player->data->name.getstr());
 					return;
@@ -629,7 +719,11 @@ void Player::Drop_item(Vector<ClString> &str)
 				{
 					if (node_player->data->name == str[1] && node_player->data->type == ITEM)
 					{
-
+						if (str[1] == ((Item*)App->my_entities[38])->name)
+						{
+							printf("I think it's better not take off my backpack, i will need.\n\n");
+							return;
+						}
 						((Room*)App->my_entities[i])->list.push_back(node_player->data);
 						printf("You Droped-> %s\n\n", node_player->data->name.getstr());
 						list.erase(node_player);
@@ -663,9 +757,14 @@ void Player::Put_into(Vector<ClString> &str)
 						{
 							if (((Item*)App->my_entities[i])->durability > 2)
 							{
-								DList<Entity*>::Node* node_item = ((Item*)App->my_entities[i])->list.first;
+								if (str[1] == ((Item*)App->my_entities[38])->name)
+								{
+									printf("I think it's better not take off my backpack, i will need.\n\n");
+									return;
+								}
 								printf("You Put %s Into %s\n\n", node_player->data->name.getstr(), node_room->data->name.getstr());
-								node_item->data->list.push_back(node_player->data);
+								((Item*)App->my_entities[i])->isinside = true;
+								((Item*)App->my_entities[i])->list.push_back(node_player->data);
 								list.erase(node_player);
 								return;
 							}
@@ -676,6 +775,7 @@ void Player::Put_into(Vector<ClString> &str)
 						if (node_player->data->name == ((Item*)App->my_entities[41])->name)
 						{
 							printf("You Put %s Into %s\n\n", node_player->data->name.getstr(), node_room->data->name.getstr());
+							((Item*)App->my_entities[51])->isinside = true;
 							((Item*)App->my_entities[51])->list.push_back((Item*)node_player->data);
 							list.erase(node_player);
 							return;
@@ -686,11 +786,12 @@ void Player::Put_into(Vector<ClString> &str)
 							return;
 						}
 					}
-					else if (node_room->data->name == ((Item*)App->my_entities[52])->name)
+					/*else if (node_room->data->name == ((Item*)App->my_entities[52])->name)
 					{
 						if (node_player->data == ((Item*)App->my_entities[44]))
 						{
 							printf("You Put %s Into %s\n\n", node_player->data->name.getstr(), node_room->data->name.getstr());
+							((Item*)App->my_entities[52])->isinside = true;
 							((Item*)App->my_entities[52])->list.push_back(node_player->data);
 							list.erase(node_player);
 							return;
@@ -700,12 +801,13 @@ void Player::Put_into(Vector<ClString> &str)
 							printf("This item is not opens this door\n\n");
 							return;
 						}
-					}
+					}*/
 					else if (node_room->data == ((Item*)App->my_entities[53]))
 					{
 						if (node_player->data == ((Item*)App->my_entities[42]))
 						{
 							printf("You Put %s Into %s\n\n", node_player->data->name.getstr(), node_room->data->name.getstr());
+							((Item*)App->my_entities[53])->isinside = true;
 							((Item*)App->my_entities[53])->list.push_back(node_player->data);
 							list.erase(node_player);
 							return;
@@ -721,6 +823,7 @@ void Player::Put_into(Vector<ClString> &str)
 						if (node_player->data == ((Item*)App->my_entities[40]))
 						{
 							printf("You Put %s Into %s\n\n", node_player->data->name.getstr(), node_room->data->name.getstr());
+							((Item*)App->my_entities[50])->isinside = true;
 							((Item*)App->my_entities[50])->list.push_back(node_player->data);
 							list.erase(node_player);
 							return;
@@ -736,6 +839,7 @@ void Player::Put_into(Vector<ClString> &str)
 						if (node_player->data == ((Item*)App->my_entities[43]))
 						{
 							printf("You Put %s Into %s\n\n", node_player->data->name.getstr(), node_room->data->name.getstr());
+							((Item*)App->my_entities[49])->isinside = true;
 							((Item*)App->my_entities[49])->list.push_back(node_player->data);
 							list.erase(node_player);
 							return;
@@ -775,46 +879,52 @@ void Player::Get_from(Vector<ClString> &str)
 {
 	DList<Entity*>::Node* node_player = list.first;
 	DList<Entity*>::Node* node_room = position->list.first;
-	if (node_player->data == ((Item*)App->my_entities[38]))
+
+	while (node_room != nullptr)
 	{
-		while (node_room != nullptr)
+		if (node_room->data->type == OBJECT && node_room->data->name == str[3])
 		{
-			if (node_room->data->type == OBJECT && node_room->data->name == str[3])
+			for (int i = 0; App->my_entities.size(); i++)
 			{
-				for (int i = 0; App->my_entities.size(); i++)
+				if (((Item*)App->my_entities[i])->name == str[3] &&
+					((Item*)App->my_entities[i])->type == OBJECT)
 				{
-					if (((Item*)App->my_entities[i])->name == str[3] &&
-						((Item*)App->my_entities[i])->type == OBJECT)
+					DList<Entity*>::Node* node_item = ((Item*)App->my_entities[i])->list.first;
+					while (node_item != nullptr)
 					{
-						DList<Entity*>::Node* node_item = ((Item*)App->my_entities[i])->list.first;
-						while (node_item != nullptr)
+						if (node_item->data->name == str[1])
 						{
-							if (node_item->data->name == str[1])
+							if (node_player->data == ((Item*)App->my_entities[38]))
 							{
+								if (((Item*)App->my_entities[40])->name == str[1] || ((Item*)App->my_entities[41])->name == str[1] ||
+									((Item*)App->my_entities[42])->name == str[1] || ((Item*)App->my_entities[43])->name == str[1])
+								{
+									printf("Remember that if you remove the item from a door and close the door on the other side you'll be trapped.\n\n");
+								}
 								printf("You get %s from %s\n\n", node_item->data->name.getstr(), node_room->data->name.getstr());
 								list.push_back(node_item->data);
-								node_item->data->list.erase(node_item);
+								node_room->data->list.erase(node_item);
+								if (node_room == nullptr)
+								{
+									((Item*)App->my_entities[i])->isinside = false;
+								}
 								return;
 							}
-							node_item = node_item->next;
 						}
-						printf("Dosent exist this item!\n\n");
-						return;
+						node_item = node_item->next;
 					}
+					printf("Dosent exist this item!\n\n");
+					return;
 				}
 			}
-			else if (node_room->data->type == ITEM && node_room->data->name == str[3])
-			{
-				printf("You can get this item from &s, You are crazy!!\n\n", node_room->data->name.getstr());
-				return;
-			}
-			node_room = node_room->next;
 		}
-	}
-	else
-	{
-		printf("First you need a bag to Get items!\n\n");
-		return;
+
+		else if (node_room->data->type == ITEM && node_room->data->name == str[3])
+		{
+			printf("You can get this item from &s, You are crazy!!\n\n", node_room->data->name.getstr());
+			return;
+		}
+		node_room = node_room->next;
 	}
 }
 
@@ -827,27 +937,90 @@ void Player::Stats()const
 	printf("----------\n");
 }
 
-void Player::Attack(Vector<ClString> &str)
+void Player::Shoot_attack()
 {
-	if (App->combat == true)
+	if (((Item*)App->my_entities[44])->equiped == true)
 	{
-		if (str[1] == App->alien->name)
+		if (((Item*)App->my_entities[45])->equiped == true)
 		{
-			App->alien->hp -= attack;
-			printf("You hit ALIEN, you did 40 damage!\n\n");
-			return;
+			if (((Item*)App->my_entities[45])->durability > 0)
+			{
+				printf("You shot the ground, I think it's better not spend foolishly ammunition.\n\n");
+				((Item*)App->my_entities[45])->durability -= 1;
+				return;
+			}
+			else
+			{
+				printf("Oh my god, There are no bullets\n\n");
+			}
 		}
-		else if (str[1] == "seller")
+		else
 		{
-			printf("You can't attack a Seller, he is a inmortal person\n\n");
+			printf("First equip ammo!!!\n\n");
 			return;
 		}
 	}
 	else
 	{
-		printf("Who do you want to attack? if no one here...\n\n");
+		printf("First equip a gun!!!\n\n");
 		return;
 	}
+}
+
+void Player::Attack(Vector<ClString> &str)
+{
+	if (((Item*)App->my_entities[44])->equiped == true)
+	{
+		if (((Item*)App->my_entities[45])->equiped == true)
+		{
+			if (((Item*)App->my_entities[45])->durability > 0)
+			{
+				if (str[1] == "padlock" && ((Item*)App->my_entities[52])->istatus == false)
+				{
+					((Item*)App->my_entities[45])->durability -= 1;
+					printf("You broke the padlock, now you can open the door.\n\n");
+					((Item*)App->my_entities[52])->istatus = true;
+					return;
+				}
+				if (App->combat == true)
+				{
+					if (str[1] == App->alien->name)
+					{
+						((Item*)App->my_entities[45])->durability - 1;
+						App->alien->hp -= attack;
+						printf("You hit ALIEN, you did 40 damage!\n\n");
+						return;
+					}
+					else if (str[1] == "seller")
+					{
+						printf("You can't attack a Seller, he is a inmortal person\n\n");
+						return;
+					}
+				}
+				else
+				{
+					printf("Who do you want to attack? if no one here...\n\n");
+					return;
+				}
+			}
+			else
+			{
+				printf("Oh my god, There are no bullets\n\n");
+				return;
+			}
+		}
+		else
+		{
+			printf("First equip an ammo!!!\n\n");
+			return;
+		}
+	}
+	else
+	{
+		printf("First equip a gun!!!\n\n");
+		return;
+	}
+	
 }
 
 void Player::Buy_list()
@@ -869,12 +1042,66 @@ void Player::Buy_list()
 	printf("\n");
 }
 
-void Player::Sell_to(Vector<ClString> &str)
-{
-
-}
-
 void Player::Buy_from(Vector<ClString> &str)
 {
-
+	if (App->seller->position == position)
+	{
+		printf("1\n");
+		DList<Entity*>::Node* node_Seller = App->seller->list.first;
+		while (node_Seller != nullptr)
+		{
+			if (str[1] == node_Seller->data->name)
+			{
+				printf("2\n");
+				for (int i = 0; i < App->my_entities.size(); i++)
+				{
+					if (((Item*)App->my_entities[i])->name == str[1])
+					{
+						printf("3\n");
+						if (coins >= ((Item*)App->my_entities[i])->price)
+						{
+							if (list.first != nullptr)
+							{
+								if (list.first->data == ((Item*)App->my_entities[38]))
+								{
+									printf("You Buy a %s\n", node_Seller->data->name.getstr());
+									coins -= ((Item*)App->my_entities[i])->price;
+									list.push_back(node_Seller->data);
+									App->seller->list.erase(node_Seller);
+									return;
+								}
+							}
+							else
+							{
+								printf("First you need a bag to pick items!\n\n");
+								return;
+							}
+						}
+						else
+						{
+							printf("You don't have enough money.\n\n");
+							return;
+						}
+					}
+				}
+			}
+			node_Seller = node_Seller->next;
+		}
+	}
 }
+
+void Player::Sell_to(Vector<ClString> &str)
+{
+	if (App->seller->position == position)
+	{
+		DList<Entity*>::Node* node_Seller = App->seller->list.first;
+		printf("Seller have these items:\n");
+		while (node_Seller != nullptr)
+		{
+			printf("- %s\n", node_Seller->data->name.getstr());
+			node_Seller = node_Seller->next;
+		}
+	}
+}
+
+

@@ -33,6 +33,7 @@ int main()
 			int actualtime = GetTickCount();
 			if (App->player->position == App->alien->position)
 			{
+				printf("¡¡MODE COMBAT ACTIVATED!!\n\n");
 				App->canmove = false;
 				App->combat = true;
 			}
