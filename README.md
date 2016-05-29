@@ -52,11 +52,11 @@ To sell an item containing->[sell <item> to seller], you just need to have that 
 
 ##MODE COMBAT
 First of all there is an alien in a room but before entering it'll have to get a gun and ammunition.
-So when you walk into that room, you will enter in * COMBAT MODE, you have to kill the alien using the [alien shoot].
+So when you walk into that room, you will enter in **COMBAT MODE**, you have to kill the alien using the [alien shoot].
 If you kill him you got money and he will disappear, then you will have 20 seconds to do what you have to do, because after those 20 seconds, the alien  will do respawn and now he can move through the rooms. 
 When you meet are in the same room, You will enter again in COMBAT MODE, and you'll have to kill him again.
 
-*COMBAT MODE: You can only attack and equip or unequip items, you can not move or leave or pick up items.
+**COMBAT MODE**-> You can only attack and equip or unequip items, you can not move or leave or pick up items.
 
 
 
@@ -72,24 +72,24 @@ And now only have to go to the end (Hall) and insert the paper and you can open 
 
 
 ##Added and Delete from the release 0.5
-Add NPC-> Seller
-Add NPC-> Alien
+Add NPC-> **Seller**
+Add NPC-> **Alien**
 Add Comand:
-		-> Shoot
-		-> Buy
-		-> Sell
-		-> throw granade
+		-> **Shoot**
+		-> **Buy**
+		-> **Sell**
+		-> **throw granade**
 		
 Add Items:
-		-> ammo1
-		-> potion
-		-> potion1
+		-> **ammo1**
+		-> **potion**
+		-> **potion1**
 		
 Add Rooms:
-		-> God Room: It is where the alien waiting to appear again.
+		-> **God Room**: It is where the alien waiting to appear again.
 
 Delete comand:
-		-> Look Direction: This command has been removed because my intention is that when you kill the alien this when it reappears is moving and i didn't want that the player could know if the alien was in the next room.
+		-> **Look Direction**: This command has been removed because my intention is that when you kill the alien this when it reappears is moving and i didn't want that the player could know if the alien was in the next room.
 		
 
 		
