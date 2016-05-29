@@ -150,6 +150,10 @@ void Player::Look() const
 		}
 		new_node_room = new_node_room->next;
 	}
+	if (App->seller->position == position)
+	{
+		printf("\nHere are a Seller, can that have something to help me escape...\n");
+	}
 	if (App->combat == true)
 	{
 		printf("In front of me there is an alien with a gun... WTF GUN???\nI think that is better kill him or I'll die.\n");
@@ -846,3 +850,31 @@ void Player::Attack(Vector<ClString> &str)
 	}
 }
 
+void Player::Buy_list()
+{
+	if (App->seller->position == position)
+	{
+		DList<Entity*>::Node* node_Seller = App->seller->list.first;
+		printf("Seller have these items:\n");
+		while (node_Seller != nullptr)
+		{
+			printf("- %s\n", node_Seller->data->name.getstr());
+			node_Seller = node_Seller->next;
+		}
+	}
+	else
+	{
+		printf("There is no seller in this room!\n");
+	}
+	printf("\n");
+}
+
+void Player::Sell_to(Vector<ClString> &str)
+{
+
+}
+
+void Player::Buy_from(Vector<ClString> &str)
+{
+
+}

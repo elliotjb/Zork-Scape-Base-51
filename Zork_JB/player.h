@@ -29,6 +29,9 @@ public:
 	void Get_from(Vector<ClString> &);
 	void Stats()const;
 	void Attack(Vector<ClString> &);
+	void Buy_list();
+	void Sell_to(Vector<ClString> &);
+	void Buy_from(Vector<ClString> &);
 	//void Look_Specify_Position() const;
 };
 

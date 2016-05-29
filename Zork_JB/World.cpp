@@ -260,10 +260,28 @@ void World::Create_World(){
 	my_entities.push_back(new Alien("alien", "He is large and has a gun in his hand.", 200, 5, 250));
 	alien = (Alien*)my_entities[56];
 	alien->position = MysteryRoom;
-
+	//my_entities[57] - ROOM ADMIN
 	Room* God;
-	//my_entities[57] _ Room god
 	my_entities.push_back(God = new Room("GOD ROOM", "Only ADMIN ACCESS", false));
+
+	//SELLER AND ITEMS TO SELL
+	//my_entities[58] - SELLER
+	my_entities.push_back(new Seller("Bob", "He is a Seller human.", 99999, 0, 10000));
+	seller = (Seller*)my_entities[58];
+	seller->position = MainRoom;
+	//my_entities[59] - AMMO
+	my_entities.push_back(Ammo = new Item("ammo", "It is a ammo pack, but only has 10 bullets\n", MainRoom, false, false, false, false, 0, 45, 10));//item[7], 
+	seller->list.push_back(Ammo);
+	//my_entities[60] - AMMO
+	my_entities.push_back(Ammo = new Item("ammo", "It is a ammo pack, but only has 10 bullets\n", MainRoom, false, false, false, false, 0, 45, 10));//item[7], 
+	seller->list.push_back(Ammo);
+	Item* Potion;
+	//my_entities[61] - LIFE POTION ("POTION")
+	my_entities.push_back(Potion = new Item("Life Potion", "If you use a Life Potion, you will receive 100 points of life.", MainRoom, false, false, false, false, 0, 45, 10));//item[7], 
+	seller->list.push_back(Potion);
+	//my_entities[62] - LIFE POTION ("POTION")
+	my_entities.push_back(Potion = new Item("Life Potion", "If you use a Life Potion, you will receive 100 points of life.", MainRoom, false, false, false, false, 0, 45, 10));//item[7], 
+	seller->list.push_back(Potion);
 
 }
 void World::Input()
@@ -338,6 +356,10 @@ void World::Set_Command()
 				{
 					printf("Invalid direction!\n\n");
 				}
+			}
+			else if (comand_tok[0] == "buy" && comand_tok[1] == "seller" && comand_tok.size() == 2)
+			{
+				player->Buy_list();
 			}
 			//Comands - Open and Close
 			else if (comand_tok[0] == "open" && comand_tok.size() == 1){

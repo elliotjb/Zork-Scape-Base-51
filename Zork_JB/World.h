@@ -12,6 +12,7 @@
 #include "Criature.h"
 #include "Item.h"
 #include "Alien.h"
+#include "Seller.h"
 #include "String_Class.h"
 
 #define NUM_ITEMS 18
@@ -41,6 +42,7 @@ public:
 	char option[80];
 	Player* player = nullptr;
 	Alien* alien = nullptr;
+	Seller* seller = nullptr;
 	int acon_moviment = 0;
 
 public:
