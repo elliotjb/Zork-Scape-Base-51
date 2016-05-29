@@ -86,7 +86,6 @@ void Player::Move(Vector<ClString> &str)
 						node_player = node_player->next;
 					}
 					printf("WAIT, WAIT, WAIT\nYou're crazy???, there's a fucking alien inside! and i don't have any gun!!\n\n");
-					//BORRAR
 					position = ((Exits*)App->my_entities[i])->destination;
 					Look();
 					return;
@@ -172,7 +171,13 @@ void Player::Look_inventory() const
 		printf("You have these items:\n");
 		while (node_player != nullptr)
 		{
-			printf("- %s\n", node_player->data->name.getstr());
+			for (int i = 0; i < App->my_entities.size(); i++)
+			{
+				if (((Item*)App->my_entities[i])->equiped == false && node_player->data == ((Item*)App->my_entities[i]))
+				{
+					printf("- %s\n", node_player->data->name.getstr());
+				}
+			}
 			node_player = node_player->next;
 		}
 	}
@@ -195,6 +200,12 @@ void Player::Look_item(Vector<ClString> &str) const
 		{
 			if (node_room->data->type == ITEM && node_room->data->name == str[1])
 			{
+				if (node_room->data->name == ((Item*)App->my_entities[45])->name)
+				{
+					printf("%s\n", node_room->data->name.getstr());
+					printf("It is a ammo pack, but only has %i bullets\n\n", ((Item*)App->my_entities[45])->durability);
+					return;
+				}
 				printf("%s\n", node_room->data->name.getstr());
 				printf("%s\n", node_room->data->description.getstr());
 				printf("\n");
@@ -571,45 +582,77 @@ void Player::Close()
 void Player::Equip(Vector<ClString> &str)
 {
 	DList<Entity*>::Node* node_player = list.first;
-	for (; node_player != nullptr; node_player = node_player->next)
+	while (node_player != nullptr)
 	{
 		if (node_player->data->name == str[1])
 		{
-			if (node_player->data->name == ((Item*)App->my_entities[44])->name && ((Item*)App->my_entities[44])->equiped == false)
+			for (int i = 0; i < App->my_entities.size(); i++)
 			{
-				((Item*)App->my_entities[44])->equiped = true;
-				attack += ((Item*)App->my_entities[44])->attack;
-				printf("You equiped-> %s\n\n", node_player->data->name.getstr());
-				return;
-			}
-			else if (node_player->data->name == ((Item*)App->my_entities[47])->name && ((Item*)App->my_entities[47])->equiped == false)
-			{
-				((Item*)App->my_entities[47])->equiped = true;
-				hp += ((Item*)App->my_entities[47])->hp;
-				printf("You equiped-> %s\n\n", node_player->data->name.getstr());
-				return;
-			}
-			else if (node_player->data->name == ((Item*)App->my_entities[45])->name && ((Item*)App->my_entities[45])->equiped == false)
-			{
-				if (((Item*)App->my_entities[44])->equiped == true)
+				if (node_player->data->name == ((Item*)App->my_entities[45])->name && ((Item*)App->my_entities[45])->equiped == false)
 				{
-					((Item*)App->my_entities[45])->equiped = true;
-					attack += ((Item*)App->my_entities[45])->attack;
+					if (((Item*)App->my_entities[44])->equiped == true)
+					{
+						if (((Item*)App->my_entities[59])->equiped == false)
+						{
+							((Item*)App->my_entities[45])->equiped = true;
+							attack += ((Item*)App->my_entities[45])->attack;
+							printf("You equiped-> %s\n\n", node_player->data->name.getstr());
+							Stats();
+							return;
+						}
+						else
+						{
+							printf("Frist you unequiped another ammo ->(ammo1)!!!\n");
+							return;
+						}
+					}
+					else
+					{
+						printf("You can not equip <Ammo> pack, first you need equip a gun!\n\n");
+						return;
+					}
+				}
+				else if (node_player->data->name == ((Item*)App->my_entities[59])->name && ((Item*)App->my_entities[59])->equiped == false)
+				{
+					if (((Item*)App->my_entities[44])->equiped == true)
+					{
+						if (((Item*)App->my_entities[45])->equiped == false)
+						{
+							((Item*)App->my_entities[59])->equiped = true;
+							attack += ((Item*)App->my_entities[59])->attack;
+							printf("You equiped-> %s\n\n", node_player->data->name.getstr());
+							Stats();
+							return;
+						}
+						else
+						{
+							printf("Frist you unequiped another ammo ->(ammo)!!!\n");
+							return;
+						}
+					}
+					else
+					{
+						printf("You can not equip <Ammo> pack, first you need equip a gun!\n\n");
+						return;
+					}
+				}
+				else if (node_player->data->name == ((Item*)App->my_entities[i])->name && ((Item*)App->my_entities[i])->equiped == false && ((Item*)App->my_entities[i])->canequip == true)
+				{
+					((Item*)App->my_entities[i])->equiped = true;
+					attack += ((Item*)App->my_entities[i])->attack;
+					hp += ((Item*)App->my_entities[i])->hp;
 					printf("You equiped-> %s\n\n", node_player->data->name.getstr());
+					Stats();
 					return;
 				}
-				else
+				else if (node_player->data->name == ((Item*)App->my_entities[i])->name && ((Item*)App->my_entities[i])->canequip == false)
 				{
-					printf("You can not equip <Ammo> pack, first you need equip a gun!\n\n");
+					printf("You can't equip this item\n\n");
 					return;
 				}
-			}
-			else
-			{
-				printf("You can't Equip this item!\n\n");
-				return;
 			}
 		}
+		node_player = node_player->next;
 	}
 	printf("Wrong, You dont have this item or It is not an item.\n\n");
 }
@@ -628,35 +671,21 @@ void Player::UnEquip(Vector<ClString> &str)
 				attack -= ((Item*)App->my_entities[44])->attack;
 				attack -= ((Item*)App->my_entities[45])->attack;
 				printf("You unequiped-> %s\n\n", node_player->data->name.getstr());
+				Stats();
 				return;
 			}
-			else if (node_player->data->name == ((Item*)App->my_entities[47])->name && ((Item*)App->my_entities[47])->equiped == true)
+			for (int i = 0; i < App->my_entities.size(); i++)
 			{
-				((Item*)App->my_entities[47])->equiped = false;
-				hp -= ((Item*)App->my_entities[47])->hp;
-				printf("You unequiped-> %s\n\n", node_player->data->name.getstr());
-				return;
-			}
-			else if (node_player->data->name == ((Item*)App->my_entities[45])->name && ((Item*)App->my_entities[45])->equiped == true)
-			{
-				if (((Item*)App->my_entities[44])->equiped == true)
+				if (node_player->data->name == ((Item*)App->my_entities[i])->name && ((Item*)App->my_entities[i])->equiped == true && ((Item*)App->my_entities[i])->canequip == true)
 				{
-					((Item*)App->my_entities[45])->equiped = false;
-					attack -= ((Item*)App->my_entities[45])->attack;
-					printf("You unequiped-> %s\n\n", node_player->data->name.getstr());
+					((Item*)App->my_entities[i])->equiped = true;
+					attack += ((Item*)App->my_entities[i])->attack;
+					hp += ((Item*)App->my_entities[i])->hp;
+					printf("You equiped-> %s\n\n", node_player->data->name.getstr());
+					Stats();
 					return;
 				}
 			}
-			else
-			{
-				printf("You can't UnEquip this item!\n\n");
-				return;
-			}
-		}
-		else
-		{
-			printf("You don't have this item or dosen't exist\n\n");
-			return;
 		}
 	}
 	printf("Wrong, You dont have this item or It is not an item.\n\n");
@@ -947,6 +976,21 @@ void Player::Shoot_attack()
 			{
 				printf("You shot the ground, I think it's better not spend foolishly ammunition.\n\n");
 				((Item*)App->my_entities[45])->durability -= 1;
+				printf("Your bullets number-> %i", ((Item*)App->my_entities[45])->durability);
+				return;
+			}
+			else
+			{
+				printf("Oh my god, There are no bullets\n\n");
+			}
+		}
+		else if (((Item*)App->my_entities[59])->equiped == true)
+		{
+			if (((Item*)App->my_entities[59])->durability > 0)
+			{
+				printf("You shot the ground, I think it's better not spend foolishly ammunition.\n\n");
+				((Item*)App->my_entities[59])->durability -= 1;
+				printf("Your bullets number-> %i", ((Item*)App->my_entities[59])->durability);
 				return;
 			}
 			else
@@ -988,7 +1032,7 @@ void Player::Attack(Vector<ClString> &str)
 					{
 						((Item*)App->my_entities[45])->durability - 1;
 						App->alien->hp -= attack;
-						printf("You hit ALIEN, you did 40 damage!\n\n");
+						printf("You hit ALIEN, you did %i damage!\n\n", attack);
 						return;
 					}
 					else if (str[1] == "seller")
@@ -1031,7 +1075,13 @@ void Player::Buy_list()
 		printf("Seller have these items:\n");
 		while (node_Seller != nullptr)
 		{
-			printf("- %s\n", node_Seller->data->name.getstr());
+			for (int i = 0; i < App->my_entities.size(); i++)
+			{
+				if (node_Seller->data == ((Item*)App->my_entities[i]))
+				{
+					printf("- %s,  price-> %i\n", node_Seller->data->name.getstr(), ((Item*)App->my_entities[i])->price);
+				}
+			}
 			node_Seller = node_Seller->next;
 		}
 	}
@@ -1046,26 +1096,24 @@ void Player::Buy_from(Vector<ClString> &str)
 {
 	if (App->seller->position == position)
 	{
-		printf("1\n");
 		DList<Entity*>::Node* node_Seller = App->seller->list.first;
 		while (node_Seller != nullptr)
 		{
 			if (str[1] == node_Seller->data->name)
 			{
-				printf("2\n");
 				for (int i = 0; i < App->my_entities.size(); i++)
 				{
 					if (((Item*)App->my_entities[i])->name == str[1])
 					{
-						printf("3\n");
 						if (coins >= ((Item*)App->my_entities[i])->price)
 						{
 							if (list.first != nullptr)
 							{
 								if (list.first->data == ((Item*)App->my_entities[38]))
 								{
-									printf("You Buy a %s\n", node_Seller->data->name.getstr());
+									printf("You Buy a %s for %i\n", node_Seller->data->name.getstr(), ((Item*)App->my_entities[i])->price);
 									coins -= ((Item*)App->my_entities[i])->price;
+									Stats();
 									list.push_back(node_Seller->data);
 									App->seller->list.erase(node_Seller);
 									return;
@@ -1094,14 +1142,30 @@ void Player::Sell_to(Vector<ClString> &str)
 {
 	if (App->seller->position == position)
 	{
-		DList<Entity*>::Node* node_Seller = App->seller->list.first;
-		printf("Seller have these items:\n");
-		while (node_Seller != nullptr)
+		DList<Entity*>::Node* node_player = list.first;
+		while (node_player != nullptr)
 		{
-			printf("- %s\n", node_Seller->data->name.getstr());
-			node_Seller = node_Seller->next;
+			if (str[1] == node_player->data->name)
+			{
+				for (int i = 0; i < App->my_entities.size(); i++)
+				{
+					if (((Item*)App->my_entities[i])->name == str[1])
+					{
+
+						printf("You Sell a %s for %i\n", node_player->data->name.getstr(), ((Item*)App->my_entities[i])->price);
+						coins += ((Item*)App->my_entities[i])->price;
+						Stats();
+						((Seller*)App->my_entities[58])->list.push_back(node_player->data);
+						list.erase(node_player);
+						return;
+					}
+				}
+			}
+			node_player = node_player->next;
 		}
 	}
+	printf("You don't have this item!!!\n\n");
+	return;
 }
 
 

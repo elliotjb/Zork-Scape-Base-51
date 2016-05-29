@@ -22,7 +22,9 @@ int main()
 	printf("WELCOME TO MY ZORK!!\n\n");
 	printf("Your name is Ros. A few days ago you desided to enter at the Area 51, but you were captured by soldiers when you were in and they took away your camera.\nYour mission is to leave the building with your camera.");
 	printf("\nTo do this you'll have to get items to open doors, and overcome obstacles.\n\n");
-
+	char key = 'a';
+	char input[100];
+	int num = 0;
 	App->player->Look();
 
 	int now = GetTickCount();
@@ -31,9 +33,9 @@ int main()
 		while (App->Exit_zork())
 		{
 			int actualtime = GetTickCount();
-			if (App->player->position == App->alien->position)
+			if (App->player->position == App->alien->position && App->combat == false)
 			{
-				printf("¡¡MODE COMBAT ACTIVATED!!\n\n");
+				printf("MODE COMBAT ACTIVATED!!\n\n");
 				App->canmove = false;
 				App->combat = true;
 			}
@@ -59,10 +61,31 @@ int main()
 				}
 			}
 
-
 			if (_kbhit())
 			{
-				App->Set_Command();
+				key = _getch();
+				input[num++] = key;
+				printf("%c", key);
+				if (key == '\b')
+				{
+					if (num > 1)
+					{
+						num--;
+						num--;
+					}
+					else if (num == 1)
+					{
+						num--;
+					}
+
+				}
+				if (key == '\r')	//enter
+				{
+					input[--num] = '\0';
+					App->Set_Command(input);
+					input[0] = '\0';
+					num = 0;
+				}
 			}
 		}
 	}
