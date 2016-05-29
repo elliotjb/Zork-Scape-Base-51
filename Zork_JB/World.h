@@ -18,21 +18,10 @@
 #define NUM_ITEMS 18
 #define NUM_DOORS 10
 
-/*class Entity;
-class Exits;
-class Room;
-class Door;
-class Item;*/
-
 class World
 {
 
 public:
-
-	//Vector <Room*> rooms;
-	//Vector <Player*> player;
-	/*Vector <Exits*> exit;
-	Vector <Item*> item;*/
 
 	Vector <Entity*> my_entities;
 	Vector <Door*> door;
@@ -62,8 +51,6 @@ public:
 
 	//fucntions to put comands
 	void Set_Command(const char*);
-
-	void Input();
 
 	//Function to exit the game
 	bool Exit_zork();

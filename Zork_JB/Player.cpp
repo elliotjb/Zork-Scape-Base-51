@@ -1150,7 +1150,7 @@ void Player::Buy_from(Vector<ClString> &str)
 			{
 				for (int i = 0; i < App->my_entities.size(); i++)
 				{
-					if (((Item*)App->my_entities[i])->name == str[1])
+					if (((Item*)App->my_entities[i])->name == str[1] && ((Item*)App->my_entities[i])->equiped == false)
 					{
 						if (coins >= ((Item*)App->my_entities[i])->price)
 						{
@@ -1177,6 +1177,10 @@ void Player::Buy_from(Vector<ClString> &str)
 							printf("You don't have enough money.\n\n");
 							return;
 						}
+					}
+					else if (((Item*)App->my_entities[i])->name == str[1] && ((Item*)App->my_entities[i])->equiped == true)
+					{
+						printf("First you need UnEquip the item!\n\n");
 					}
 				}
 			}

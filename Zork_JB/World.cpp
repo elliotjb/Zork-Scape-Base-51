@@ -282,19 +282,9 @@ void World::Create_World(){
 	seller->list.push_back(Potion2);
 
 }
-void World::Input()
-{
-	do
-	{
-		printf("> ");
-		gets_s(option, 80);
-	} while (option == NULL);
 
-}
 void World::Set_Command(const char* str)
 {
-	/*Input();
-	comand = option;*/
 	printf("> %s\n", str);
 	if (str[0] != NULL && str[0] != ' ')
 	{
@@ -466,29 +456,6 @@ void World::Set_Command(const char* str)
 			}
 
 		}
-		
-
-
-		/*Command - Look
-		else if (comand == "look"){
-			Look();
-			if (cont < 2){
-				printf("If you want to specify where to look like this-> [ look north/n, look west/w, look south/s, look east/e ]\n\n");
-				cont++;
-			}
-		}*/
-
-		/*Commands - Look Specify position
-		else if (comand == "look n" || comand == "look w" || comand == "look s" || comand == "look e"){
-			Look_Specify_Position();
-		}
-		else if (comand == "look north" || comand == "look west" || comand == "look south" || comand == "look east"){
-			Look_Specify_Position();
-		}*/
-
-
-
-
 		else
 		{
 			printf("I beg your pardon?\n\n");
