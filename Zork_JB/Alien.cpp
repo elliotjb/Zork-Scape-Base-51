@@ -1,5 +1,6 @@
 #include "World.h"
 #include "Alien.h"
+#include "player.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -18,6 +19,8 @@ Alien::~Alien()
 void Alien::Update()
 {
 	srand(time(NULL));
+	Vector<ClString> playercombat = comans.tokenize(attackplayere);
+
 	int dir;
 	if (hp <= 0)
 	{
@@ -37,6 +40,10 @@ void Alien::Update()
 	{
 		printf("\n");
 		Attack();
+		if (App->player->isattack == true)
+		{
+			App->player->Attack(playercombat);
+		}
 	}
 
 	if (App->alien_dead == false)
@@ -95,6 +102,7 @@ void Alien::Dead()
 	App->alien_dead = true;
 	hp = 300;
 	App->combat = false;
+	App->player->isattack = false;
 	App->player->coins += coins;
 	position = ((Room*)App->my_entities[57]);
 	printf("You kill the Alien\n");

@@ -20,6 +20,9 @@ public:
 	void Dead();
 	void Update();
 
+	ClString comans;
+	const char* attackplayere = "shoot alien";
+
 };
 
 #endif

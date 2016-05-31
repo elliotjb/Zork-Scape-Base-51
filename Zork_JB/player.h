@@ -15,6 +15,8 @@ public:
 	Room* position;
 	Vector<Item*>inv;
 
+	bool isattack = false;
+
 	void Move(Vector<ClString> &);
 	void Look() const;
 	void Look_inventory() const;

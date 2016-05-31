@@ -1037,6 +1037,7 @@ void Player::Attack(Vector<ClString> &str)
 						((Item*)App->my_entities[45])->durability - 1;
 						App->alien->hp -= attack;
 						printf("You hit ALIEN, you did %i damage!\n\n", attack);
+						isattack = true;
 						return;
 					}
 					else if (str[1] == "seller")
