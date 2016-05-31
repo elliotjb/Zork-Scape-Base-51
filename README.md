@@ -58,6 +58,7 @@ If you kill him you got money and he will disappear, then you will have 20 secon
 When you meet are in the same room, You will enter again in COMBAT MODE, and you'll have to kill him again.
 
 **COMBAT MODE**-> You can only attack and equip or unequip items, you can not move or leave or pick up items.
+**ATTACK MODE**-> If you attack alien->(shoot alien), you dont will have to retype (shoot alien), beacause the combat turns automatically.
 
 
 
