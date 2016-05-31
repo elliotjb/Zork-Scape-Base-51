@@ -85,9 +85,8 @@ void Player::Move(Vector<ClString> &str)
 						}
 						node_player = node_player->next;
 					}
-					printf("WAIT, WAIT, WAIT\nYou're crazy???, there's a fucking alien inside! and i don't have any gun!!\n\n");
-					position = ((Exits*)App->my_entities[i])->destination;
-					Look();
+					printf("WAIT, WAIT, WAIT\nYou're crazy???, there's a fucking alien inside! and i don't have any gun!!\n");
+					printf("I will not go!\n\n");
 					return;
 				}
 				if (((Exits*)App->my_entities[i])->destination != App->alien->position)
@@ -166,19 +165,27 @@ void Player::Look() const
 void Player::Look_inventory() const
 {
 	DList<Entity*>::Node* node_player = App->player->list.first;
-	if (App->player->list.first->data == ((Item*)App->my_entities[38]))
+	if (node_player != nullptr)
 	{
-		printf("You have these items:\n");
-		while (node_player != nullptr)
+		if (App->player->list.first->data == ((Item*)App->my_entities[38]))
 		{
-			for (int i = 0; i < App->my_entities.size(); i++)
+			printf("You have these items:\n");
+			while (node_player != nullptr)
 			{
-				if (((Item*)App->my_entities[i])->equiped == false && node_player->data == ((Item*)App->my_entities[i]))
+				for (int i = 0; i < App->my_entities.size(); i++)
 				{
-					printf("- %s\n", node_player->data->name.getstr());
+					if (((Item*)App->my_entities[i])->equiped == false && node_player->data == ((Item*)App->my_entities[i]))
+					{
+						printf("- %s\n", node_player->data->name.getstr());
+					}
 				}
+				node_player = node_player->next;
 			}
-			node_player = node_player->next;
+		}
+		else
+		{
+			printf("Sorry you don't have inventory!\n");
+			printf("First you need a bag to look inventory!!!\n");
 		}
 	}
 	else
@@ -186,6 +193,7 @@ void Player::Look_inventory() const
 		printf("Sorry you don't have inventory!\n");
 		printf("First you need a bag to look inventory!!!\n");
 	}
+
 	printf("\n");
 }
 
@@ -288,6 +296,7 @@ void Player::Open()
 				else
 				{
 					printf("First you need unlock the door!!\n\n");
+					return;
 				}
 			}
 			else if (position == ((Door*)App->door[i])->door_origin && ((Door*)App->door[i])->isOP == true)
@@ -357,6 +366,7 @@ void Player::Open()
 				else
 				{
 					printf("First you need unlock the door!!\n\n");
+					return;
 				}
 			}
 			else if (position == ((Door*)App->door[i])->door_origin && ((Door*)App->door[i])->isOP == true)
@@ -388,6 +398,7 @@ void Player::Open()
 				else
 				{
 					printf("First you need unlock the door!!\n\n");
+					return;
 				}
 			}
 			else if (position == ((Door*)App->door[i])->door_origin && ((Door*)App->door[i])->isOP == true)
@@ -419,6 +430,7 @@ void Player::Open()
 				else
 				{
 					printf("First you need unlock the door!!\n\n");
+					return;
 				}
 			}
 			else if (position == ((Door*)App->door[i])->door_origin && ((Door*)App->door[i])->isOP == true)
