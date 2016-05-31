@@ -207,7 +207,7 @@ void World::Create_World(){
 	my_entities.push_back(Key = new Item("key", "It is a normal key, with a label that puts armory\n", DressingRoom, false, false, false, false, false, 0, 0, 10, 300));//item[4], 
 	DressingRoom->list.push_back(Key);
 	//my_entities[43] - Item[5]
-	my_entities.push_back(Paper = new Item("paper", "It is a small role. It has written a command: 'SZKMS'\n", Laboratory, false, false, false, false, false, 0, 0, 100, 300));//item[5], 12
+	my_entities.push_back(Paper = new Item("paper", "It is a small paper with bars, if I put it inside something might please open a door.\n", Laboratory, false, false, false, false, false, 0, 0, 100, 300));//item[5], 12
 	Laboratory->list.push_back(Paper);
 	//my_entities[44] - Item[6]
 	my_entities.push_back(Gun = new Item("gun", "It is a M4A1-S, it is one of my favorite weapons\n", Gunsmith, false, false, false, false, true, 0, 5, 100, 2000));//item[6], 
@@ -226,7 +226,7 @@ void World::Create_World(){
 	Warehouse->list.push_back(Safe);
 	Safe->type = OBJECT;
 	//my_entities[49] - Item[11]
-	my_entities.push_back(Reader = new Item("reader", "It seems that putting a password the door opened (no implemented yet)\n", Hall, false, true, false, false, false, 0, 0, 0, 0));//item[11], 
+	my_entities.push_back(Reader = new Item("reader", "It is a barcode reader, I think something with bars and poninedolo inside the door will open.\n", Hall, false, true, false, false, false, 0, 0, 0, 0));//item[11], 
 	Hall->list.push_back(Reader);
 	Reader->type = OBJECT;
 	//my_entities[50] - Item[12]

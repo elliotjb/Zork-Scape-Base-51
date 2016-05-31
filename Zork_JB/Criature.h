@@ -34,10 +34,6 @@ public:
 	virtual void Put_into(Vector<ClString> &){};
 	virtual void Get_from(Vector<ClString> &){};
 	virtual void Attack(Vector<ClString> &){};
-	//virtual void Look_Specify_Position() const = 0;
-
-
-
 };
 
 

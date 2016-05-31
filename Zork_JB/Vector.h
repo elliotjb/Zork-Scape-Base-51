@@ -98,20 +98,11 @@ public:
 		{
 			buffer[i] = buffer[i - 1];
 		}
-			//buffer[0] = elements;
 	}
-	//Pop_back  -> elimina el ultim element
 	
 
 
 };
-
-//Vector<int> v;
-//v.push_back(2);
-//v.push_back(4);
-//Memoria-> [2, 4, ...] amb push_back fica a la ultima posicio de la memoria del vector el
-//numero que em posat despres del push, si no hi ha res afegeix un nou espai
-
 #endif
 
 

@@ -20,31 +20,23 @@ private:
 public:
 	ClString();
 	ClString(const char* str);
-	//Contructor de copia
 	ClString(const ClString& copy);
 	~ClString();
 
-	//Funcion para devolver longitud
 	uint length()const;
 
 	void clear();
 
-	//Funcion para imprimir string
 	const char* getstr()const;
 
-	//Devuelve la capacidad!
 	uint capacity() const;
 
-	//Funcion para saber si hay algo en la cadena
 	bool empty() const;
 
-	//Funcion para comparar 2 clases si son iguales
 	bool operator ==(const ClString& str) const;
 
-	//Function to compare 2 char
 	bool operator ==(const char* str) const;
 
-	//Funcion para sumar 2 clases
 	bool operator +=(const ClString& str) const;
 
 	void operator =(const ClString& str);

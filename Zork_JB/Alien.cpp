@@ -48,10 +48,6 @@ void Alien::Update()
 			position = ((Room*)App->my_entities[4]);
 		}
 	}
-
-
-
-	/*Implemented MOVE*/
 }
 
 void Alien::Move(const int dir)
